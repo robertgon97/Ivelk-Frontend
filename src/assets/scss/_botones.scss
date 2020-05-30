@@ -1,0 +1,9 @@
+@import 'variables';
+
+
+.btn-primario {
+  background-color: $color-principal !important;
+  color: white;
+  text-transform: uppercase;
+  outline: transparent;
+}
