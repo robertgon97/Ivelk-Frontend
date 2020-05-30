@@ -9,7 +9,7 @@
           <router-view />
         </transition>
         <footer>
-          <nav class="navbar fixed-bottom justify-content-center">
+          <nav class="navbar fixed-bottom justify-content-center p-0 bg-white">
             <p class="text-center"><b>Ivelk Copyright @2020 - Todos los derechos reservados</b></p>
           </nav>
         </footer>
