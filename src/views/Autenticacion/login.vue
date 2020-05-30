@@ -8,7 +8,7 @@
       </div>
       <div class="d-flex flex-wrap justify-content-center">
         <div class="col-12 col-md-7 mb-3">
-          <el-input placeholder="Usuario" type="email" autocomplete="username" clearable v-model="login.user" />
+          <el-input placeholder="Usuario" type="text" autocomplete="username" clearable v-model="login.user" />
         </div>
         <div class="col-12 col-md-7 mb-3">
           <el-input placeholder="Contraseña" type="password" autocomplete="password" clearable show-password v-model="login.password" />
