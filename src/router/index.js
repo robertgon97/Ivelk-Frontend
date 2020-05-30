@@ -6,6 +6,19 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/autenticador',
+    name: 'Modulo de autenticacion',
+    redirect: '/autenticador/login',
+    component: () => import('./../views/Autenticacion/contenedor.vue'),
+    children: [
+      {
+        path: 'login',
+        name: 'Login de Usuario',
+        component: () => import('./../views/Autenticacion/login.vue')
+      }
+    ]
+  },
+  {
     path: '/',
     name: 'Home',
     component: Home
@@ -21,7 +34,12 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  routes
+  mode: 'history',
+  routes,
+})
+
+router.beforeEach((to, from, next) => {
+  next()
 })
 
 export default router

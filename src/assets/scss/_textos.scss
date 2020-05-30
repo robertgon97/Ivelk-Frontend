@@ -1,0 +1,11 @@
+@import 'variables';
+
+p, ul, li {
+  color: $color-texto !important;
+  font-weight: 400 !important;
+}
+
+b {
+  color: $color-texto !important;
+  font-weight: 700;
+}
