@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-    <menuApp id="nav" />
     <div class="container">
-      <router-view />
+      <transition mode="out-in">
+        <router-view />
+      </transition>
     </div>
   </div>
 </template>
 <script>
-  import nav from '@/components/header.vue'
+  // import nav from '@/components/header.vue'
   export default {
     components: {
-      menuApp: nav
+      // menuApp: nav
     }
   }
 </script>

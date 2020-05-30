@@ -11,7 +11,7 @@ Vue.use(IconsPlugin)
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-// import './assets/scss/estilos.scss'
+import './assets/scss/estilos.scss'
 
 new Vue({
   router,
