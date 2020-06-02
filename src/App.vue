@@ -9,14 +9,11 @@
   </div>
 </template>
 <script>
-  // import nav from '@/components/header.vue'
+  import config from './config'
   export default {
     metaInfo: {
-      title: 'Ivelk',
+      title: config.frontend.titulo,
       titleTemplate: '%s'
-    },
-    components: {
-      // menuApp: nav
     }
   }
 </script>
