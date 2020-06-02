@@ -1,5 +1,5 @@
 <template>
-  <transition mode="slide">
+  <transition mode="in-out">
     <div class="d-flex justify-content-center">
       <div id="visualizador" class="col-md-10 mb-3">
         <div class="imagen my-3">
