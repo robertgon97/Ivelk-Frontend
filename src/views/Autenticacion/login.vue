@@ -27,6 +27,9 @@
 </template>
 <script>
   export default {
+    metaInfo: {
+      titleTemplate: '%s | Login'
+    },
     data () {
       return {
         login: {
