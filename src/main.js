@@ -1,16 +1,20 @@
 import Vue from 'vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import Componentsglobals from './globalComponents'
 import Element from 'element-ui'
 import Locale from 'element-ui/lib/locale/lang/es'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import Meta from 'vue-meta'
 
 Vue.config.productionTip = false
 
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(Element, { Locale })
+Vue.use(Meta)
+Vue.use(Componentsglobals)
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
