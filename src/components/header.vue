@@ -1,5 +1,5 @@
 <template>
-	<el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+	<el-menu class="el-menu-demo" :mode="configMenu.mode" @select="handleSelect" :background-color="configMenu.background" :text-color="configMenu.text" :active-text-color="configMenu.active">
   <el-menu-item index="1">Processing Center</el-menu-item>
   <el-submenu index="2">
     <template slot="title">Workspace</template>
@@ -21,9 +21,15 @@
   export default {
     data() {
       return {
+        configMenu: {
+          background: '#196587',
+          text: '#ffffff',
+          active: '#5DADE2',
+          mode: 'horizontal'
+        },
         activeIndex: '1',
         activeIndex2: '1'
-      };
+      }
     },
     methods: {
       handleSelect(key, keyPath) {
