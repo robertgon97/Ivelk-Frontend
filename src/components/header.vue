@@ -1,39 +1,29 @@
 <template>
-	<el-menu class="el-menu-demo" :mode="configMenu.mode" @select="handleSelect" :background-color="configMenu.background" :text-color="configMenu.text" :active-text-color="configMenu.active">
-  <el-menu-item index="1">Processing Center</el-menu-item>
-  <el-submenu index="2">
-    <template slot="title">Workspace</template>
-    <el-menu-item index="2-1">item one</el-menu-item>
-    <el-menu-item index="2-2">item two</el-menu-item>
-    <el-menu-item index="2-3">item three</el-menu-item>
-    <el-submenu index="2-4">
-      <template slot="title">item four</template>
-      <el-menu-item index="2-4-1">item one</el-menu-item>
-      <el-menu-item index="2-4-2">item two</el-menu-item>
-      <el-menu-item index="2-4-3">item three</el-menu-item>
-    </el-submenu>
-  </el-submenu>
-  <el-menu-item index="3" disabled>Info</el-menu-item>
-  <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item>
-</el-menu>
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark py-2">
+    <router-link class="navbar-brand" to="/">
+      <img src="./../assets/logo.png" height="30" :alt="title">
+    </router-link>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse pt-2" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <router-link class="nav-link" exact to="/">Inicio</router-link>
+        </li>
+      </ul>
+    </div>
+    <div class="form-inline my-2 my-lg-0">
+      <router-link class="btn btn-outline my-2 my-sm-0" tag="a" exact to="/autenticador/login">Iniciar Sesión</router-link>
+    </div>
+  </nav>
 </template>
 <script>
+  import config from './../config'
   export default {
     data() {
       return {
-        configMenu: {
-          background: '#196587',
-          text: '#ffffff',
-          active: '#5DADE2',
-          mode: 'horizontal'
-        },
-        activeIndex: '1',
-        activeIndex2: '1'
-      }
-    },
-    methods: {
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath)
+        title: config.frontend.titulo
       }
     }
   }
