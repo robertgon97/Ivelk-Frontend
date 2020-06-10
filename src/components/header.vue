@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg fixed-top navbar-dark py-2">
+  <nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-dark py-2 bg-white">
     <router-link class="navbar-brand" to="/">
       <img src="./../assets/logo.png" height="30" :alt="title">
     </router-link>
@@ -28,3 +28,9 @@
     }
   }
 </script>
+<style lang="scss" scoped>
+  #navbar {
+    overflow: hidden;
+    box-shadow: 0px 0px 10px 0px #196587;
+  }
+</style>
