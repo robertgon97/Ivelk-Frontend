@@ -15,7 +15,7 @@ Vue.config.productionTip = false
 Axios.defaults.baseURL = Config.backend.url
 Axios.defaults.headers = {
   'Content-Type': 'application/json',
-  Authorization: localStorage.token_ivelk ? `Bearer ${localStorage.token_ivelk}` : null
+  Authorization: localStorage.token_ivelk ? `Bearer ${localStorage.token_ivelk}` : ''
 }
 
 Vue.use(BootstrapVue)
