@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <menu-ivlk class="mb-2"></menu-ivlk>
-    <div class="container">
+    <menu-ivlk></menu-ivlk>
+    <div class="container mt-5 pt-3">
       <transition mode="out-in">
         <router-view />
       </transition>
