@@ -1,7 +1,7 @@
 'use strict'
 
 const backend = {
-  url: `http:localhost:4011/`
+  url: `http://localhost:4011/`
 }
 
 const frontend = {
