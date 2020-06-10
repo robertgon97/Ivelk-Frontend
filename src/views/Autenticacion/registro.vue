@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form>
+    <form @submit.prevent="register">
       <div class="row m-0 p-0 justify-content-center">
         <div class="col-md-12 mb-3 text-center">
           <h3>Registro de Usuario</h3>
@@ -26,7 +26,7 @@
           <el-input placeholder="Correo" type="email" autocomplete="email" clearable v-model="registro.usuario_email">
             <i slot="suffix" class="el-input__icon el-icon-message"></i>
           </el-input>
-        </div>        
+        </div>
         <div class="col-12 mt-3">
           <h5><small>Datos básicos</small></h5>
         </div>
@@ -50,7 +50,7 @@
         <div class="col-12 col-md-4 mb-3">
           <label class="w-100">Numero de Identificación</label>
           <el-input placeholder="123456789" type="text" autocomplete="dni" clearable v-model="registro.personas_documento_identidad">
-            
+
           </el-input>
         </div>
         <div class="col-12 col-md-6 mb-3">
@@ -116,7 +116,7 @@
         </div>
         <div class="col-12 mb-3 text-center">
           <hr />
-          <el-button button="submit" class="btn-primario" round>Regístrate</el-button>
+          <el-button class="btn-primario" round @click="register" v-loading.fullscreen.lock="uploading">Regístrate</el-button>
         </div>
         <div class="col-12 text-center">
           <p class="m-0 p-0">Ya tienes usuario? <router-link to="/autenticador/login">Inicia Sesión!</router-link> </p>
@@ -128,6 +128,9 @@
 </template>
 <script>
   export default {
+    metaInfo: {
+      titleTemplate: '%s | Regístrate!'
+    },
     data () {
       return {
         registro: {
@@ -146,7 +149,30 @@
           personas_estado: null,
           personas_pais: 'VENEZUELA',
           personas_telefono: null
-        }
+        },
+        uploading: false
+      }
+    },
+    methods: {
+      register() {
+        this.uploading = true
+        this.axios({
+          method: `POST`,
+          url: `/user`,
+          data: this.login
+        })
+        .then(response => {
+          console.log(response)
+        })
+        .catch(err => {
+          if (err.response) {
+            console.log (err.response)
+          } else {
+            console.log(err)
+          }
+          this.uploading = false
+          // console.clear()
+        })
       }
     }
   }
