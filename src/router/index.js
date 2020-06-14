@@ -45,6 +45,25 @@ const routes = [
     component: () => import('./../views/Menu/MenuView.vue'),
     children: [
       {
+        path: 'usuarios',
+        redirect: 'usuarios/lista'
+      },
+      {
+        path: 'usuarios/lista',
+        name: 'Lista de Usuarios',
+        component: () => import('./../views/Usuarios/list.vue')
+      },
+      {
+        path: 'usuarios/crear',
+        name: 'Nuevo Usuario',
+        component: () => import('./../views/Usuarios/add.vue')
+      },
+      {
+        path: 'usuarios/:ID',
+        name: 'Editar Usuario',
+        component: () => import('./../views/Usuarios/add.vue')
+      },
+      {
         path: 'articulos',
         redirect: 'articulos/lista'
       },
