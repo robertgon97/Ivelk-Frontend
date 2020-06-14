@@ -40,6 +40,18 @@ const routes = [
     }
   },
   {
+    path: '/tienda',
+    name: 'Gestión de la tienda',
+    component: () => import('./../views/Menu/MenuView.vue'),
+    children: [
+      {
+        path: 'articulos',
+        name: 'Lista de Artículos',
+        component: () => import('./../views/Articulos/list.vue')
+      }
+    ]
+  },
+  {
     path: '*',
     name: 'Error 404',
     component: () => import('./../views/Error404.vue')
@@ -48,7 +60,7 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  linkActiveClass: 'active',
+  linkActiveClass: 'active is-active',
   routes,
 })
 
