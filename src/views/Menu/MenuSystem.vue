@@ -48,8 +48,8 @@
           <span>Proveedores</span>
         </template>
         <el-menu-item-group>
-          <router-link tag="el-menu-item" exact to="/tienda/articulos/lista">Lista de Proveedores</router-link>
-          <router-link tag="el-menu-item" exact to="/tienda/articulos/crear">Añadir Proveedor</router-link>
+          <router-link tag="el-menu-item" exact to="/tienda/proveedores/lista">Lista de Proveedores</router-link>
+          <router-link tag="el-menu-item" exact to="/tienda/proveedores/crear">Añadir Proveedor</router-link>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="5">

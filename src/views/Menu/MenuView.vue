@@ -4,7 +4,7 @@
       <menu-ivelk-admin />
     </div>
     <div class="col-md-10 p-0">
-      <div class="bg-light p-3"><h5 class="text-center m-0 p-0">{{$route.name || 'Sin Título'}}</h5></div>
+      <div id="menucito" class="bg-light p-3"><h5 class="text-center m-0 p-0">{{$route.name || 'Sin Título'}}</h5></div>
       <div class="p-3">
         <router-view />
       </div>
@@ -29,3 +29,12 @@
     }
   }
 </script>
+<style lang="scss" scoped>
+  #menucito {
+    background-color: #196587 !important;
+    color: white !important;
+    h5 {
+      color: white !important;
+    }
+  }
+</style>
