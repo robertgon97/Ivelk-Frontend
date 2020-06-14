@@ -88,17 +88,17 @@ const routes = [
       },
       {
         path: 'proveedores/lista',
-        name: 'Lista de Artículos',
+        name: 'Lista de Proveedores',
         component: () => import('./../views/Proveedores/list.vue')
       },
       {
         path: 'proveedores/crear',
-        name: 'Nuevo Artículo',
+        name: 'Nuevo Proveedor',
         component: () => import('./../views/Proveedores/add.vue')
       },
       {
         path: 'proveedores/:ID',
-        name: 'Editar Artículo',
+        name: 'Editar Proveedor',
         component: () => import('./../views/Proveedores/add.vue')
       }
     ]
