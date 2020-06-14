@@ -81,6 +81,25 @@ const routes = [
         path: 'articulos/:ID',
         name: 'Editar Artículo',
         component: () => import('./../views/Articulos/add.vue')
+      },
+      {
+        path: 'proveedores',
+        redirect: 'proveedores/lista'
+      },
+      {
+        path: 'proveedores/lista',
+        name: 'Lista de Artículos',
+        component: () => import('./../views/Proveedores/list.vue')
+      },
+      {
+        path: 'proveedores/crear',
+        name: 'Nuevo Artículo',
+        component: () => import('./../views/Proveedores/add.vue')
+      },
+      {
+        path: 'proveedores/:ID',
+        name: 'Editar Artículo',
+        component: () => import('./../views/Proveedores/add.vue')
       }
     ]
   },
