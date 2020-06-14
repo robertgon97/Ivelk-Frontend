@@ -27,8 +27,8 @@
           <span>Usuarios</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item>Lista de Usuarios</el-menu-item>
-          <el-menu-item>Crear de Usuarios</el-menu-item>
+          <router-link tag="el-menu-item" exact to="/tienda/usuarios/lista">Lista de Usuarios</router-link>
+          <router-link tag="el-menu-item" exact to="/tienda/usuarios/crear">Crear Usuarios</router-link>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="3">
@@ -37,9 +37,9 @@
           <span>Artículos</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item>Lista de Artículos</el-menu-item>
-          <el-menu-item>Crear Artículo</el-menu-item>
-          <el-menu-item>Devoluciones</el-menu-item>
+          <router-link tag="el-menu-item" exact to="/tienda/articulos/lista">Lista de Artículos</router-link>
+          <router-link tag="el-menu-item" exact to="/tienda/articulos/crear">Crear Artículo</router-link>
+          <router-link tag="el-menu-item" exact to="/tienda/articulos/devoluciones">Devoluciones PENDIENTE</router-link>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="4">
@@ -48,8 +48,8 @@
           <span>Proveedores</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item>Lista de Proveedores</el-menu-item>
-          <el-menu-item>Añadir Proveedores</el-menu-item>
+          <router-link tag="el-menu-item" exact to="/tienda/articulos/lista">Lista de Proveedores</router-link>
+          <router-link tag="el-menu-item" exact to="/tienda/articulos/crear">Añadir Proveedor</router-link>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="5">
