@@ -1,11 +1,8 @@
 <template>
   <div id="app">
-    <menu-ivlk></menu-ivlk>
-    <div class="container mt-5 pt-3">
-      <transition mode="out-in">
-        <router-view />
-      </transition>
-    </div>
+    <transition mode="out-in">
+      <router-view />
+    </transition>
   </div>
 </template>
 <script>
