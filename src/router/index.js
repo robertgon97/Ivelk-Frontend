@@ -46,8 +46,22 @@ const routes = [
     children: [
       {
         path: 'articulos',
+        redirect: 'articulos/lista'
+      },
+      {
+        path: 'articulos/lista',
         name: 'Lista de Artículos',
         component: () => import('./../views/Articulos/list.vue')
+      },
+      {
+        path: 'articulos/crear',
+        name: 'Nuevo Artículo',
+        component: () => import('./../views/Articulos/add.vue')
+      },
+      {
+        path: 'articulos/:ID',
+        name: 'Editar Artículo',
+        component: () => import('./../views/Articulos/add.vue')
       }
     ]
   },
