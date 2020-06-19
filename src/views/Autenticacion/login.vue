@@ -41,6 +41,7 @@
     },
     methods: {
       loginBackend() {
+        this.$router.push(`/tienda`)
         this.uploading = true
         this.axios({
           method: `POST`,
