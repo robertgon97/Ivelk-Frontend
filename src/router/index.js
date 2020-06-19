@@ -114,6 +114,25 @@ const routes = [
         path: 'proveedores/:ID',
         name: 'Editar Proveedor',
         component: () => import('./../views/Proveedores/add.vue')
+      },
+      {
+        path: 'compras',
+        redirect: 'compras/lista'
+      },
+      {
+        path: 'compras/lista',
+        name: 'Lista de Compras',
+        component: () => import('./../views/Compras/list.vue')
+      },
+      {
+        path: 'compras/crear',
+        name: 'Nueva Orden de Compra',
+        component: () => import('./../views/Compras/add.vue')
+      },
+      {
+        path: 'compras/:ID',
+        name: 'Editar Orden de Compra',
+        component: () => import('./../views/Compras/add.vue')
       }
     ]
   },
