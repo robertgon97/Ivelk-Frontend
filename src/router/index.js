@@ -87,6 +87,11 @@ const routes = [
         component: () => import('./../views/Articulos/add.vue')
       },
       {
+        path: 'articulos/devoluciones',
+        name: 'Lista de Devoluciones',
+        component: () => import('./../views/Articulos/devolucion.vue')
+      },
+      {
         path: 'articulos/:ID',
         name: 'Editar Artículo',
         component: () => import('./../views/Articulos/add.vue')
