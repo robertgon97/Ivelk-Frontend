@@ -16,8 +16,8 @@
           <span>Perfil</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item>Modificar mi perfil</el-menu-item>
-          <el-menu-item>Cerrar Sesión</el-menu-item>
+          <router-link tag="el-menu-item" exact to="/tienda/perfil/editar">Modificar mi Perfil</router-link>
+          <router-link tag="el-menu-item" exact to="/logout">Cerrar Sesión</router-link>
         </el-menu-item-group>
       </el-submenu>
       <hr />

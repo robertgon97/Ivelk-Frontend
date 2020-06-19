@@ -45,6 +45,15 @@ const routes = [
     component: () => import('./../views/Menu/MenuView.vue'),
     children: [
       {
+        path: 'perfil',
+        redirect: 'perfil/editar'
+      },
+      {
+        path: 'perfil/editar',
+        name: 'Editar mi Usuario',
+        component: () => import('./../views/Perfil/edit.vue')
+      },
+      {
         path: 'usuarios',
         redirect: 'usuarios/lista'
       },
@@ -102,6 +111,11 @@ const routes = [
         component: () => import('./../views/Proveedores/add.vue')
       }
     ]
+  },
+  {
+    path: '/logout',
+    name: 'Cerrar Sesión',
+    component: () => import('./../views/Logout.vue')
   },
   {
     path: '*',
