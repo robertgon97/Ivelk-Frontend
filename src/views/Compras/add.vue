@@ -114,6 +114,26 @@
           proveedor_correo: null,
           proveedor_telefono: null
         },
+        compra: {
+          compras_id: 0,
+          personas_id: null,
+          status_id: null,
+          compras_created: null,
+          compras_iva: null,
+          compras_subtotal: null,
+          compras_total: null
+        },
+        detalleCompra: [
+          // {
+          //   compras_detalles_id: 0,
+          //   compras_id: null,
+          //   proveedor_id: null,
+          //   stock_id: null,
+          //   compras_detalle_cantidad: null,
+          //   compras_detalles_preciobase: null,
+          //   compras_detalles_total: null
+          // }
+        ],
         uploading: false
       }
     },
