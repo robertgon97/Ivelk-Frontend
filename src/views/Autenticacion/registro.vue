@@ -162,13 +162,27 @@
           data: this.login
         })
         .then(response => {
+          this.$notify({
+            title: 'Registro Exitoso!',
+            message: 'Tu registro fué procesado con éxito.!',
+            type: 'success'
+          })
           console.log(response)
         })
         .catch(err => {
           if (err.response) {
-            console.log (err.response)
+            this.$notify({
+              title: 'Error',
+              message: 'Agunos datos son requeridos o son inválidos',
+              type: 'info'
+            })
+            console.log (err.response.data.message)
           } else {
-            console.log(err)
+            this.$notify({
+              title: 'Error',
+              message: 'Agunos datos son requeridos o son inválidos',
+              type: 'error'
+            })
           }
           this.uploading = false
           // console.clear()
