@@ -5,7 +5,7 @@
         <div class="row m-0 p-0 justify-content-between">
           <div class="col-md-6 mb-3">
             <label>Razon Social del Proveedor</label>
-            <el-input type="text" placeholder="Nombre del artículo" v-model="proveedores.proveedor_razon_social" prefix-icon="el-icon-goods" clearable></el-input>
+            <el-input type="text" placeholder="Razón social" v-model="proveedores.proveedor_razon_social" prefix-icon="el-icon-goods" clearable></el-input>
           </div>
           <div class="col-md-2 mb-3">
             <label class="w-100">Nacionalidad</label>
