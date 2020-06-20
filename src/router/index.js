@@ -131,8 +131,27 @@ const routes = [
       },
       {
         path: 'compras/:ID',
-        name: 'Editar Orden de Compra',
+        name: 'Ver Orden de Compra',
         component: () => import('./../views/Compras/add.vue')
+      },
+      {
+        path: 'ventas',
+        redirect: 'ventas/lista'
+      },
+      {
+        path: 'ventas/lista',
+        name: 'Lista de Ventas',
+        component: () => import('./../views/Ventas/list.vue')
+      },
+      {
+        path: 'ventas/crear',
+        name: 'Nueva Orden de Venta',
+        component: () => import('./../views/Ventas/add.vue')
+      },
+      {
+        path: 'ventas/:ID',
+        name: 'Ver Orden de Venta',
+        component: () => import('./../views/Ventas/add.vue')
       }
     ]
   },
