@@ -29,6 +29,7 @@
         <el-menu-item-group>
           <router-link tag="el-menu-item" exact to="/tienda/usuarios/lista">Lista de Usuarios</router-link>
           <router-link tag="el-menu-item" exact to="/tienda/usuarios/crear">Crear Usuarios</router-link>
+          <el-menu-item>Tipos de Usuario</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="3">
@@ -40,6 +41,11 @@
           <router-link tag="el-menu-item" exact to="/tienda/articulos/lista">Lista de Artículos</router-link>
           <router-link tag="el-menu-item" exact to="/tienda/articulos/crear">Crear Artículo</router-link>
           <router-link tag="el-menu-item" exact to="/tienda/articulos/devoluciones">Devoluciones</router-link>
+          <el-menu-item>Garantías</el-menu-item>
+          <el-menu-item>Marcas</el-menu-item>
+          <el-menu-item>Medidas</el-menu-item>
+          <el-menu-item>Tamaños</el-menu-item>
+          <el-menu-item>Tipos</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="4">
@@ -70,6 +76,7 @@
         <el-menu-item-group>
           <router-link tag="el-menu-item" exact to="/tienda/ventas/lista">Todas las Ventas</router-link>
           <router-link tag="el-menu-item" exact to="/tienda/ventas/crear">Nueva Venta</router-link>
+          <el-menu-item>Tipo</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="7">
@@ -79,6 +86,7 @@
         </template>
         <el-menu-item-group>
           <router-link tag="el-menu-item" exact to="/tienda/balances/lista">Balances Generales</router-link>
+          <el-menu-item>Tipos de Balances</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="99">
@@ -89,6 +97,9 @@
         <el-menu-item-group>
           <router-link tag="el-menu-item" exact to="/tienda/configuracion/general">Configuración General</router-link>
           <router-link tag="el-menu-item" exact to="/tienda/configuracion/status">Estatus</router-link>
+          <el-menu-item>Auditoría</el-menu-item>
+          <el-menu-item>Bancos</el-menu-item>
+          <el-menu-item>Nacionalidades</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>
