@@ -88,6 +88,7 @@
         </template>
         <el-menu-item-group>
           <router-link tag="el-menu-item" exact to="/tienda/configuracion/general">Configuración General</router-link>
+          <router-link tag="el-menu-item" exact to="/tienda/configuracion/status">Estatus</router-link>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>

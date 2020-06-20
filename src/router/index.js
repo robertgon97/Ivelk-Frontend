@@ -180,6 +180,11 @@ const routes = [
         path: 'configuracion/general',
         name: 'Configuración General del Sistema',
         component: () => import('./../views/Configuracion/general.vue')
+      },
+      {
+        path: 'configuracion/status',
+        name: 'Configuración de Estatus',
+        component: () => import('./../views/Configuracion/status.vue')
       }
     ]
   },
