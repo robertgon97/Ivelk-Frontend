@@ -11,6 +11,9 @@
     metaInfo: {
       title: config.frontend.titulo,
       titleTemplate: '%s'
+    },
+    created () {
+      this.$store.dispatch('startupEscencial')
     }
   }
 </script>
