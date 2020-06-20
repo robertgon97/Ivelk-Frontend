@@ -45,6 +45,7 @@
         <div class="col-12 col-md-2 mb-3">
           <label class="w-100">Nacionalidad</label>
           <el-select placeholder="Selecciona tu nacionalidad" v-model="registro.tipo_documento_id">
+            <el-option v-for="item in getAllTypeDocumento" :key="item.tipo_documento_id" :label="`${item.tipo_documento_nombre} (${item.tipo_documento_letra})`" :value="item.tipo_documento_id" />
           </el-select>
         </div>
         <div class="col-12 col-md-4 mb-3">
@@ -62,7 +63,13 @@
         </div>
         <div class="col-12 col-md-6 mb-3">
           <label>Fecha de cumpleaños</label>
-          <el-date-picker class="w-100" type="date" placeholder="Fecha de cumpleaños" value-format="YYYY-MM-DD" v-model="registro.personas_cumple" />
+          <el-date-picker class="w-100" type="date" placeholder="Fecha de cumpleaños" value-format="yyyy-MM-dd" v-model="registro.personas_cumple" />
+        </div>
+        <div class="col-12 col-md-6 mb-3">
+          <label>Teléfono</label>
+          <el-input placeholder="Número de Teléfono" type="text" autocomplete="phone" clearable v-model="registro.personas_telefono">
+            <i slot="suffix" class="el-input__icon el-icon-s-custom"></i>
+          </el-input>
         </div>
         <div class="col-12 mt-3">
           <h5><small>Dirección del usuario</small></h5>
@@ -134,7 +141,7 @@
     data () {
       return {
         registro: {
-          usuarios_tipo_id: null,
+          usuarios_tipo_id: 6,
           usuario_username: null,
           usuario_password: null,
           usuario_email: null,
@@ -159,15 +166,16 @@
         this.axios({
           method: `POST`,
           url: `/user`,
-          data: this.login
+          data: this.registro
         })
         .then(response => {
           this.$notify({
             title: 'Registro Exitoso!',
-            message: 'Tu registro fué procesado con éxito.!',
-            type: 'success'
+            message: response.data.data,
+            type: 'success',
+            duration: 0
           })
-          console.log(response)
+          this.uploading = false
         })
         .catch(err => {
           if (err.response) {
@@ -187,6 +195,14 @@
           this.uploading = false
           // console.clear()
         })
+      }
+    },
+    computed: {
+      getAllTypeUsers () {
+        return this.$store.getters.getAllTypeUsers
+      },
+      getAllTypeDocumento () {
+        return this.$store.getters.getAllTypeDocumento
       }
     }
   }
