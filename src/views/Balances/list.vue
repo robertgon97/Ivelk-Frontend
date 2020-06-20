@@ -4,7 +4,7 @@
 <script>
   export default {
     metaInfo: {
-      titleTemplate: '%s | Lista de Balances'
+      titleTemplate: '%s | Balances Generales'
     },
   }
 </script>

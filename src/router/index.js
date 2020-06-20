@@ -113,7 +113,7 @@ const routes = [
       {
         path: 'proveedores/:ID',
         name: 'Editar Proveedor',
-        component: () => import('./../views/Proveedores/add.vue')
+        component: () => import('./../views/Proveedores/edit.vue')
       },
       {
         path: 'compras',
@@ -132,7 +132,7 @@ const routes = [
       {
         path: 'compras/:ID',
         name: 'Ver Orden de Compra',
-        component: () => import('./../views/Compras/add.vue')
+        component: () => import('./../views/Compras/edit.vue')
       },
       {
         path: 'ventas',
@@ -151,7 +151,26 @@ const routes = [
       {
         path: 'ventas/:ID',
         name: 'Ver Orden de Venta',
-        component: () => import('./../views/Ventas/add.vue')
+        component: () => import('./../views/Ventas/edit.vue')
+      },
+      {
+        path: 'balances',
+        redirect: 'balances/lista'
+      },
+      {
+        path: 'balances/lista',
+        name: 'Lista de Balances',
+        component: () => import('./../views/Balances/list.vue')
+      },
+      // {
+      //   path: 'balances/crear',
+      //   name: 'Nuevo Balance',
+      //   component: () => import('./../views/Balances/add.vue')
+      // },
+      {
+        path: 'balances/:ID',
+        name: 'Ver Balance',
+        component: () => import('./../views/Balances/edit.vue')
       }
     ]
   },
