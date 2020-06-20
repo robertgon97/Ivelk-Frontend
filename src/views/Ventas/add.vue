@@ -19,12 +19,16 @@
       <div class="contenido">
         <div class="row m-0 p-0 justify-content-center">
           <div class="col-md-6 mb-3">
-            <label>Proveedor</label>
-            <el-input type="text" placeholder="Proveedor" prefix-icon="el-icon-user" v-model="item.proveedor_id" clearable></el-input>
+            <label>Cliente</label>
+            <el-select class="d-block" v-model="value" multiple filterable remote reserve-keyword placeholder="Escriba su Artículo Aquí" :remote-method="remoteMethod" :loading="loading">
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+            </el-select>
           </div>
           <div class="col-md-6 mb-3">
             <label>Artículo</label>
-            <el-input type="text" placeholder="Nombre del artículo" prefix-icon="el-icon-goods" v-model="item.stock_id" clearable></el-input>
+            <el-select class="d-block" v-model="value" multiple filterable remote reserve-keyword placeholder="Escriba su Artículo Aquí" :remote-method="remoteMethod" :loading="loading">
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+            </el-select>
           </div>
         </div>
         <div class="row m-0 p-0 justify-content-center">
@@ -73,7 +77,7 @@
       </div>
       <el-divider></el-divider>
       <div class="d-flex justify-content-center">
-        <el-button @click="enviarCarrito" class="btn-primario">Procesar Orden de compra</el-button>
+        <el-button @click="enviarCarrito" class="btn-primario">Procesar Orden de Venta</el-button>
       </div>
     </el-card>
   </div>

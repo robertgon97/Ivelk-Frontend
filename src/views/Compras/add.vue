@@ -73,7 +73,7 @@
       </div>
       <el-divider></el-divider>
       <div class="d-flex justify-content-center">
-        <el-button @click="enviarCarrito" class="btn-primario">Procesar Orden de compra</el-button>
+        <el-button @click="enviarCarrito" class="btn-primario">Procesar Orden de Venta</el-button>
       </div>
     </el-card>
   </div>
@@ -81,7 +81,7 @@
 <script>
   export default {
     metaInfo: {
-      titleTemplate: '%s | Registro de Compras'
+      titleTemplate: '%s | Nueva Orden de Compra'
     },
     data () {
       return {
