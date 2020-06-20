@@ -171,6 +171,15 @@ const routes = [
         path: 'balances/:ID',
         name: 'Ver Balance',
         component: () => import('./../views/Balances/edit.vue')
+      },
+      {
+        path: 'configuracion',
+        redirect: 'configuracion/general'
+      },
+      {
+        path: 'configuracion/general',
+        name: 'Configuración General del Sistema',
+        component: () => import('./../views/Configuracion/general.vue')
       }
     ]
   },
