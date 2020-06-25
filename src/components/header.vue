@@ -11,6 +11,9 @@
         <li class="nav-item">
           <router-link class="nav-link" exact to="/">Inicio</router-link>
         </li>
+        <li class="nav-item">
+          <router-link class="nav-link" exact to="/categorias">Categorías</router-link>
+        </li>
       </ul>
     </div>
     <div class="form-inline my-2 my-lg-0">

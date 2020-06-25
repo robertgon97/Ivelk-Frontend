@@ -7,7 +7,7 @@ const routes = [
   {
     path: '/',
     name: 'Inicio',
-    component: () => import('./../views/Home.vue'),
+    component: () => import('./../views/Menu/MenuViewGeneral.vue'),
     meta: {
       requiresAuth: false,
       guest: true
@@ -42,7 +42,7 @@ const routes = [
   {
     path: '/tienda',
     name: 'Gestión de la tienda',
-    component: () => import('./../views/Menu/MenuView.vue'),
+    component: () => import('./../views/Menu/MenuViewAdmin.vue'),
     children: [
       {
         path: 'perfil',
