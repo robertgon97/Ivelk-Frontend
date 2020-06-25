@@ -6,8 +6,16 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Inicio',
+    name: 'BASE',
+    redirect: '/inicio',
     component: () => import('./../views/Menu/MenuViewGeneral.vue'),
+    children: [
+      {
+        path: 'inicio',
+        name: 'Inicio',
+        component: () => import('./../views/Home.vue')
+      },
+    ],
     meta: {
       requiresAuth: false,
       guest: true

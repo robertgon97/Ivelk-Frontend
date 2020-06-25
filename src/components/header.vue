@@ -1,6 +1,6 @@
 <template>
   <nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-dark py-2 bg-white">
-    <router-link class="navbar-brand" to="/">
+    <router-link class="navbar-brand" exact to="/">
       <img src="./../assets/logo.png" height="30" :alt="title">
     </router-link>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse pt-2" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <router-link class="nav-link" exact to="/">Inicio</router-link>
+          <router-link class="nav-link" exact to="/inicio">Inicio</router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" exact to="/categorias">Categorías</router-link>
