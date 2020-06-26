@@ -14,6 +14,9 @@
         <li class="nav-item">
           <router-link class="nav-link" exact to="/categorias">Categorías</router-link>
         </li>
+        <li class="nav-item">
+          <router-link class="nav-link" exact to="/ayuda">Ayuda</router-link>
+        </li>
       </ul>
     </div>
     <div v-if="userdata" class="form-inline my-2 my-lg-0">
