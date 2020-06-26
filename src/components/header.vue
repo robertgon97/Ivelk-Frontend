@@ -16,7 +16,42 @@
         </li>
       </ul>
     </div>
-    <div class="form-inline my-2 my-lg-0">
+    <div v-if="userdata" class="form-inline my-2 my-lg-0">
+      <el-badge value="0" class="item mx-2" type="primary">
+        <el-button type="text">
+          <i v-if="false" class="el-icon-shopping-cart-full"></i>
+          <i v-else class="el-icon-shopping-cart-1"></i>
+          Carrito</el-button>
+      </el-badge>
+      <el-dropdown class="mx-2">
+        <span class="el-dropdown-link">
+          <i class="el-icon-user"></i> {{userdata.usuario_username}} <i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>
+            <router-link to="/miuser" class="text-dark">
+              <i class="el-icon-user"></i> Mi Usuario
+            </router-link>
+          </el-dropdown-item>
+          <el-dropdown-item>
+            <router-link to="/compras" class="text-dark">
+              <i class="el-icon-goods"></i> Mis Compras
+            </router-link>
+          </el-dropdown-item>
+          <el-dropdown-item>
+            <router-link to="/configuracion" class="text-dark">
+              <i class="el-icon-setting"></i> Configuración
+            </router-link>
+          </el-dropdown-item>
+          <el-dropdown-item divided>
+            <router-link to="/logout" class="text-dark">
+              <i class="el-icon-key"></i> Cerrar Sesión
+            </router-link>
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
+    <div v-else class="form-inline my-2 my-lg-0">
       <router-link class="btn btn-primary my-2 my-sm-0 text-white" tag="a" exact to="/autenticador/login">Iniciar Sesión</router-link>
     </div>
   </nav>
@@ -24,9 +59,13 @@
 <script>
   import config from './../config'
   export default {
+    created () {
+      this.userdata = JSON.parse(localStorage.getItem('ud_ivelk'))
+    },
     data() {
       return {
-        title: config.frontend.titulo
+        title: config.frontend.titulo,
+        userdata: null
       }
     }
   }
