@@ -171,10 +171,14 @@
         .then(response => {
           this.$notify({
             title: 'Registro Exitoso!',
-            message: response.data.data,
+            message: `Bienvenido, ${response.data.data.usuario[0].usuario_username}!`,
             type: 'success',
             duration: 0
           })
+          localStorage.setItem('token_ivelk', response.data.data.token)
+          localStorage.setItem('ud_ivelk', JSON.stringify(response.data.data.usuario[0]))
+          this.$store.dispatch('startupClient')
+          this.$router.push(`/`)
           this.uploading = false
         })
         .catch(err => {
