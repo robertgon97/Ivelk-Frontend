@@ -17,7 +17,7 @@
       </ul>
     </div>
     <div class="form-inline my-2 my-lg-0">
-      <router-link class="btn btn-outline my-2 my-sm-0" tag="a" exact to="/autenticador/login">Iniciar Sesión</router-link>
+      <router-link class="btn btn-primary my-2 my-sm-0 text-white" tag="a" exact to="/autenticador/login">Iniciar Sesión</router-link>
     </div>
   </nav>
 </template>

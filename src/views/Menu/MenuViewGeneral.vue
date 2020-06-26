@@ -3,20 +3,9 @@
     <menu-ivlk></menu-ivlk>
     <br />
     <el-container class="mt-5">
-      <el-main>
-        <div class="iniciooo" id="iniciooo"></div>
-        <el-backtop target=".iniciooo" :bottom="100">
-          <div style="{
-              height: 100%;
-              width: 100%;
-              background-color: #f2f5f6;
-              box-shadow: 0 0 6px rgba(0,0,0, .12);
-              text-align: center;
-              line-height: 40px;
-              color: #1989fa;
-            }">
-            SUBIR
-          </div>
+      <el-main ref="scrollTarget" class="test-scroll">
+        <el-backtop target=".test-scroll" :bottom="100">
+          <span>test_up_text</span>
         </el-backtop>
         <router-view />
       </el-main>
