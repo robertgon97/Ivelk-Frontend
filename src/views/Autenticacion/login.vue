@@ -8,10 +8,10 @@
       </div>
       <div class="d-flex flex-wrap justify-content-center">
         <div class="col-12 col-md-7 mb-3">
-          <el-input placeholder="Usuario" type="text" autocomplete="username" clearable v-model="login.user" />
+          <el-input placeholder="Usuario" type="text" autocomplete="username" clearable v-model="login.usuario_username" />
         </div>
         <div class="col-12 col-md-7 mb-3">
-          <el-input placeholder="Contraseña" type="password" autocomplete="password" clearable show-password v-model="login.password" />
+          <el-input placeholder="Contraseña" type="password" autocomplete="password" clearable show-password v-model="login.usuario_password" />
         </div>
         <div class="col-12 col-md-7 mb-3 text-center">
           <hr />
@@ -33,15 +33,15 @@
     data () {
       return {
         login: {
-          user: null,
-          password: null
+          usuario_username: null,
+          usuario_password: null
         },
         uploading: false
       }
     },
     methods: {
       loginBackend() {
-        this.$router.push(`/tienda`)
+        // this.$router.push(`/tienda`)
         this.uploading = true
         this.axios({
           method: `POST`,
@@ -49,13 +49,39 @@
           data: this.login
         })
         .then(response => {
-          console.log(response)
+          this.uploading = false
+          this.$notify({
+            title: 'Autenticación Exitosa!',
+            message: `Bienvenido, ${response.data.data.usuario.usuario_username}!`,
+            type: 'success',
+            duration: 0
+          })
+          localStorage.setItem('token_ivelk', response.data.data.token)
+          localStorage.setItem('ud_ivelk', JSON.stringify(response.data.data.usuario))
+          switch (response.data.data.usuario.usuarios_tipo_id) {
+            case 6:
+              this.$store.dispatch('startupClient')
+              this.$router.push(`/`)
+              break
+            default:
+              this.$store.dispatch('startupAdmin')
+              this.$router.push(`/tienda`)
+              break;
+          }
         })
         .catch(err => {
           if (err.response) {
-            console.log (err.response)
+            this.$notify({
+              title: 'Error',
+              message: err.response.data.message,
+              type: 'info'
+            })
           } else {
-            console.log(err)
+            this.$notify({
+              title: 'Error',
+              message: 'No tienes conexión a internet. Verifica e inténtalo de nuevo',
+              type: 'error'
+            })
           }
           this.uploading = false
           // console.clear()

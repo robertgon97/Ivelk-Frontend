@@ -18,7 +18,7 @@ const routes = [
     ],
     meta: {
       requiresAuth: false,
-      guest: true
+      guest: false
     }
   },
   {
