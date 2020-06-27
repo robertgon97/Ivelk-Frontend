@@ -5,10 +5,10 @@ export default {
       context.dispatch('getAllTypeDocumento')
     },
     startupClient (context) {
-      context.dispatch('getAllTypeDocumento')
+      context.dispatch('getCarritoAll')
     },
     startupAdmin (context) {
-      context.dispatch('getAllTypeDocumento')
+      context.dispatch('getCarritoAll')
     }
   }
 }

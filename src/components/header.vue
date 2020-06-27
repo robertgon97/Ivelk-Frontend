@@ -20,9 +20,9 @@
       </ul>
     </div>
     <div v-if="userdata" class="form-inline my-2 my-lg-0">
-      <el-badge value="0" class="item mx-2" type="primary">
+      <el-badge :value="getCarritoAll.carrito.length" class="item mx-2" type="primary">
         <el-button type="text">
-          <i v-if="false" class="el-icon-shopping-cart-full"></i>
+          <i v-if="getCarritoAll.carrito.length" class="el-icon-shopping-cart-full"></i>
           <i v-else class="el-icon-shopping-cart-1"></i>
           Carrito</el-button>
       </el-badge>
@@ -69,6 +69,11 @@
       return {
         title: config.frontend.titulo,
         userdata: null
+      }
+    },
+    computed: {
+      getCarritoAll () {
+        return this.$store.getters.getCarritoAll
       }
     }
   }
