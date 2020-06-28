@@ -21,12 +21,14 @@
     </div>
     <div v-if="userdata" class="form-inline my-2 my-lg-0">
       <el-button v-if="getCarritoAll && getCarritoAll == 'Loading'" type="text" :loading="true">...</el-button>
-      <el-badge v-else :value="getCarritoAll.carrito.length" class="item mx-2" type="primary">
-        <el-button type="text">
-          <i v-if="getCarritoAll.carrito.length" class="el-icon-shopping-cart-full"></i>
-          <i v-else class="el-icon-shopping-cart-1"></i>
-          Carrito</el-button>
-      </el-badge>
+      <router-link v-else to="/carrito" class="text-decoration-none">
+        <el-badge :value="getCarritoAll.carrito.length" class="item mx-2" type="primary">
+          <el-button type="text">
+            <i v-if="getCarritoAll.carrito.length" class="el-icon-shopping-cart-full"></i>
+            <i v-else class="el-icon-shopping-cart-1"></i>
+            Carrito</el-button>
+        </el-badge>
+      </router-link>
       <el-dropdown class="mx-2">
         <span class="el-dropdown-link">
           <i class="el-icon-user"></i> {{userdata.usuario_username}} <i class="el-icon-arrow-down el-icon--right"></i>

@@ -15,6 +15,15 @@ const routes = [
         name: 'Inicio',
         component: () => import('./../views/Home.vue')
       },
+      {
+        path: 'carrito',
+        name: 'Tu Carrito',
+        component: () => import('./../views/Carrito/carrito.vue'),
+        meta: {
+          requiresAuth: true,
+          guest: false
+        }
+      }
     ],
     meta: {
       requiresAuth: false,
