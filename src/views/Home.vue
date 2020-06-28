@@ -82,6 +82,9 @@
 <script>
   import config from './../config'
   export default {
+    metaInfo: {
+      titleTemplate: '%s | Inicio'
+    },
     data () {
       return {
         title: config.frontend.titulo,
