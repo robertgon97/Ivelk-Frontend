@@ -20,7 +20,8 @@
       </ul>
     </div>
     <div v-if="userdata" class="form-inline my-2 my-lg-0">
-      <el-badge :value="getCarritoAll.carrito.length" class="item mx-2" type="primary">
+      <el-button v-if="getCarritoAll && getCarritoAll == 'Loading'" type="text" :loading="true">...</el-button>
+      <el-badge v-else :value="getCarritoAll.carrito.length" class="item mx-2" type="primary">
         <el-button type="text">
           <i v-if="getCarritoAll.carrito.length" class="el-icon-shopping-cart-full"></i>
           <i v-else class="el-icon-shopping-cart-1"></i>

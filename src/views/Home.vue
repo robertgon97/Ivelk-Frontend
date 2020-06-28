@@ -36,31 +36,19 @@
     </div>
     <br />
     <el-divider>Artículos Recién Agregados</el-divider>
-    <div class="d-flex overflow-auto py-5 bg-light">
-      <div class="col-3">
-        <item-normal />
+    <div v-if="getAllArticulos && getAllArticulos != 'Loading' && getAllArticulos.length" class="d-flex overflow-auto py-5 bg-light">
+      <div v-for="(articulo) in getAllArticulos.slice(0, 20)" :key="articulo.articulos_id" class="col-3">
+        <item-normal :to="`/articulo/${articulo.articulos_id}`"
+        :title="articulo.articulos_nombres" :description="articulo.articulos_descripcion"
+        :costo="articulo.stock_precio" :src="[articulo.articulos_imagen_principal || false]"
+        :admin="false" :complete="articulo" />
       </div>
-      <div class="col-3">
-        <item-normal />
-      </div>
-      <div class="col-3">
-        <item-normal />
-      </div>
-      <div class="col-3">
-        <item-normal />
-      </div>
-      <div class="col-3">
-        <item-normal />
-      </div>
-      <div class="col-3">
-        <item-normal />
-      </div>
-      <div class="col-3">
-        <item-normal />
-      </div>
-      <div class="col-3">
-        <item-normal />
-      </div>
+    </div>
+    <div v-else-if="getAllArticulos == 'Loading'">
+      <h3>Cargando</h3>
+    </div>
+    <div v-else class="text-center">
+      <h3>No tenemos disponible aún ítems para que compres</h3>
     </div>
     <br />
     <el-divider>Nuestras Categorías</el-divider>
@@ -98,6 +86,11 @@
       return {
         title: config.frontend.titulo,
         search: null
+      }
+    },
+    computed: {
+      getAllArticulos () {
+        return this.$store.getters.getAllArticulos
       }
     }
   }
