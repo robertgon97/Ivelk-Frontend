@@ -6,6 +6,7 @@ import tipo_documento from './tipo_documento'
 import balances_tipos from './balances_tipos'
 import carrito from './carrito'
 import articulo from './articulos'
+import configData from './config_backend'
 import disparator from './disparator'
 
 Vue.use(Vuex)
@@ -17,6 +18,7 @@ export default new Vuex.Store({
     balances_tipos,
     carrito,
     articulo,
+    configData,
     disparator
   }
 })

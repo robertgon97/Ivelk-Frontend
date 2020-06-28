@@ -28,6 +28,7 @@ export default {
         }
       })
       .then(res => {
+        context.commit('setgetAppConfig', res.data.appData)
         context.commit('setCarritoAll', res.data.data)
       })
       .catch(error => {
