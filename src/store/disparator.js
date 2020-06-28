@@ -3,6 +3,7 @@ export default {
     startupEscencial (context) {
       context.dispatch('getAllTypeUsers')
       context.dispatch('getAllTypeDocumento')
+      context.dispatch('getAllArticulos')
     },
     startupClient (context) {
       context.dispatch('getCarritoAll')
