@@ -7,7 +7,7 @@
         <h1 class="display-3 text-center">...Cargando</h1>
       </el-card>
     </div>
-    <div v-else-if="getCarritoAll.carrito.length">
+    <div class="container" v-else-if="getCarritoAll.carrito.length">
       <el-card shadow="hover">
         <div slot="header" class="clearfix">
           <i class="el-icon-shopping-cart-full"></i>
@@ -47,10 +47,35 @@
             </template>
           </el-table-column>
         </el-table>
-        <div class="clearfix text-right mt-3">
-          <p class="m-0 p-0"> SubTotal <span class="text-primary"> {{parseMoneda(getCarritoAll.subtotal)}} </span> </p>
-          <p class="m-0 p-0"> IVA ({{getgetAppConfig.config_iva}}%) <span class="text-primary"> {{parseMoneda(getCarritoAll.subtotal * (getgetAppConfig.config_iva * 0.01))}} </span> </p>
-          <p class="m-0 p-0"> Total <span class="text-primary"> {{parseMoneda((getCarritoAll.subtotal * (getgetAppConfig.config_iva * 0.01)) + getCarritoAll.subtotal)}} </span> </p>
+        <el-divider></el-divider>
+        <div class="clearfix mt-3 d-flex flex-wrap justify-content-between">
+          <div class="col-md-5 mb-3">
+            <label class="w-100">Seleccione su Método de Pago</label>
+            <el-select v-model="orden.banco_id" class="w-100" clearable placeholder="Seleccione el banco">
+              <el-option v-for="banco in getAllBancos" :key="banco.banco_id" :label="banco.bancos_nombre" :value="banco.banco_id" />
+            </el-select>
+          </div>
+          <div class="col-md-5 mb-3">
+            <div class="d-flex flex-wrap">
+              <p class="col-6 m-0 p-0"> SubTotal: </p>
+              <p class="col-6 m0 p-0 text-right"><span class="text-primary"> {{parseMoneda(getCarritoAll.subtotal)}} </span></p>
+            </div>
+            <div class="d-flex flex-wrap">
+              <p class="col-6 m-0 p-0"> IVA (<span class="text-danger">{{getgetAppConfig.config_iva}}%</span>): </p>
+              <p class="col-6 m0 p-0 text-right"><span class="text-primary"> <span class="text-primary"> {{parseMoneda(getCarritoAll.subtotal * (getgetAppConfig.config_iva * 0.01))}} </span> </span></p>
+            </div>
+            <div class="d-flex flex-wrap">
+              <p class="col-6 m-0 p-0"> Total: </p>
+              <p class="col-6 m0 p-0 text-right"><span class="text-primary"> {{parseMoneda((getCarritoAll.subtotal * (getgetAppConfig.config_iva * 0.01)) + getCarritoAll.subtotal)}} </span></p>
+            </div>
+          </div>
+          <div class="col-md-12 mb-3">
+            <p><b>Nota: </b> Una vez seleccionado el banco a pagar, continúe con el proceso de compra internamente y copie el número de referencia. Más adelante se le solicitará el número de transacción arrojado por la entidad bancaria.</p>
+            <div class="d-flex justify-content-center">
+              <el-button class="btn-primario">Obtener número de orden</el-button>
+            </div>
+          </div>
+          <br>
         </div>
       </el-card>
     </div>
@@ -71,7 +96,10 @@
     },
     data () {
       return {
-        uploading: false
+        uploading: false,
+        orden: {
+          banco_id: null
+        }
       }
     },
     methods: {
@@ -132,6 +160,9 @@
       },
       getgetAppConfig () {
         return this.$store.getters.getgetAppConfig
+      },
+      getAllBancos () {
+        return this.$store.getters.getAllBancos
       }
     }
   }

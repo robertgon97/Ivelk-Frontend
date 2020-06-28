@@ -4,6 +4,7 @@ export default {
       context.dispatch('getAllTypeUsers')
       context.dispatch('getAllTypeDocumento')
       context.dispatch('getAllArticulos')
+      context.dispatch('getAllBancos')
     },
     startupClient (context) {
       context.dispatch('getCarritoAll')
