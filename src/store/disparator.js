@@ -1,6 +1,7 @@
 export default {
   actions: {
     startupEscencial (context) {
+      context.dispatch('getMyUser')
       context.dispatch('getAllTypeUsers')
       context.dispatch('getAllTypeDocumento')
       context.dispatch('getAllArticulos')

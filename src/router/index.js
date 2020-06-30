@@ -41,6 +41,15 @@ const routes = [
           requiresAuth: true,
           guest: false
         }
+      },
+      {
+        path: 'miuser',
+        name: 'Perfil de Usuario',
+        component: () => import('./../views/MiUsuario/edit.vue'),
+        meta: {
+          requiresAuth: true,
+          guest: false
+        }
       }
     ],
     meta: {
