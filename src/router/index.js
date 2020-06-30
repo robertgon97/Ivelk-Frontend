@@ -23,6 +23,24 @@ const routes = [
           requiresAuth: true,
           guest: false
         }
+      },
+      {
+        path: 'compras',
+        name: 'Tu historial de compras',
+        component: () => import('./../views/UsuarioCompras/list.vue'),
+        meta: {
+          requiresAuth: true,
+          guest: false
+        }
+      },
+      {
+        path: 'compras/:ID',
+        name: 'Resumen de Compra',
+        component: () => import('./../views/UsuarioCompras/edit.vue'),
+        meta: {
+          requiresAuth: true,
+          guest: false
+        }
       }
     ],
     meta: {
