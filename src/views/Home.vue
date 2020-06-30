@@ -52,28 +52,27 @@
     </div>
     <br />
     <el-divider>Nuestras Categorías</el-divider>
-    <div class="d-flex flex-wrap py-5 justify-content-center bg-light">
-      <div class="border border-primary p-4 m-1">
-        <p class="p-0 m-0 text-primary"><small class="text-primary">Categoría </small></p>
+    <div v-if="getAllCategoria && getAllCategoria != 'Loading' && getAllCategoria.length" class="d-flex flex-wrap py-5 justify-content-center bg-light">
+      <div v-for="category of getAllCategoria" :key="category.articulo_tipo_id" class="border border-primary p-4 m-1 text-center">
+        <el-image class="" fit="cover" :src="articulo_imagen || false">
+          <div slot="placeholder" class="image-slot">
+            Cargando<span class="dot">...</span>
+          </div>
+          <div slot="error" class="image-slot">
+            <div class="text-center">
+              <h1 class="m-0 p-0"><i class="el-icon-picture-outline"></i></h1>
+            </div>
+          </div>
+        </el-image>
+        <p class="p-0 m-0 text-primary"><small class="text-primary">{{category.articulo_tipo_nombre || 'Sin Nombre'}} </small></p>
+        <!-- <p class="p-0 m-0"><small>{{category.articulo_tipo_descripcion || 'Sin Nombre'}} </small></p> -->
       </div>
-      <div class="border border-primary p-4 m-1">
-        <p class="p-0 m-0 text-primary"><small class="text-primary">Categoría </small></p>
-      </div>
-      <div class="border border-primary p-4 m-1">
-        <p class="p-0 m-0 text-primary"><small class="text-primary">Categoría </small></p>
-      </div>
-      <div class="border border-primary p-4 m-1">
-        <p class="p-0 m-0 text-primary"><small class="text-primary">Categoría </small></p>
-      </div>
-      <div class="border border-primary p-4 m-1">
-        <p class="p-0 m-0 text-primary"><small class="text-primary">Categoría </small></p>
-      </div>
-      <div class="border border-primary p-4 m-1">
-        <p class="p-0 m-0 text-primary"><small class="text-primary">Categoría </small></p>
-      </div>
-      <div class="border border-primary p-4 m-1">
-        <p class="p-0 m-0 text-primary"><small class="text-primary">Categoría </small></p>
-      </div>
+    </div>
+    <div v-else-if="getAllCategoria == 'Loading'">
+      <h3>Cargando</h3>
+    </div>
+    <div v-else class="text-center">
+      <h3>No tenemos disponible aún ítems categorías para que las veas</h3>
     </div>
     <br>
     <p class="text-center"><small class="text-dark">{{title}} Copyright 2020 - Todos los derechos reservados</small></p>
@@ -94,6 +93,9 @@
     computed: {
       getAllArticulos () {
         return this.$store.getters.getAllArticulos
+      },
+      getAllCategoria () {
+        return this.$store.getters.getAllCategoria
       }
     }
   }

@@ -10,6 +10,7 @@ import configData from './config_backend'
 import bancos from './bancos'
 import ventas from './ventas'
 import myUser from './myUser'
+import categoria from './categorias'
 import disparator from './disparator'
 
 Vue.use(Vuex)
@@ -25,6 +26,7 @@ export default new Vuex.Store({
     bancos,
     ventas,
     myUser,
+    categoria,
     disparator
   }
 })

@@ -17,6 +17,7 @@ export default {
   },
   actions: {
     getCarritoAll (context) {
+      if (!localStorage.token_ivelk) return context.commit('setCarritoAll', null)
       context.commit('setCarritoAll', 'Loading')
       axios({
         method: `GET`,
