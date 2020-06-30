@@ -12,7 +12,7 @@
           <router-link class="nav-link" exact to="/inicio">Inicio</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" exact to="/categorias">Categorías</router-link>
+          <router-link class="nav-link" exact to="/articulos">Articulos</router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" exact to="/ayuda">Ayuda</router-link>
