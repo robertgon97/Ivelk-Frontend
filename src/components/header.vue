@@ -44,9 +44,9 @@
               <i class="el-icon-goods"></i> Mis Compras
             </router-link>
           </el-dropdown-item>
-          <el-dropdown-item>
-            <router-link to="/configuracion" class="text-dark">
-              <i class="el-icon-setting"></i> Configuración
+          <el-dropdown-item v-if="userdata.usuarios_tipo_id != 6">
+            <router-link to="/tienda" class="text-dark">
+              <i class="el-icon-setting"></i> Administrar
             </router-link>
           </el-dropdown-item>
           <el-dropdown-item divided>
