@@ -8,10 +8,12 @@ export default {
     startupClient (context) {
       context.dispatch('getCarritoAll')
       context.dispatch('getAllBancos')
+      context.dispatch('getAllVentaUser')
     },
     startupAdmin (context) {
       context.dispatch('getCarritoAll')
-      context.dispatch('getAllBancos')
+      context.dispatch('getAllVentaUser')
+      context.dispatch('getAllVentas')
     }
   }
 }

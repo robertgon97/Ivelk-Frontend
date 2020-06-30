@@ -8,6 +8,7 @@ import carrito from './carrito'
 import articulo from './articulos'
 import configData from './config_backend'
 import bancos from './bancos'
+import ventas from './ventas'
 import disparator from './disparator'
 
 Vue.use(Vuex)
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     articulo,
     configData,
     bancos,
+    ventas,
     disparator
   }
 })
