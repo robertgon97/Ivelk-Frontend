@@ -3,7 +3,7 @@
     <el-page-header @back="$router.push(`/`)" content="Historial de Compras" title="Atrás" />
     <br />
     <div v-if="getAllVentaUser && getAllVentaUser == 'Loading'">
-      <el-card class="col-10 my-5">
+      <el-card class="d-flex my-5 justify-content-center">
         <h1 class="display-3 text-center">...Cargando</h1>
       </el-card>
     </div>

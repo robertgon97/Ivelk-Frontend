@@ -95,7 +95,7 @@ export default {
       })
     },
     getVentaID (context, ID) {
-      if (!localStorage.token_ivelk || ID.value) return context.commit('setVentaID', null)
+      if (!localStorage.token_ivelk || !ID.value) return context.commit('setVentaID', null)
       context.commit('setVentaID', 'Loading')
       axios({
         method: `GET`,
