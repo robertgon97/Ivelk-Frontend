@@ -150,7 +150,16 @@
           // console.clear()
         })
         .finally(() => {
-          this.$store.dispatch('getCarritoAll')
+          if (localStorage.token_ivelk && localStorage.token_ivelk != null && typeof localStorage.token_ivelk == 'string') {
+            let user = JSON.parse(localStorage.getItem('ud_ivelk'))
+            if (user && user.usuarios_tipo_id == 6) {
+              this.$store.dispatch('startupEscencial')
+              this.$store.dispatch('startupClient')
+            } else {
+              this.$store.dispatch('startupEscencial')
+              this.$store.dispatch('startupAdmin')
+            }
+          }
         })
       },
       confirmOrden(value) {
