@@ -72,7 +72,7 @@
           <div class="col-md-12 mb-3">
             <p><b>Nota: </b> Una vez seleccionado el banco a pagar, continúe con el proceso de compra internamente y copie el número de referencia. Más adelante se le solicitará el número de transacción arrojado por la entidad bancaria.</p>
             <div class="d-flex justify-content-center">
-              <el-button class="btn-primario">Obtener número de orden</el-button>
+              <el-button @click="confirmOrden(orden)" :loading="uploading" class="btn-primario">Obtener número de orden</el-button>
             </div>
           </div>
           <br>
@@ -131,6 +131,44 @@
             duration: 5000
           })
           console.log('Eliminado el articulo ', response.data.appData.config_id)
+        })
+        .catch(err => {
+          if (err.response) {
+            this.$notify({
+              title: 'Error',
+              message: err.response.data.message,
+              type: 'info'
+            })
+          } else {
+            this.$notify({
+              title: 'Error',
+              message: 'No tienes conexión a internet. Verifica e inténtalo de nuevo',
+              type: 'error'
+            })
+          }
+          this.uploading = false
+          // console.clear()
+        })
+        .finally(() => {
+          this.$store.dispatch('getCarritoAll')
+        })
+      },
+      confirmOrden(value) {
+        this.uploading = true
+        this.axios({
+          method: `POST`,
+          url: `/orden/confirm`,
+          data: value
+        })
+        .then(response => {
+          this.uploading = false
+          this.$notify({
+            title: 'Hecho!',
+            message: `Ahora puedes visualizar tu orden en tu lista de órdenes!`,
+            type: 'success',
+            duration: 5000
+          })
+          console.log('Confirmado ', response.data.appData.config_id)
         })
         .catch(err => {
           if (err.response) {
