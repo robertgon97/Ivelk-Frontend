@@ -45,7 +45,7 @@
           <el-menu-item>Marcas</el-menu-item>
           <el-menu-item>Medidas</el-menu-item>
           <el-menu-item>Tamaños</el-menu-item>
-          <el-menu-item>Tipos</el-menu-item>
+          <el-menu-item>Categorias</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="4">
