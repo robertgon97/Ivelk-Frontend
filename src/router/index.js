@@ -243,6 +243,11 @@ const routes = [
         path: 'configuracion/status',
         name: 'Configuración de Estatus',
         component: () => import('./../views/Configuracion/status.vue')
+      },
+      {
+        path: 'configuracion/nacionalidades',
+        name: 'Configuración de Nacionalidades',
+        component: () => import('./../views/Configuracion/nacionalidades.vue')
       }
     ],
     meta: {

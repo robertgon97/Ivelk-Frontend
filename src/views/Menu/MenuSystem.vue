@@ -99,7 +99,7 @@
           <router-link tag="el-menu-item" exact to="/tienda/configuracion/status">Estatus</router-link>
           <el-menu-item>Auditoría</el-menu-item>
           <el-menu-item>Bancos</el-menu-item>
-          <el-menu-item>Nacionalidades</el-menu-item>
+          <router-link tag="el-menu-item" exact to="/tienda/configuracion/nacionalidades">Nacionalidades</router-link>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>
