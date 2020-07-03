@@ -1,84 +1,90 @@
 <template>
   <div>
-    <el-loading></el-loading>
-    <el-row :gutter="20">
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/' }">Inicio</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/tienda' }">Administración Tienda</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/tienda/perfil/editar' }">Editar Perfil</el-breadcrumb-item>
+    </el-breadcrumb>
+    <br />
+    <div v-if="getMyUser && getMyUser == 'Loading'">
+      <el-button type="text" v-loading.fullscreen.lock="true"></el-button>
+    </div>
+    <el-row :gutter="20" v-else-if="getMyUser && getMyUser.usuario_email">
       <el-col class="col-md-9">
         <el-card shadow="hover">
-          <form>
+          <form @submit.prevent="register(getMyUser)">
             <div class="d-flex flex-wrap justify-content-init">
               <div class="col-12 mt-3">
                 <h5><small>Datos de autenticación y contacto</small></h5>
               </div>
               <div class="col-12 col-md-6 mb-3">
-                <label>Contraseña</label>
-                <el-input placeholder="Contraseña" type="password" autocomplete="password" clearable show-password v-model="registro.usuario_password" />
-              </div>
-              <div class="col-12 col-md-6 mb-3">
                 <label>Correo Electrónico</label>
-                <el-input placeholder="Correo" type="email" autocomplete="email" clearable v-model="registro.usuario_email">
+                <el-input placeholder="Correo" type="email" autocomplete="email" clearable v-model="getMyUser.usuario_email">
                   <i slot="suffix" class="el-input__icon el-icon-message"></i>
                 </el-input>
               </div>
               <div class="col-12 col-md-6 mb-3">
-                <label>Nivel de Usuario</label>
-                <el-select class="w-100" placeholder="Selecciona tu nacionalidad" v-model="registro.usuarios_tipo_id">
-                </el-select>
+                <label>Teléfono</label>
+                <el-input placeholder="Teléfono" type="phone" autocomplete="phone" clearable v-model="getMyUser.personas_telefono">
+                  <i slot="suffix" class="el-input__icon el-icon-phone-outline"></i>
+                </el-input>
               </div>
               <div class="col-12 mt-3">
                 <h5><small>Datos básicos</small></h5>
               </div>
               <div class="col-12 col-md-6 mb-3">
                 <label>Nombres</label>
-                <el-input placeholder="Nombres" type="text" autocomplete="name" clearable v-model="registro.personas_name">
+                <el-input placeholder="Nombres" type="text" autocomplete="name" clearable v-model="getMyUser.personas_name">
                   <i slot="suffix" class="el-input__icon el-icon-s-custom"></i>
                 </el-input>
               </div>
               <div class="col-12 col-md-6 mb-3">
                 <label>Apellidos</label>
-                <el-input placeholder="Apellidos" type="text" autocomplete="lastname" clearable v-model="registro.personas_apellido">
+                <el-input placeholder="Apellidos" type="text" autocomplete="lastname" clearable v-model="getMyUser.personas_apellido">
                   <i slot="suffix" class="el-input__icon el-icon-s-custom"></i>
                 </el-input>
               </div>
               <div class="col-12 col-md-2 mb-3">
                 <label class="w-100">Nacionalidad</label>
-                <el-select placeholder="Selecciona tu nacionalidad" v-model="registro.tipo_documento_id">
+                <el-select placeholder="Selecciona tu nacionalidad" v-model="getMyUser.tipo_documento_id" disabled>
+                  <el-option v-for="item in getAllTypeDocumento" :key="item.tipo_documento_id" :label="`${item.tipo_documento_nombre} (${item.tipo_documento_letra})`" :value="item.tipo_documento_id" />
                 </el-select>
               </div>
               <div class="col-12 col-md-4 mb-3">
                 <label class="w-100">Numero de Identificación</label>
-                <el-input placeholder="123456789" type="text" autocomplete="dni" clearable v-model="registro.personas_documento_identidad">
+                <el-input placeholder="123456789" type="text" disabled autocomplete="dni" clearable v-model="getMyUser.personas_documento_identidad">
 
                 </el-input>
               </div>
               <div class="col-12 col-md-6 mb-3">
                 <label>Sexo</label>
-                <el-select class="w-100" placeholder="Sexo" size="large" v-model="registro.personas_sexo">
+                <el-select class="w-100" placeholder="Sexo" size="large" v-model="getMyUser.personas_sexo">
                   <el-option label="Hombre" value="Hombre" />
                   <el-option label="Mujer" value="Mujer" />
                 </el-select>
               </div>
               <div class="col-12 col-md-6 mb-3">
                 <label>Fecha de cumpleaños</label>
-                <el-date-picker class="w-100" type="date" placeholder="Fecha de cumpleaños" value-format="YYYY-MM-DD" v-model="registro.personas_cumple" />
+                <el-date-picker class="w-100" type="date" placeholder="Fecha de cumpleaños" value-format="YYYY-MM-DD" v-model="getMyUser.personas_cumple" />
               </div>
               <div class="col-12 mt-3">
                 <h5><small>Dirección del usuario</small></h5>
               </div>
               <div class="col-12 col-md-6 mb-3">
                 <label>Dirección</label>
-                <el-input placeholder="Dirección completa" type="text" autocomplete="direction" clearable v-model="registro.personas_direccion">
+                <el-input placeholder="Dirección completa" type="text" autocomplete="direction" clearable v-model="getMyUser.personas_direccion">
                   <i slot="suffix" class="el-input__icon el-icon-position"></i>
                 </el-input>
               </div>
               <div class="col-12 col-md-6 mb-3">
                 <label>Ciudad</label>
-                <el-input placeholder="Ciudad" type="text" autocomplete="city" clearable v-model="registro.personas_ciudad">
+                <el-input placeholder="Ciudad" type="text" autocomplete="city" clearable v-model="getMyUser.personas_ciudad">
                   <i slot="suffix" class="el-input__icon el-icon-position"></i>
                 </el-input>
               </div>
               <div class="col-12 col-md-6 mb-3">
                 <label>Estado</label>
-                <el-select class="w-100" placeholder="Estado" size="large" v-model="registro.personas_estado">
+                <el-select class="w-100" placeholder="Estado" size="large" v-model="getMyUser.personas_estado">
                   <el-option label="Amazonas" value="Amazonas" />
                   <el-option label="Anzoátegui" value="Anzoátegui" />
                   <el-option label="Apure" value="Apure" />
@@ -107,13 +113,13 @@
               </div>
               <div class="col-12 col-md-6 mb-3">
                 <label>País</label>
-                <el-select class="w-100" placeholder="País" size="large" v-model="registro.personas_pais">
+                <el-select class="w-100" placeholder="País" size="large" v-model="getMyUser.personas_pais">
                   <el-option label="Venezuela" value="VENEZUELA" />
                 </el-select>
               </div>
               <div class="col-12 mb-3 text-center">
                 <hr />
-                <el-button class="btn-primario" round @click="register" v-loading.fullscreen.lock="uploading">Guardar</el-button>
+                <el-button class="btn-primario" round @click="register(getMyUser)" v-loading.fullscreen.lock="uploading">Guardar</el-button>
               </div>
             </div>
           </form>
@@ -121,44 +127,98 @@
       </el-col>
       <el-col class="col-md-3">
         <el-card shadow="hover" :body-style="{ padding: '0px' }">
-          <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+          <img src="https://www.gravatar.com/avatar/?s=2048" class="image">
           <div style="padding: 14px;">
-            <span>Deni Aguirre</span>
+            <span>{{getMyUser.personas_name}} {{getMyUser.personas_apellido}}</span>
             <div class="bottom clearfix">
-              <time class="time">example@gmail.com</time>
+              <time class="time">{{getMyUser.usuario_email}}</time>
             </div>
           </div>
         </el-card>
       </el-col>
     </el-row>
+    <div v-else class="d-flex my-5 justify-content-center">
+      <div class="col-10 my-5">
+        <h1 class="display-3 text-center"><i class="el-icon-s-custom"></i></h1>
+        <div class="text-center">
+          <h3>Error al cargar su información</h3>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
+  import moment from 'moment'
   export default {
     data () {
       return {
-        registro: {
-          usuarios_tipo_id: null,
-          usuario_username: null,
-          usuario_password: null,
-          usuario_email: null,
-          tipo_documento_id: null,
-          personas_name: null,
-          personas_apellido: null,
-          personas_documento_identidad: null,
-          personas_sexo: null,
-          personas_cumple: null,
-          personas_direccion: null,
-          personas_ciudad: null,
-          personas_estado: null,
-          personas_pais: 'VENEZUELA',
-          personas_telefono: null
-        },
+        uploading: false
       }
     },
     methods: {
-      addArt () {
+      register (value) {
         this.uploading = true
+        this.axios({
+          method: `PUT`,
+          url: `/user`,
+          data: {
+            usuario_id: value.usuario_id,
+            personas_id: value.personas_id,
+            usuarios_tipo_id: value.usuarios_tipo_id,
+            usuario_username: value.usuario_username,
+            usuario_password: value.usuario_password || 'NO132456789',
+            usuario_email: value.usuario_email,
+            tipo_documento_id: value.tipo_documento_id,
+            personas_name: value.personas_name,
+            personas_apellido: value.personas_apellido,
+            personas_documento_identidad: value.personas_documento_identidad,
+            personas_sexo: value.personas_sexo,
+            personas_cumple: value.personas_cumple ? moment(value.personas_cumple).format('YYYY-MM-DD') : moment().format('YYYY-MM-DD'),
+            personas_direccion: value.personas_direccion,
+            personas_ciudad: value.personas_ciudad,
+            personas_estado: value.personas_estado,
+            personas_pais: value.personas_pais,
+            personas_telefono: value.personas_telefono
+          }
+        })
+        .then(response => {
+          this.uploading = false
+          this.$notify({
+            title: 'Hecho!',
+            message: `Tu usuario fue modificado exitosamente!`,
+            type: 'success',
+            duration: 5000
+          })
+          console.log('Confirmado ', response.data.appData.config_id)
+        })
+        .catch(err => {
+          if (err.response) {
+            this.$notify({
+              title: 'Error',
+              message: err.response.data.message,
+              type: 'info'
+            })
+          } else {
+            this.$notify({
+              title: 'Error',
+              message: 'No tienes conexión a internet. Verifica e inténtalo de nuevo',
+              type: 'error'
+            })
+          }
+          this.uploading = false
+          // console.clear()
+        })
+        .finally(() => {
+          this.$store.dispatch('startupEscencial')
+        })
+      }
+    },
+    computed: {
+      getMyUser () {
+        return this.$store.getters.getMyUser
+      },
+      getAllTypeDocumento () {
+        return this.$store.getters.getAllTypeDocumento
       }
     }
   }
