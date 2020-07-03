@@ -16,7 +16,7 @@ export default {
     startupAdmin (context) {
       context.dispatch('getCarritoAll')
       context.dispatch('getAllVentaUser')
-      context.dispatch('getAllVentas')
+      context.dispatch('getAllVentas', { venta_date: null, status_id: null, personas_name: null, ventas_id: null })
     }
   }
 }

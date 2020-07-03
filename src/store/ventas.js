@@ -30,7 +30,7 @@ export default {
     }
   },
   actions: {
-    getAllVentas (context) {
+    getAllVentas (context, query) {
       if (!localStorage.token_ivelk) return context.commit('setAllVentas', null)
       context.commit('setAllVentas', 'Loading')
       axios({
@@ -40,6 +40,12 @@ export default {
         headers: {
           'Content-Type': 'application/json',
           Authorization: localStorage.token_ivelk ? `Bearer ${localStorage.token_ivelk}` : ''
+        },
+        params: {
+          venta_date: query.venta_date ? query.venta_date : null,
+          status_id: query.status_id ? query.status_id : null,
+          personas_name: query.personas_name ? query.personas_name : null,
+          ventas_id: query.ventas_id ? query.ventas_id : null
         }
       })
       .then(res => {
