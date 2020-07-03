@@ -1,6 +1,15 @@
 <template>
   <div>
-    <el-card class="mb-3">
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/' }">Inicio</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/tienda' }">Administración Tienda</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/tienda/nivelesusuario/lista' }">Lista de Niveles de Usuario</el-breadcrumb-item>
+    </el-breadcrumb>
+    <br />
+    <div v-if="getAllTypeUsers && getAllTypeUsers == 'Loading'">
+      <el-button type="text" v-loading.fullscreen.lock="true"></el-button>
+    </div>
+    <el-card class="mb-3" v-else-if="getAllTypeUsers && getAllTypeUsers.length">
       <div slot="header" class="clearfix">
         <i class="el-icon-finished"></i>
         <span> Lista de Niveles de Usuario</span>
@@ -42,6 +51,14 @@
         </div>
       </div>
     </el-card>
+    <div v-else class="d-flex my-5 justify-content-center">
+      <div class="col-10 my-5">
+        <h1 class="display-3 text-center"><i class="el-icon-s-custom"></i></h1>
+        <div class="text-center">
+          <h3>No hay niveles registrados</h3>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
