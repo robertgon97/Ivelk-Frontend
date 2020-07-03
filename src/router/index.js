@@ -248,6 +248,11 @@ const routes = [
         path: 'configuracion/nacionalidades',
         name: 'Configuración de Nacionalidades',
         component: () => import('./../views/Configuracion/nacionalidades.vue')
+      },
+      {
+        path: 'configuracion/bancos',
+        name: 'Configuración de Bancos',
+        component: () => import('./../views/Configuracion/bancos.vue')
       }
     ],
     meta: {
