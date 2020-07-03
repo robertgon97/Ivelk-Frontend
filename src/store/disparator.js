@@ -17,6 +17,7 @@ export default {
       context.dispatch('getCarritoAll')
       context.dispatch('getAllVentaUser')
       context.dispatch('getAllVentas', { venta_date: null, status_id: null, personas_name: null, ventas_id: null })
+      context.dispatch('getAllUsers')
     }
   }
 }
