@@ -7,6 +7,7 @@ export default {
       context.dispatch('getAllArticulos')
       context.dispatch('getAllCategoria')
       context.dispatch('getAllCategoryFields')
+      context.dispatch('getAllStatus')
     },
     startupClient (context) {
       context.dispatch('getCarritoAll')
