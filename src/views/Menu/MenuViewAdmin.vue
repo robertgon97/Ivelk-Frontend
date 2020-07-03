@@ -34,6 +34,9 @@
     components: {
       'menu-ivelk-admin': menu
     },
+    created () {
+      //
+    },
     data () {
       return {
         uploading: false,

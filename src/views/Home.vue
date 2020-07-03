@@ -40,7 +40,7 @@
       <div v-for="(articulo) in getAllArticulos.slice(0, 20)" :key="articulo.articulos_id" class="col-3">
         <item-normal :to="`/articulo/${articulo.articulos_id}`"
         :title="articulo.articulos_nombres" :description="articulo.articulos_descripcion"
-        :costo="articulo.stock_precio" :src="[articulo.articulos_imagen_principal || false]"
+        :costo="articulo.stock_precio" :src="[articulo.articulos_imagen_principal || null]"
         :admin="false" :complete="articulo" />
       </div>
     </div>
@@ -54,7 +54,7 @@
     <el-divider>Nuestras Categorías</el-divider>
     <div v-if="getAllCategoria && getAllCategoria != 'Loading' && getAllCategoria.length" class="d-flex flex-wrap py-5 justify-content-center bg-light">
       <div v-for="category of getAllCategoria" :key="category.articulo_tipo_id" class="border border-primary p-4 m-1 text-center">
-        <el-image class="" fit="cover" :src="articulo_imagen || false">
+        <el-image class="" fit="cover" :src="category.articulo_imagen || null">
           <div slot="placeholder" class="image-slot">
             Cargando<span class="dot">...</span>
           </div>

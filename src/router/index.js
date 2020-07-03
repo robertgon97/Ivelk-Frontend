@@ -235,7 +235,11 @@ const routes = [
         name: 'Configuración de Estatus',
         component: () => import('./../views/Configuracion/status.vue')
       }
-    ]
+    ],
+    meta: {
+      requiresAuth: true,
+      guest: false
+    }
   },
   {
     path: '/logout',
