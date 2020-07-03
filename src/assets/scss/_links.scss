@@ -5,3 +5,9 @@ a {
 .active {
   border-bottom: solid $color-link 2px;
 }
+
+.el-menu-item.is-active.active {
+  background-color: $color-principal !important;
+  border-bottom: solid $color-principal 2px;
+  color: white !important;
+}
