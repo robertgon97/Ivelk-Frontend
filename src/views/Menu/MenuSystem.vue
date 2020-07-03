@@ -29,7 +29,7 @@
         <el-menu-item-group>
           <router-link tag="el-menu-item" exact to="/tienda/usuarios/lista">Lista de Usuarios</router-link>
           <router-link tag="el-menu-item" exact to="/tienda/usuarios/crear">Crear Usuarios</router-link>
-          <el-menu-item>Tipos de Usuario</el-menu-item>
+          <router-link tag="el-menu-item" exact to="/tienda/nivelesusuario/lista">Niveles de Usuario</router-link>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="3">

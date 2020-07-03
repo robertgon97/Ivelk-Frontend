@@ -1,7 +1,17 @@
 <template>
   <div>
-    <el-card>
-      <form>
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/' }">Inicio</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/tienda' }">Administración Tienda</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/tienda/usuarios/crear' }">Registro de Usuario</el-breadcrumb-item>
+    </el-breadcrumb>
+    <br />
+    <el-card shadow="hover">
+      <div slot="header" class="clearfix">
+        <i class="el-icon-plus"></i>
+        <span> Agregar Usuario</span>
+      </div>
+      <form @submit.prevent="register">
         <div class="d-flex flex-wrap justify-content-init">
           <div class="col-12 mt-3">
             <h5><small>Datos de autenticación y contacto</small></h5>
@@ -24,7 +34,8 @@
           </div>
           <div class="col-12 col-md-6 mb-3">
             <label>Nivel de Usuario</label>
-            <el-select class="w-100" placeholder="Selecciona tu nacionalidad" v-model="registro.usuarios_tipo_id">
+            <el-select class="w-100" placeholder="Nivel" size="large" v-model="registro.usuarios_tipo_id">
+              <el-option v-for="tipo of getAllTypeUsers" :key="tipo.usuarios_tipo_id" :label="tipo.usuarios_tipo_nombre" :value="tipo.usuarios_tipo_id" />
             </el-select>
           </div>
           <div class="col-12 mt-3">
@@ -45,6 +56,7 @@
           <div class="col-12 col-md-2 mb-3">
             <label class="w-100">Nacionalidad</label>
             <el-select placeholder="Selecciona tu nacionalidad" v-model="registro.tipo_documento_id">
+              <el-option v-for="item in getAllTypeDocumento" :key="item.tipo_documento_id" :label="`${item.tipo_documento_nombre} (${item.tipo_documento_letra})`" :value="item.tipo_documento_id" />
             </el-select>
           </div>
           <div class="col-12 col-md-4 mb-3">
@@ -62,7 +74,13 @@
           </div>
           <div class="col-12 col-md-6 mb-3">
             <label>Fecha de cumpleaños</label>
-            <el-date-picker class="w-100" type="date" placeholder="Fecha de cumpleaños" value-format="YYYY-MM-DD" v-model="registro.personas_cumple" />
+            <el-date-picker class="w-100" type="date" placeholder="Fecha de cumpleaños" value-format="yyyy-MM-dd" v-model="registro.personas_cumple" />
+          </div>
+          <div class="col-12 col-md-6 mb-3">
+            <label>Teléfono</label>
+            <el-input placeholder="Número de Teléfono" type="text" autocomplete="phone" clearable v-model="registro.personas_telefono">
+              <i slot="suffix" class="el-input__icon el-icon-s-custom"></i>
+            </el-input>
           </div>
           <div class="col-12 mt-3">
             <h5><small>Dirección del usuario</small></h5>
@@ -114,9 +132,8 @@
               <el-option label="Venezuela" value="VENEZUELA" />
             </el-select>
           </div>
-          <div class="col-12 mb-3 text-center">
-            <hr />
-            <el-button class="btn-primario" round @click="register" v-loading.fullscreen.lock="uploading">Regístrate</el-button>
+          <div class="col-12 my-3 text-center">
+            <el-button class="btn-primario" round @click="register" v-loading.fullscreen.lock="uploading">Registrar</el-button>
           </div>
         </div>
       </form>
@@ -126,12 +143,12 @@
 <script>
   export default {
     metaInfo: {
-      titleTemplate: '%s | Registro de Usuario'
+      titleTemplate: '%s | Regístrate!'
     },
     data () {
       return {
         registro: {
-          usuarios_tipo_id: null,
+          usuarios_tipo_id: 6,
           usuario_username: null,
           usuario_password: null,
           usuario_email: null,
@@ -147,13 +164,53 @@
           personas_pais: 'VENEZUELA',
           personas_telefono: null
         },
-        uploading: false,
-        FormData: new FormData()
+        uploading: false
       }
     },
     methods: {
-      addArt () {
+      register() {
         this.uploading = true
+        this.axios({
+          method: `POST`,
+          url: `/user`,
+          data: this.registro
+        })
+        .then(response => {
+          this.$notify({
+            title: 'Registro Exitoso!',
+            message: `El usuario ${response.data.data.usuario.usuario_username} se registró correctamente!`,
+            type: 'success',
+            duration: 0
+          })
+          this.$store.dispatch('startupAdmin')
+          this.uploading = false
+        })
+        .catch(err => {
+          if (err.response) {
+            this.$notify({
+              title: 'Error',
+              message: 'Agunos datos son requeridos o son inválidos',
+              type: 'info'
+            })
+            console.log (err.response.data.message)
+          } else {
+            this.$notify({
+              title: 'Error',
+              message: 'Agunos datos son requeridos o son inválidos',
+              type: 'error'
+            })
+          }
+          this.uploading = false
+          // console.clear()
+        })
+      }
+    },
+    computed: {
+      getAllTypeUsers () {
+        return this.$store.getters.getAllTypeUsers
+      },
+      getAllTypeDocumento () {
+        return this.$store.getters.getAllTypeDocumento
       }
     }
   }

@@ -122,6 +122,15 @@ const routes = [
         component: () => import('./../views/Usuarios/add.vue')
       },
       {
+        path: 'nivelesusuario',
+        redirect: 'nivelesusuario/lista'
+      },
+      {
+        path: 'nivelesusuario/lista',
+        name: 'Niveles de Usuario',
+        component: () => import('./../views/Usuarios/type.vue')
+      },
+      {
         path: 'articulos',
         redirect: 'articulos/lista'
       },
