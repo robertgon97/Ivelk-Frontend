@@ -4,7 +4,7 @@ export default {
       context.dispatch('getMyUser')
       context.dispatch('getAllTypeUsers')
       context.dispatch('getAllTypeDocumento')
-      context.dispatch('getAllArticulos')
+      context.dispatch('getAllArticulos', { articulos_id: null, articulos_nombres: null, articulo_tipo_nombre: null, articulo_marcas_nombre: null, articulo_medidas_nombre: null, articulo_tamano_nombre: null })
       context.dispatch('getAllCategoria')
       context.dispatch('getAllCategoryFields')
       context.dispatch('getAllStatus')
