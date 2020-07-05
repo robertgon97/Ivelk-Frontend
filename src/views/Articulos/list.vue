@@ -67,7 +67,7 @@
           </div>
         </div>
         <div class="contenido">
-          <el-table :data="getAllArticulos" class="w-100" :default-sort = "{prop: 'articulos_id', order: 'descending'}">
+          <el-table v-loading="uploading" :data="getAllArticulos" class="w-100" :default-sort = "{prop: 'articulos_id', order: 'descending'}">
             <el-table-column sortable fixed prop="articulos_id" label="ID" width="80"></el-table-column>
             <el-table-column width="300" sortable prop="articulos_nombres" label="Nombre"></el-table-column>
             <el-table-column width="150" sortable prop="articulo_tipo_nombre" label="Categoría"></el-table-column>
@@ -80,9 +80,9 @@
               </template>
             </el-table-column>
             <el-table-column fixed="right" label="Operaciones" width="150">
-              <template slot-scope="">
+              <template slot-scope="props">
                 <el-button class="text-primary" type="text" size="small" icon="el-icon-edit" @click="$router.push(`/tienda/usuarios/${props.row.usuario_id}`)">Ver</el-button>
-                <el-button class="text-danger" type="text" size="small" icon="el-icon-delete">Eliminar</el-button>
+                <el-button class="text-danger" type="text" size="small" icon="el-icon-delete" @click="eliminar(props.row)">Eliminar</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -119,7 +119,8 @@
           articulo_marcas_nombre: null,
           articulo_medidas_nombre: null,
           articulo_tamano_nombre: null
-        }
+        },
+        uploading: false
       }
     },
     methods: {
@@ -130,6 +131,67 @@
       },
       searchapi () {
         this.$store.dispatch('getAllArticulos', this.search)
+      },
+      eliminar (articulo) {
+        this.$confirm('Deseas eliminar este artículo?', 'Estás Seguro de esto?', {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancelar',
+          type: 'warning'
+        })
+        .then(() => {
+          this.uploading = true
+          this.axios({
+            method: `DELETE`,
+            url: `/articulos`,
+            data: {
+              articulos_id: articulo.articulos_id,
+              stock_id: articulo.stock_id,
+              articulo_tipo_id: 1,
+              articulo_marcas_id: 1,
+              articulo_medida_id: 1,
+              articulo_tamano_id: 1,
+              articulos_nombres: 'aaaa',
+              articulos_descripcion: 'aaa',
+              articulos_imagen_principal: 'aaa',
+              stock_cantidad: 0,
+              stock_precio: 0
+            }
+          })
+          .then(() => {
+            this.$notify({
+              title: 'Eliinación Exitosa!',
+              message: `El articulo ${articulo.articulos_nombres} se eliminó correctamente!`,
+              type: 'success'
+            })
+            this.$store.dispatch('startupEscencial')
+            this.$store.dispatch('startupAdmin')
+            this.uploading = false
+          })
+          .catch(err => {
+            if (err.response) {
+              this.$notify({
+                title: 'Error',
+                message: 'Agunos datos son requeridos o son inválidos',
+                type: 'info'
+              })
+              console.log (err.response.data.message)
+            } else {
+              this.$notify({
+                title: 'Error',
+                message: 'Agunos datos son requeridos o son inválidos',
+                type: 'error'
+              })
+            }
+            this.uploading = false
+            // console.clear()
+          })
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: 'Uff... cancelado'
+          })
+        })
       }
     },
     computed: {

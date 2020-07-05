@@ -126,8 +126,7 @@
           this.$notify({
             title: 'Registro Exitoso!',
             message: `El articulo ${this.article.articulos_nombres} se registró correctamente!`,
-            type: 'success',
-            duration: 0
+            type: 'success'
           })
           this.article = {
             articulos_id: 0,
