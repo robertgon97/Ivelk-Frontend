@@ -21,7 +21,9 @@
           </div>
           <div class="col-md-6 mb-3">
             <label>Marca</label>
-            <el-select class="w-100" placeholder="Seleccione la marca del articulo" v-model="article.articulo_marcas_id" clearable></el-select>
+            <el-select class="w-100" placeholder="Marca del Artículo" v-model="article.articulo_marcas_id">
+              <el-option v-for="marca of getAllMarcas" :key="marca.articulo_marcas_id" :label="marca.articulo_marcas_nombre" :value="marca.articulo_marcas_id" />
+            </el-select>
           </div>
         </div>
         <div class="row m-0 p-0 justify-content-between">
@@ -79,6 +81,9 @@
     computed: {
       getAllCategoria () {
         return this.$store.getters.getAllCategoria
+      },
+      getAllMarcas () {
+        return this.$store.getters.getAllMarcas
       }
     }
   }

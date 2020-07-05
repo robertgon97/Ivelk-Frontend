@@ -31,7 +31,9 @@
               </div>
               <div class="col-md-3 p-0 mb-2 mx-1">
                 <label>Marca del Artículo</label>
-                <el-input placeholder="Marca del Artículo" size="mini" type="text" v-model="search.articulo_marcas_nombre" clearable></el-input>
+                <el-select class="w-100" placeholder="Marca del Artículo" size="mini" v-model="search.articulo_marcas_nombre" clearable>
+                  <el-option v-for="marca of getAllMarcas" :key="marca.articulo_marcas_id" :label="marca.articulo_marcas_nombre" :value="marca.articulo_marcas_nombre" />
+                </el-select>
               </div>
               <div class="col-md-3 p-0 mb-2 mx-1">
                 <label>Medida del Artículo</label>
@@ -132,6 +134,9 @@
       },
       getAllCategoria () {
         return this.$store.getters.getAllCategoria
+      },
+      getAllMarcas () {
+        return this.$store.getters.getAllMarcas
       }
     }
   }

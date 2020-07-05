@@ -14,6 +14,7 @@ import categoria from './categorias'
 import status from './estatus'
 import usuarios from './usuarios'
 import auditoria from './auditoria'
+import marcas from './articulos.marcas'
 import disparator from './disparator'
 
 Vue.use(Vuex)
@@ -33,6 +34,7 @@ export default new Vuex.Store({
     status,
     usuarios,
     auditoria,
+    marcas,
     disparator
   }
 })

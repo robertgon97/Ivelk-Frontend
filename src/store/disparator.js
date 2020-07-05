@@ -9,6 +9,7 @@ export default {
       context.dispatch('getAllCategoryFields')
       context.dispatch('getAllStatus')
       context.dispatch('getAllConfig')
+      context.dispatch('getAllMarcas')
     },
     startupClient (context) {
       context.dispatch('getCarritoAll')
