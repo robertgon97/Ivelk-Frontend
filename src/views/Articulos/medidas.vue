@@ -4,35 +4,39 @@
       <el-breadcrumb-item :to="{ path: '/' }">Inicio</el-breadcrumb-item>
       <el-breadcrumb-item :to="{ path: '/tienda' }">Administración Tienda</el-breadcrumb-item>
       <el-breadcrumb-item :to="{ path: '/tienda/articulos' }">Artículos</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ path: '/tienda/articulos/marcas' }">Marcas</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/tienda/articulos/medidas' }">Medidas</el-breadcrumb-item>
     </el-breadcrumb>
     <br />
     <el-card class="mb-3">
       <div slot="header" class="clearfix">
         <i class="el-icon-plus"></i>
-        <span> Agregar Marca</span>
+        <span> Agregar Medida</span>
       </div>
       <div class="contenido">
         <form @submit.prevent="addStatus">
           <div class="row m-0 p-0 justify-content-center">
             <div class="col-md-6 mb-3">
               <label>Nombre</label>
-              <el-input type="text" placeholder="Nombre" v-model="article.articulo_marcas_nombre" clearable></el-input>
+              <el-input type="text" placeholder="Nombre" v-model="article.articulo_medidas_nombre" clearable></el-input>
             </div>
             <div class="col-md-6 mb-3">
-              <label>Descripción</label>
-              <el-input type="text" placeholder="Descripción" v-model="article.articulo_marcas_descripcion" clearable></el-input>
+              <label>Diminutivo</label>
+              <el-input type="text" placeholder="Diminutivo" v-model="article.articulo_medidas_diminutivo" clearable></el-input>
             </div>
           </div>
           <div class="row m-0 p-0 justify-content-center">
             <div class="col-md-6 mb-3">
-              <label for="articulo_marcas_imagen">Imagen</label>
-              <input class="form-control" type="file" name="articulo_marcas_imagen" id="articulo_marcas_imagen" placeholder="Selecciona tu imagen" accept="image/*" @change="updateImage" />
+              <label>Descripcion</label>
+              <el-input type="text" placeholder="Descripcion" v-model="article.articulo_medidas_descripcion" clearable></el-input>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="articulo_medidas_imagen">Imagen</label>
+              <input class="form-control" type="file" name="articulo_medidas_imagen" id="articulo_medidas_imagen" placeholder="Selecciona tu imagen" accept="image/*" @change="updateImage" />
             </div>
           </div>
           <div class="row m-0 p-0 justify-content-center">
             <div class="col-md-5 mb-3 pt-4 text-center">
-              <el-button class="btn-primario mt-2" round @click="addStatus" v-loading.fullscreen.lock="uploading">Agregar Marca</el-button>
+              <el-button class="btn-primario mt-2" round @click="addStatus" v-loading.fullscreen.lock="uploading">Agregar Medida</el-button>
             </div>
           </div>
         </form>
@@ -41,24 +45,25 @@
         <p class="m-0 p-0"><small>Todos los campos son obligatorios</small></p>
       </div>
     </el-card>
-    <div v-if="getAllMarcas && getAllMarcas == 'Loading'">
+    <div v-if="getAllMedidas && getAllMedidas == 'Loading'">
       <el-button type="text" v-loading.fullscreen.lock="true"></el-button>
     </div>
-    <el-card class="mb-3" v-else-if="getAllMarcas && getAllMarcas.length">
+    <el-card class="mb-3" v-else-if="getAllMedidas && getAllMedidas.length">
       <div slot="header" class="clearfix">
         <i class="el-icon-finished"></i>
-        <span> Lista de Marcas</span>
+        <span> Lista de Medidas</span>
       </div>
       <div class="contenido">
-        <el-table :data="getAllMarcas">
-          <el-table-column fixed width="50" prop="articulo_marcas_id" label="#"></el-table-column>
-          <el-table-column prop="articulo_marcas_nombre" label="Nombre"></el-table-column>
-          <el-table-column prop="articulo_marcas_descripcion" label="Descripcion"></el-table-column>
-          <el-table-column fixed label="Imagen" width="150">
+        <el-table :data="getAllMedidas">
+          <el-table-column fixed width="50" prop="articulo_medida_id" label="#"></el-table-column>
+          <el-table-column prop="articulo_medidas_nombre" label="Nombre" width="250"></el-table-column>
+          <el-table-column prop="articulo_medidas_diminutivo" label="Dm." width="50"></el-table-column>
+          <el-table-column prop="articulo_medidas_descripcion" label="Descripcion" width="300"></el-table-column>
+          <el-table-column fixed label="Imagen" width="100">
             <template slot-scope="props">
               <div class="demo-basic--circle">
                 <div class="block">
-                  <el-avatar shape="square" size="medium" :src="props.row.articulo_marcas_imagen || '/noimage.png'"></el-avatar>
+                  <el-avatar shape="square" size="medium" :src="props.row.articulo_medidas_imagen || '/noimage.png'"></el-avatar>
                 </div>
               </div>
             </template>
@@ -73,7 +78,7 @@
         <el-divider></el-divider>
         <div>
           <div class="d-flex justify-content-center">
-            <p class="m-0 p-0"><small>Mostrando {{getAllMarcas.length}} Registros</small></p>
+            <p class="m-0 p-0"><small>Mostrando {{getAllMedidas.length}} Registros</small></p>
           </div>
         </div>
       </div>
@@ -91,45 +96,49 @@
 <script>
   export default {
     metaInfo: {
-      titleTemplate: '%s | Gestión de Marcas'
+      titleTemplate: '%s | Gestión de Medidas'
     },
     data () {
       return {
         uploading: false,
         formData: new FormData(),
         article: {
-          articulo_marcas_id: 0,
-          articulo_marcas_nombre: null,
-          articulo_marcas_descripcion: null
+          articulo_medida_id: 0,
+          articulo_medidas_nombre: null,
+          articulo_medidas_diminutivo: null,
+          articulo_medidas_descripcion: null
         }
       }
     },
     methods: {
       addStatus () {
         this.uploading = true
-        this.formData.delete('articulo_marcas_id')
-        this.formData.append('articulo_marcas_id', this.article.articulo_marcas_id)
-        this.formData.delete('articulo_marcas_nombre')
-        this.formData.append('articulo_marcas_nombre', this.article.articulo_marcas_nombre)
-        this.formData.delete('articulo_marcas_descripcion')
-        this.formData.append('articulo_marcas_descripcion', this.article.articulo_marcas_descripcion)
+        this.formData.delete('articulo_medida_id')
+        this.formData.append('articulo_medida_id', this.article.articulo_medida_id)
+        this.formData.delete('articulo_medidas_nombre')
+        this.formData.append('articulo_medidas_nombre', this.article.articulo_medidas_nombre)
+        this.formData.delete('articulo_medidas_diminutivo')
+        this.formData.append('articulo_medidas_diminutivo', this.article.articulo_medidas_diminutivo)
+        this.formData.delete('articulo_medidas_descripcion')
+        this.formData.append('articulo_medidas_descripcion', this.article.articulo_medidas_descripcion)
         this.axios({
           method: `POST`,
-          url: `/marcas`,
+          url: `/medidas`,
           data: this.formData
         })
         .then(() => {
           this.$notify({
             title: 'Registro Exitoso!',
-            message: `La marca se agregó correctamente!`,
+            message: `La medida se agregó correctamente!`,
             type: 'success'
           })
           this.$store.dispatch('startupEscencial')
           this.$store.dispatch('startupAdmin')
           this.article = {
-            articulo_marcas_id: 0,
-            articulo_marcas_nombre: null,
-            articulo_marcas_descripcion: null
+            articulo_medida_id: 0,
+            articulo_medidas_nombre: null,
+            articulo_medidas_diminutivo: null,
+            articulo_medidas_descripcion: null
           }
           this.uploading = false
         })
@@ -154,15 +163,15 @@
       },
       updateImage (event) {
         let files = event.target.files
-        this.formData.delete('articulo_marcas_imagen')
+        this.formData.delete('articulo_medidas_imagen')
         if (files.length) {
           for (let image of files) {
-            this.formData.append('articulo_marcas_imagen', image, image.name)
+            this.formData.append('articulo_medidas_imagen', image, image.name)
           }
         }
       },
       eliminar (marca) {
-        this.$confirm('Deseas eliminar esta marca?', 'Estás Seguro de esto?', {
+        this.$confirm('Deseas eliminar esta medida?', 'Estás Seguro de esto?', {
           confirmButtonText: 'OK',
           cancelButtonText: 'Cancelar',
           type: 'warning'
@@ -171,18 +180,19 @@
           this.uploading = true
           this.axios({
             method: `DELETE`,
-            url: `/marcas`,
+            url: `/medidas`,
             data: {
-              articulo_marcas_id: marca.articulo_marcas_id,
-              articulo_marcas_nombre: marca.articulo_marcas_nombre,
-              articulo_marcas_descripcion: marca.articulo_marcas_descripcion,
-              articulo_marcas_imagen: marca.articulo_marcas_imagen || 'aa'
+              articulo_medida_id: marca.articulo_medida_id,
+              articulo_medidas_nombre: marca.articulo_medidas_nombre,
+              articulo_medidas_diminutivo: marca.articulo_medidas_diminutivo,
+              articulo_medidas_descripcion: marca.articulo_medidas_descripcion,
+              articulo_medidas_imagen: marca.articulo_medidas_imagen || 'aa'
             }
           })
           .then(() => {
             this.$notify({
               title: 'Eliinación Exitosa!',
-              message: `La marca ${marca.articulo_marcas_nombre} se eliminó correctamente!`,
+              message: `La medida ${marca.articulo_medidas_nombre} se eliminó correctamente!`,
               type: 'success'
             })
             this.$store.dispatch('startupEscencial')
@@ -217,8 +227,8 @@
       }
     },
     computed: {
-      getAllMarcas () {
-        return this.$store.getters.getAllMarcas
+      getAllMedidas () {
+        return this.$store.getters.getAllMedidas
       }
     }
   }

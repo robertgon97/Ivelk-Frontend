@@ -155,6 +155,11 @@ const routes = [
         component: () => import('./../views/Articulos/marcas.vue')
       },
       {
+        path: 'articulos/medidas',
+        name: 'Gestión de Medidas',
+        component: () => import('./../views/Articulos/medidas.vue')
+      },
+      {
         path: 'articulos/:ID',
         name: 'Editar Artículo',
         component: () => import('./../views/Articulos/add.vue')
