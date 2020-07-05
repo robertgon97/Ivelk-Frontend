@@ -29,7 +29,9 @@
         <div class="row m-0 p-0 justify-content-between">
           <div class="col-md-6 mb-3">
             <label>Medida</label>
-            <el-select class="w-100" placeholder="Seleccione la medida del articulo" v-model="article.articulo_medida_id" clearable></el-select>
+            <el-select class="w-100" placeholder="Seleccione la medida del articulo" v-model="article.articulo_medida_id" clearable>
+              <el-option v-for="medida of getAllMedidas" :key="medida.articulo_medida_id" :label="medida.articulo_medidas_nombre" :value="medida.articulo_medida_id" />
+            </el-select>
           </div>
           <div class="col-md-6 mb-3">
             <label>Tamaño</label>
@@ -84,6 +86,9 @@
       },
       getAllMarcas () {
         return this.$store.getters.getAllMarcas
+      },
+      getAllMedidas () {
+        return this.$store.getters.getAllMedidas
       }
     }
   }
