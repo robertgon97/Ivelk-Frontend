@@ -13,6 +13,7 @@ import myUser from './myUser'
 import categoria from './categorias'
 import status from './estatus'
 import usuarios from './usuarios'
+import auditoria from './auditoria'
 import disparator from './disparator'
 
 Vue.use(Vuex)
@@ -31,6 +32,7 @@ export default new Vuex.Store({
     categoria,
     status,
     usuarios,
+    auditoria,
     disparator
   }
 })

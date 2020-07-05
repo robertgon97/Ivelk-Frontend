@@ -253,6 +253,11 @@ const routes = [
         path: 'configuracion/bancos',
         name: 'Configuración de Bancos',
         component: () => import('./../views/Configuracion/bancos.vue')
+      },
+      {
+        path: 'configuracion/auditoria',
+        name: 'Auditoría del Sistema',
+        component: () => import('./../views/Configuracion/auditoria.vue')
       }
     ],
     meta: {

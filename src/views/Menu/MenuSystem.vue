@@ -97,7 +97,7 @@
         <el-menu-item-group>
           <router-link tag="el-menu-item" exact to="/tienda/configuracion/general">Configuración General</router-link>
           <router-link tag="el-menu-item" exact to="/tienda/configuracion/status">Estatus</router-link>
-          <el-menu-item>Auditoría</el-menu-item>
+          <router-link tag="el-menu-item" exact to="/tienda/configuracion/auditoria">Auditoría</router-link>
           <router-link tag="el-menu-item" exact to="/tienda/configuracion/bancos">Bancos</router-link>
           <router-link tag="el-menu-item" exact to="/tienda/configuracion/nacionalidades">Nacionalidades</router-link>
         </el-menu-item-group>
