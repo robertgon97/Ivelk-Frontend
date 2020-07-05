@@ -42,7 +42,7 @@
           <router-link tag="el-menu-item" exact to="/tienda/articulos/crear">Crear Artículo</router-link>
           <router-link tag="el-menu-item" exact to="/tienda/articulos/devoluciones">Devoluciones</router-link>
           <el-menu-item>Garantías</el-menu-item>
-          <el-menu-item>Marcas</el-menu-item>
+          <router-link tag="el-menu-item" exact to="/tienda/articulos/marcas">Marcas</router-link>
           <el-menu-item>Medidas</el-menu-item>
           <el-menu-item>Tamaños</el-menu-item>
           <el-menu-item>Categorias</el-menu-item>

@@ -150,6 +150,11 @@ const routes = [
         component: () => import('./../views/Articulos/devolucion.vue')
       },
       {
+        path: 'articulos/marcas',
+        name: 'Gestión de Marcas',
+        component: () => import('./../views/Articulos/marcas.vue')
+      },
+      {
         path: 'articulos/:ID',
         name: 'Editar Artículo',
         component: () => import('./../views/Articulos/add.vue')
