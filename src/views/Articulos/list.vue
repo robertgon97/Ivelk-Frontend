@@ -43,7 +43,9 @@
               </div>
               <div class="col-md-3 p-0 mb-2 mx-1">
                 <label>Tamaño del Artículo</label>
-                <el-input placeholder="Tamaño del Artículo" size="mini" type="text" v-model="search.articulo_tamano_nombre" clearable></el-input>
+                <el-select class="w-100" placeholder="Medida del Artículo" size="mini" v-model="search.articulo_tamano_nombre" clearable>
+                  <el-option v-for="tamano of getAllTamanos" :key="tamano.articulo_tamano_id" :label="tamano.articulo_tamano_nombre" :value="tamano.articulo_tamano_nombre" />
+                </el-select>
               </div>
               <div class="col-md-3 p-0 mb-2 mx-1">
                 <label>ID de Artículo</label>
@@ -142,6 +144,9 @@
       },
       getAllMedidas () {
         return this.$store.getters.getAllMedidas
+      },
+      getAllTamanos () {
+        return this.$store.getters.getAllTamanos
       }
     }
   }

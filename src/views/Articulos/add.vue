@@ -35,7 +35,9 @@
           </div>
           <div class="col-md-6 mb-3">
             <label>Tamaño</label>
-            <el-select class="w-100" placeholder="Seleccione el tamaño del articulo" v-model="article.articulo_tamano_id" clearable></el-select>
+            <el-select class="w-100" placeholder="Seleccione el tamaño del articulo" v-model="article.articulo_tamano_id" clearable>
+              <el-option v-for="tamano of getAllTamanos" :key="tamano.articulo_tamano_id" :label="tamano.articulo_tamano_nombre" :value="tamano.articulo_tamano_id" />
+            </el-select>
           </div>
         </div>
         <div class="row m-0 p-0 justify-content-between">
@@ -89,6 +91,9 @@
       },
       getAllMedidas () {
         return this.$store.getters.getAllMedidas
+      },
+      getAllTamanos () {
+        return this.$store.getters.getAllTamanos
       }
     }
   }

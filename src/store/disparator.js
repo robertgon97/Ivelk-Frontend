@@ -11,6 +11,7 @@ export default {
       context.dispatch('getAllConfig')
       context.dispatch('getAllMarcas')
       context.dispatch('getAllMedidas')
+      context.dispatch('getAllTamanos')
     },
     startupClient (context) {
       context.dispatch('getCarritoAll')

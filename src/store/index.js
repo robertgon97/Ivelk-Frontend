@@ -16,6 +16,7 @@ import usuarios from './usuarios'
 import auditoria from './auditoria'
 import marcas from './articulos.marcas'
 import medidas from './articulos.medidas'
+import tamanos from './articulos.tamanos'
 import disparator from './disparator'
 
 Vue.use(Vuex)
@@ -37,6 +38,7 @@ export default new Vuex.Store({
     auditoria,
     marcas,
     medidas,
+    tamanos,
     disparator
   }
 })
