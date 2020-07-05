@@ -74,7 +74,8 @@
           </div>
           <div class="col-12 col-md-6 mb-3">
             <label>Fecha de cumpleaños</label>
-            <el-date-picker class="w-100" type="date" placeholder="Fecha de cumpleaños" value-format="yyyy-MM-dd" v-model="registro.personas_cumple" />
+            <el-input placeholder="Fecha de Cumpleaños" type="date" autocomplete="nacimiento" :max="maxDate" clearable v-model="registro.personas_cumple">
+            </el-input>
           </div>
           <div class="col-12 col-md-6 mb-3">
             <label>Teléfono</label>
@@ -141,6 +142,7 @@
   </div>
 </template>
 <script>
+  import moment from 'moment'
   export default {
     metaInfo: {
       titleTemplate: '%s | Regístrate!'
@@ -211,6 +213,9 @@
       },
       getAllTypeDocumento () {
         return this.$store.getters.getAllTypeDocumento
+      },
+      maxDate () {
+        return moment().subtract(18, 'years').format('YYYY-MM-DD')
       }
     }
   }
