@@ -1,7 +1,14 @@
 <template>
   <div>
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/' }">Inicio</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/tienda' }">Administración Tienda</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/tienda/articulos' }">Artículos</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/tienda/articulos/crear' }">Crear Artículo</el-breadcrumb-item>
+    </el-breadcrumb>
+    <br />
     <el-card>
-      <form>
+      <form @submit.prevent="registro">
         <div class="row m-0 p-0 justify-content-between">
           <div class="col-md-6 mb-3">
             <label>Nombre del Artículo</label>
@@ -42,14 +49,24 @@
         </div>
         <div class="row m-0 p-0 justify-content-between">
           <div class="col-md-6 mb-3">
-            <label>Imagen</label>
-            <el-input type="file" placeholder="Imagen del artículo" v-model="article.articulos_imagen_principal" prefix-icon="el-icon-paperclip" clearable></el-input>
+            <label>Cantidad Inicial</label>
+            <el-input type="number" placeholder="Cantidad del artículo" min="0" v-model="article.stock_cantidad" prefix-icon="el-icon-takeaway-box" clearable></el-input>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label>Precio Inical</label>
+            <el-input type="number" placeholder="Precio del artículo" min="0" step="0.01" v-model="article.stock_precio" prefix-icon="el-icon-money" clearable></el-input>
+          </div>
+        </div>
+        <div class="row m-0 p-0 justify-content-between">
+          <div class="col-md-6 mb-3">
+            <label for="articulos_imagen_principal">Imagen</label>
+            <input class="form-control" type="file" name="articulos_imagen_principal" id="articulos_imagen_principal" placeholder="Selecciona tu imagen" accept="image/*" @change="updateImage" />
           </div>
         </div>
         <hr />
         <div class="row m-0 p-0 justify-content-center">
           <div class="col-md-3 mb-3 text-center">
-            <el-button class="btn-primario" round @click="addArt" v-loading.fullscreen.lock="uploading">Registrar</el-button>
+            <el-button class="btn-primario" round @click="registro" v-loading.fullscreen.lock="uploading">Registrar</el-button>
           </div>
         </div>
       </form>
@@ -71,15 +88,90 @@
           articulo_tamano_id: null,
           articulos_nombres: null,
           articulos_descripcion: null,
-          articulos_imagen_principal: null
+          articulos_imagen_principal: null,
+          stock_cantidad: 0,
+          stock_precio: 0
         },
         uploading: false,
-        FormData: new FormData()
+        formData: new FormData()
       }
     },
     methods: {
-      addArt () {
+      registro () {
         this.uploading = true
+        this.formData.delete('articulos_id')
+        this.formData.append('articulos_id', this.article.articulos_id)
+        this.formData.delete('articulo_tipo_id')
+        this.formData.append('articulo_tipo_id', this.article.articulo_tipo_id)
+        this.formData.delete('articulo_marcas_id')
+        this.formData.append('articulo_marcas_id', this.article.articulo_marcas_id)
+        this.formData.delete('articulo_medida_id')
+        this.formData.append('articulo_medida_id', this.article.articulo_medida_id)
+        this.formData.delete('articulo_tamano_id')
+        this.formData.append('articulo_tamano_id', this.article.articulo_tamano_id)
+        this.formData.delete('articulos_nombres')
+        this.formData.append('articulos_nombres', this.article.articulos_nombres)
+        this.formData.delete('articulos_descripcion')
+        this.formData.append('articulos_descripcion', this.article.articulos_descripcion)
+        this.formData.delete('stock_cantidad')
+        this.formData.append('stock_cantidad', this.article.stock_cantidad)
+        this.formData.delete('stock_precio')
+        this.formData.append('stock_precio', this.article.stock_precio)
+        this.axios({
+          method: `POST`,
+          url: `/articulos`,
+          data: this.formData
+        })
+        .then(() => {
+          this.$notify({
+            title: 'Registro Exitoso!',
+            message: `El articulo ${this.article.articulos_nombres} se registró correctamente!`,
+            type: 'success',
+            duration: 0
+          })
+          this.article = {
+            articulos_id: 0,
+            articulo_tipo_id: null,
+            articulo_marcas_id: null,
+            articulo_medida_id: null,
+            articulo_tamano_id: null,
+            articulos_nombres: null,
+            articulos_descripcion: null,
+            articulos_imagen_principal: null,
+            stock_cantidad: 0,
+            stock_precio: 0
+          }
+          this.$store.dispatch('startupEscencial')
+          this.$store.dispatch('startupAdmin')
+          this.uploading = false
+        })
+        .catch(err => {
+          if (err.response) {
+            this.$notify({
+              title: 'Error',
+              message: 'Agunos datos son requeridos o son inválidos',
+              type: 'info'
+            })
+            console.log (err.response.data.message)
+          } else {
+            this.$notify({
+              title: 'Error',
+              message: 'Agunos datos son requeridos o son inválidos',
+              type: 'error'
+            })
+          }
+          this.uploading = false
+          // console.clear()
+        })
+      },
+      updateImage (event) {
+        let files = event.target.files
+        this.formData.delete('articulos_imagen_principal')
+        if (files.length) {
+          for (let image of files) {
+            this.formData.append('articulos_imagen_principal', image, image.name)
+          }
+        }
       }
     },
     computed: {
