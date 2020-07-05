@@ -14,8 +14,10 @@
         </div>
         <div class="row m-0 p-0 justify-content-between">
           <div class="col-md-6 mb-3">
-            <label>Tipo</label>
-            <el-select class="w-100" placeholder="Seleccione el tipo de articulo" v-model="article.articulo_tipo_id" clearable></el-select>
+            <label>Categoría del Artículo</label>
+            <el-select class="w-100" placeholder="Categoría del Artículo" v-model="article.articulo_tipo_id">
+              <el-option v-for="categoria of getAllCategoria" :key="categoria.articulo_tipo_id" :label="categoria.articulo_tipo_nombre" :value="categoria.articulo_tipo_id" />
+            </el-select>
           </div>
           <div class="col-md-6 mb-3">
             <label>Marca</label>
@@ -72,6 +74,11 @@
     methods: {
       addArt () {
         this.uploading = true
+      }
+    },
+    computed: {
+      getAllCategoria () {
+        return this.$store.getters.getAllCategoria
       }
     }
   }

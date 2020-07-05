@@ -25,7 +25,9 @@
               </div>
               <div class="col-md-3 p-0 mb-2 mx-1">
                 <label>Categoría del Artículo</label>
-                <el-input placeholder="Categoría del Artículo" size="mini" type="text" v-model="search.articulo_tipo_nombre" clearable></el-input>
+                <el-select class="w-100" placeholder="Categoría del Artículo" size="mini" v-model="search.articulo_tipo_nombre" clearable>
+                  <el-option v-for="categoria of getAllCategoria" :key="categoria.articulo_tipo_id" :label="categoria.articulo_tipo_nombre" :value="categoria.articulo_tipo_nombre" />
+                </el-select>
               </div>
               <div class="col-md-3 p-0 mb-2 mx-1">
                 <label>Marca del Artículo</label>
@@ -41,7 +43,7 @@
               </div>
               <div class="col-md-3 p-0 mb-2 mx-1">
                 <label>ID de Artículo</label>
-                <el-input placeholder="123456789" type="number" min="1" v-model="search.articulos_id" clearable></el-input>
+                <el-input placeholder="123456789" size="mini" type="number" min="1" v-model="search.articulos_id" clearable></el-input>
               </div>
             </div>
             <div class="d-flex justify-content-center flex-wrap">
@@ -127,6 +129,9 @@
     computed: {
       getAllArticulos () {
         return this.$store.getters.getAllArticulos
+      },
+      getAllCategoria () {
+        return this.$store.getters.getAllCategoria
       }
     }
   }
