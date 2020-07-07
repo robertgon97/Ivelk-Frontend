@@ -222,6 +222,11 @@ const routes = [
         component: () => import('./../views/Ventas/add.vue')
       },
       {
+        path: 'ventas/tipo',
+        name: 'Tipos de Ventas',
+        component: () => import('./../views/Ventas/type.vue')
+      },
+      {
         path: 'ventas/:ID',
         name: 'Ver Orden de Venta',
         component: () => import('./../views/Ventas/edit.vue')
