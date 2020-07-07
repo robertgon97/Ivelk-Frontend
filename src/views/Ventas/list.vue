@@ -36,14 +36,17 @@
                 <label>N° Orden</label>
                 <el-input placeholder="123456789" type="number" min="1" v-model="search.ventas_id" clearable></el-input>
               </div>
-              <div class="col-12 p-0 text-center">
+              <div class="col-12 p-0 mb-3 text-center">
                 <button type="submit" class="btn btn-primario">Buscar</button>
+              </div>
+              <div class="col-12 p-0 text-center">
+                <el-button class="btn btn-primario" @click="print('print')">Imprimir Resultados</el-button>
               </div>
             </form>
           </el-card>
         </el-col>
         <el-col class="col-md-9 mb-3">
-          <el-card shadow="hover">
+          <el-card shadow="hover" id="print">
             <div slot="header" class="clearfix">
               <i class="el-icon-finished"></i>
               <span> Lista</span>
@@ -89,6 +92,7 @@
 </template>
 <script>
   import moment from 'moment'
+  import html2pdf from 'html2pdf.js'
   export default {
     metaInfo: {
       titleTemplate: '%s | Lista de Ventas del Sistema'
@@ -118,6 +122,9 @@
       },
       searchapi () {
         this.$store.dispatch('getAllVentas', this.search)
+      },
+      print (id = 'print') {
+        html2pdf().from(document.getElementById(id)).save('Comprobante.pdf')
       }
     },
     computed: {

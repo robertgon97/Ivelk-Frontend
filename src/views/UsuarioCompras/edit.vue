@@ -12,9 +12,6 @@
       </el-card>
     </div>
     <div v-else-if="getVentaID && getVentaID.venta.ventas_id">
-      <div class="d-flex flex-wrap justify-content-end mb-2">
-        <el-button @click="print('print')">Imprimir</el-button>
-      </div>
       <el-card shadow="hover" class="container" id="print">
         <div slot="header" class="clearfix">
           <i class="el-icon-shopping-cart-full"></i>
@@ -78,9 +75,10 @@
             </div>
           </div>
         </div>
-        <el-divider></el-divider>
-
       </el-card>
+      <div class="d-flex flex-wrap justify-content-end mt-2">
+        <el-button class="btn btn-primario" @click="print('print')">Imprimir Vista</el-button>
+      </div>
     </div>
     <div v-else class="d-flex my-5 justify-content-center">
       <el-card class="col-10 my-5">
