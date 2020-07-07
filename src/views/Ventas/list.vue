@@ -124,7 +124,7 @@
         this.$store.dispatch('getAllVentas', this.search)
       },
       print (id = 'print') {
-        html2pdf().from(document.getElementById(id)).save('Comprobante.pdf')
+        html2pdf().from(document.getElementById(id)).save('Ventas.pdf')
       }
     },
     computed: {
