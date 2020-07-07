@@ -1,7 +1,14 @@
 <template>
   <div>
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/' }">Inicio</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/tienda' }">Administración Tienda</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/tienda/proveedores' }">Proveedores</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/tienda/proveedores/crear' }">Agregar Proveedor</el-breadcrumb-item>
+    </el-breadcrumb>
+    <br />
     <el-card>
-      <form>
+      <form @submit.prevent="register">
         <div class="row m-0 p-0 justify-content-between">
           <div class="col-md-6 mb-3">
             <label>Razon Social del Proveedor</label>
@@ -10,6 +17,7 @@
           <div class="col-md-2 mb-3">
             <label class="w-100">Nacionalidad</label>
             <el-select placeholder="Selecciona tu nacionalidad" v-model="proveedores.tipo_documento_id">
+              <el-option v-for="item in getAllTypeDocumento" :key="item.tipo_documento_id" :label="`${item.tipo_documento_nombre} (${item.tipo_documento_letra})`" :value="item.tipo_documento_id" />
             </el-select>
           </div>
           <div class="col-md-4 mb-3">
@@ -88,7 +96,7 @@
         <hr />
         <div class="row m-0 p-0 justify-content-center">
           <div class="col-md-3 mb-3 text-center">
-            <el-button class="btn-primario" round @click="addProveedor" v-loading.fullscreen.lock="uploading">Registrar</el-button>
+            <el-button class="btn-primario" round @click="register" v-loading.fullscreen.lock="uploading">Registrar</el-button>
           </div>
         </div>
       </form>
@@ -110,7 +118,7 @@
           proveedor_direccion: null,
           proveedor_ciudad: null,
           proveedor_estado: null,
-          proveedor_pais: null,
+          proveedor_pais: 'Venezuela',
           proveedor_correo: null,
           proveedor_telefono: null
         },
@@ -118,8 +126,47 @@
       }
     },
     methods: {
-      addProveedor () {
+      register() {
         this.uploading = true
+        this.axios({
+          method: `POST`,
+          url: `/proveedores`,
+          data: this.proveedores
+        })
+        .then(() => {
+          this.$notify({
+            title: 'Registro Exitoso!',
+            message: `El proveedor ${this.proveedores.proveedor_razon_social} se registró correctamente!`,
+            type: 'success',
+            duration: 0
+          })
+          this.$store.dispatch('startupEscencial')
+          this.$store.dispatch('startupAdmin')
+          this.uploading = false
+        })
+        .catch(err => {
+          if (err.response) {
+            this.$notify({
+              title: 'Error',
+              message: 'Agunos datos son requeridos o son inválidos',
+              type: 'info'
+            })
+            console.log (err.response.data.message)
+          } else {
+            this.$notify({
+              title: 'Error',
+              message: 'Agunos datos son requeridos o son inválidos',
+              type: 'error'
+            })
+          }
+          this.uploading = false
+          // console.clear()
+        })
+      }
+    },
+    computed: {
+      getAllTypeDocumento () {
+        return this.$store.getters.getAllTypeDocumento
       }
     }
   }
