@@ -71,9 +71,9 @@
           <el-table-column prop="bancos_telefono" label="Teléfono"></el-table-column>
           <el-table-column prop="bancos_dni" label="Identificación"></el-table-column>
           <el-table-column fixed="right" label="Operaciones" width="150">
-            <template slot-scope="">
+            <template slot-scope="props">
               <el-button class="text-primary" type="text" size="small" icon="el-icon-edit">Editar</el-button>
-              <el-button class="text-danger" type="text" size="small" icon="el-icon-delete">Eliminar</el-button>
+              <el-button class="text-danger" type="text" size="small" icon="el-icon-delete" @click="eliminar(props.row)">Eliminar</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -160,6 +160,62 @@
         })
         .finally(() => {
           //
+        })
+      },
+      eliminar (banco) {
+        this.$confirm('Deseas eliminar este Banco?', 'Estás Seguro de esto?', {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancelar',
+          type: 'warning'
+        })
+        .then(() => {
+          this.uploading = true
+          this.axios({
+            method: `DELETE`,
+            url: `/bancos`,
+            data: {
+              banco_id: banco.banco_id,
+              bancos_nombre: banco.bancos_nombre,
+              bancos_cuenta: banco.bancos_cuenta,
+              bancos_tipo_cuenta: banco.bancos_tipo_cuenta,
+              bancos_telefono: banco.bancos_telefono,
+              bancos_dni: banco.bancos_dni
+            }
+          })
+          .then(() => {
+            this.$notify({
+              title: 'Eliinación Exitosa!',
+              message: `El Banco ${banco.bancos_nombre} se eliminó correctamente!`,
+              type: 'success'
+            })
+            this.$store.dispatch('startupEscencial')
+            this.$store.dispatch('startupAdmin')
+            this.uploading = false
+          })
+          .catch(err => {
+            if (err.response) {
+              this.$notify({
+                title: 'Error',
+                message: 'Agunos datos son requeridos o son inválidos',
+                type: 'info'
+              })
+              console.log (err.response.data.message)
+            } else {
+              this.$notify({
+                title: 'Error',
+                message: 'Agunos datos son requeridos o son inválidos',
+                type: 'error'
+              })
+            }
+            this.uploading = false
+            // console.clear()
+          })
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: 'Uff... cancelado'
+          })
         })
       }
     },
