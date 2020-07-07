@@ -38,12 +38,12 @@
               </div>
               <el-divider>Montos</el-divider>
               <div class="d-flex flex-wrap justify-content-between">
-                <div>Subtotal: </div>
-                <div><span class="text-primary">{{parseMoneda(getVentaID.venta.venta_subtotal)}}</span></div>
+                <div>IVA: </div>
+                <div><span class="text-primary">{{getVentaID.venta.venta_iva}} %</span></div>
               </div>
               <div class="d-flex flex-wrap justify-content-between">
-                <div>Total IVA: </div>
-                <div><span class="text-primary">{{parseMoneda(getVentaID.venta.venta_iva)}}</span></div>
+                <div>Subtotal: </div>
+                <div><span class="text-primary">{{parseMoneda(getVentaID.venta.venta_subtotal)}}</span></div>
               </div>
               <div class="d-flex flex-wrap justify-content-between">
                 <div>Total: </div>
@@ -91,10 +91,37 @@
                   </template>
                 </el-table-column>
               </el-table>
+              <br>
+              <div class="clearfix">
+                <p class="text-center text-info"><span>Acciones rápidas de la venta</span></p>
+                <div class="d-flex flex-wrap my-3 justify-content-center">
+                  <el-button class="btn-primario m-2" plain @click="modificarEstatus = true" :loading="uploading">Cambiar Estatus</el-button>
+                  <el-popconfirm confirmButtonText='Sí' cancelButtonText='No, Gracias' icon="el-icon-info" iconColor="red" title="Estás seguro de anular esta orden?" @onConfirm="anular(getVentaID.venta.ventas_id)">
+                    <el-button slot="reference" class="btn-primario m-2" plain :loading="uploading">Anular Orden</el-button>
+                  </el-popconfirm>
+                </div>
+              </div>
             </div>
           </el-card>
         </el-col>
       </el-row>
+      <el-drawer title="Cambio del Estatus de la Orden" ref="drawer" :before-close="handleClose" :visible.sync="modificarEstatus" direction="rtl" custom-class="demo-drawer">
+        <div class="Contenido p-2">
+          <form class="" @submit.prevent="modificar(getVentaID.venta)">
+            <div class="col-12">
+              <label>Estatus de la venta</label>
+              <el-select class="w-100" placeholder="Nivel" size="large" v-model="getVentaID.venta.status_id">
+                <el-option v-for="status of getAllStatus" :key="status.status_id" :label="status.status_nombre" :value="status.status_id" />
+              </el-select>
+            </div>
+          </form>
+          <el-divider></el-divider>
+          <div class="d-flex flex-wrap justify-content-between" >
+            <el-button class="btn-primario" @click="modificarEstatus = false">Cancelar</el-button>
+            <el-button class="btn-primario" @click="modificar(getVentaID.venta)" :loading="uploading">{{ uploading ? 'Enviando ...' : 'Enviar' }}</el-button>
+          </div>
+        </div>
+      </el-drawer>
     </div>
     <div v-else class="d-flex my-5 justify-content-center">
       <div class="col-10 my-5">
@@ -120,9 +147,15 @@
         this.find(this.$route.params.ID)
       }
     },
+    data () {
+      return {
+        uploading: false,
+        modificarEstatus: false
+      }
+    },
     methods: {
       find(route) {
-        this.$store.dispatch('getVentaID', { value: route })
+        this.$store.dispatch('getVentaID', { value: route || this.$route.params.ID })
       },
       parseMoneda(value) {
         var numer = parseFloat(value || 0)
@@ -135,10 +168,127 @@
           return moment(value).format('LL hh:mm A')
         } else return 'Fecha Inválida'
       },
+      handleClose(done) {
+        if (this.uploading) {
+          return
+        }
+        this.$confirm('Esto descartará los cambios.', 'Deseas cerrar el formulario?', {
+          confirmButtonText: 'SI',
+          cancelButtonText: 'NO',
+          type: 'warning'
+        })
+          .then(() => {
+            this.loading = false
+            this.modificarEstatus = false
+            done()
+            this.$message({
+              type: 'success',
+              message: 'Listo'
+            })
+          })
+          .catch(() => {
+            this.$message({
+              type: 'info',
+              message: 'Uff Estuvo Cerca'
+            })
+          })
+      },
+      anular (idventa) {
+        this.uploading = true
+        this.axios({
+          method: `PUT`,
+          url: `/orden/anular`,
+          data: {
+            ventas_id: idventa
+          }
+        })
+        .then(() => {
+          this.$notify({
+            title: 'Anulación Exitosa!',
+            message: `La Orden ${idventa} se anuló correctamente!`,
+            type: 'success',
+            duration: 0
+          })
+          this.$store.dispatch('startupEscencial')
+          this.$store.dispatch('startupAdmin')
+          this.find()
+          this.uploading = false
+        })
+        .catch(err => {
+          if (err.response) {
+            this.$notify({
+              title: 'Error',
+              message: 'Hubo un error del servidor',
+              type: 'info'
+            })
+            console.log (err.response.data.message)
+          } else {
+            this.$notify({
+              title: 'Error',
+              message: 'Hubo un problema con la conexión',
+              type: 'error'
+            })
+          }
+          this.uploading = false
+          // console.clear()
+        })
+      },
+      modificar (venta) {
+        this.uploading = true
+        this.axios({
+          method: `PUT`,
+          url: `/orden`,
+          data: {
+            ventas_id: venta.ventas_id,
+            venta_tipo_id: venta.venta_tipo_id,
+            status_id: venta.status_id,
+            banco_id: venta.banco_id,
+            personas_id: venta.personas_id,
+            venta_date: venta.venta_date,
+            venta_iva: venta.venta_iva,
+            venta_subtotal: venta.venta_subtotal,
+            venta_total: venta.venta_total
+          }
+        })
+        .then(() => {
+          this.$notify({
+            title: 'Modifcación Exitosa!',
+            message: `La Orden ${venta.ventas_id} se modificó correctamente!`,
+            type: 'success',
+            duration: 0
+          })
+          this.$store.dispatch('startupEscencial')
+          this.$store.dispatch('startupAdmin')
+          this.find()
+          this.uploading = false
+          this.modificarEstatus = false
+        })
+        .catch(err => {
+          if (err.response) {
+            this.$notify({
+              title: 'Error',
+              message: 'Hubo un error del servidor',
+              type: 'info'
+            })
+            console.log (err.response.data.message)
+          } else {
+            this.$notify({
+              title: 'Error',
+              message: 'Hubo un problema con la conexión',
+              type: 'error'
+            })
+          }
+          this.uploading = false
+          // console.clear()
+        })
+      }
     },
     computed: {
       getVentaID () {
         return this.$store.getters.getVentaID
+      },
+      getAllStatus () {
+        return this.$store.getters.getAllStatus
       }
     }
   }
