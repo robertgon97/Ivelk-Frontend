@@ -62,12 +62,12 @@
             <span class="text-primary">Montos Totales</span>
             <el-divider>Resumen</el-divider>
             <div class="d-flex flex-wrap">
-              <p class="col-6 m-0 p-0"> SubTotal: </p>
-              <p class="col-6 m0 p-0 text-right"><span class="text-primary"> {{parseMoneda(getVentaID.venta.venta_subtotal)}} </span></p>
+              <p class="col-6 m-0 p-0"> IVA: </p>
+              <p class="col-6 m0 p-0 text-right"><span class="text-primary"> <span class="text-primary"> {{getVentaID.venta.venta_iva}} % </span> </span></p>
             </div>
             <div class="d-flex flex-wrap">
-              <p class="col-6 m-0 p-0"> IVA: </p>
-              <p class="col-6 m0 p-0 text-right"><span class="text-primary"> <span class="text-primary"> {{parseMoneda(getVentaID.venta.venta_iva)}} </span> </span></p>
+              <p class="col-6 m-0 p-0"> SubTotal: </p>
+              <p class="col-6 m0 p-0 text-right"><span class="text-primary"> {{parseMoneda(getVentaID.venta.venta_subtotal)}} </span></p>
             </div>
             <div class="d-flex flex-wrap">
               <p class="col-6 m-0 p-0"> Total: </p>
