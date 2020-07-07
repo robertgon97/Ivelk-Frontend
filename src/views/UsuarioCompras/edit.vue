@@ -12,7 +12,10 @@
       </el-card>
     </div>
     <div v-else-if="getVentaID && getVentaID.venta.ventas_id">
-      <el-card shadow="hover">
+      <div class="d-flex flex-wrap justify-content-end mb-2">
+        <el-button @click="print('print')">Imprimir</el-button>
+      </div>
+      <el-card shadow="hover" class="container" id="print">
         <div slot="header" class="clearfix">
           <i class="el-icon-shopping-cart-full"></i>
           <span> Orden de Compra</span>
@@ -31,8 +34,8 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="articulos_nombres" label="Nombre del Artículo" />
-          <el-table-column prop="ventas_detalle_cantidad" label="Cantidad" width="150" />
+          <el-table-column prop="articulos_nombres" label="Nombre del Artículo" width="200" />
+          <el-table-column prop="ventas_detalle_cantidad" label="Cantidad" width="100" />
           <el-table-column prop="ventas_detalle_precio_base" label="Precio por Unidad" width="150">
             <template slot-scope="props">
               <div class="text-primary">
@@ -91,6 +94,7 @@
 </template>
 <script>
   import moment from 'moment'
+  import html2pdf from 'html2pdf.js'
   export default {
     metaInfo: {
       titleTemplate: '%s | Visualizar órden'
@@ -123,6 +127,9 @@
           moment.locale('es-VE')
           return moment(value).format('LL hh:mm A')
         } else return 'Fecha Inválida'
+      },
+      print (id = 'print') {
+        html2pdf().from(document.getElementById(id)).save('Comprobante.pdf')
       }
     },
     computed: {
