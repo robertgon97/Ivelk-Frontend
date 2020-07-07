@@ -1,9 +1,9 @@
 <template>
   <div class="row m-0 p-p justify-content-between">
-    <div class="col-md-2 p-0">
+    <div class="col-md-2 col-sm-3 p-0">
       <menu-ivelk-admin />
     </div>
-    <div class="col-md-10 p-0">
+    <div class="col-md-10 col-sm-9 p-0">
       <div id="menucito" class="bg-light p-3"><h5 class="text-center m-0 p-0">{{$route.name || 'Sin Título'}}</h5></div>
       <div class="p-3">
         <router-view />
