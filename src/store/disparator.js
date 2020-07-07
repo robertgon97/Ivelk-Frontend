@@ -25,6 +25,7 @@ export default {
       context.dispatch('getAllUsers')
       context.dispatch('getAllBancos')
       context.dispatch('getAllAuditoria', { auditoria_date: null, auditoria_id: null, usuario_email: null, personas_name: null, auditoria_accion: null, auditoria_descripcion: null })
+      context.dispatch('getAllProveedores')
     }
   }
 }
