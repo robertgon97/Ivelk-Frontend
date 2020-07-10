@@ -19,6 +19,7 @@ import medidas from './articulos.medidas'
 import tamanos from './articulos.tamanos'
 import proveedores from './proveedores'
 import ventastipos from './ventas.tipos'
+import compras from './compras'
 import disparator from './disparator'
 
 Vue.use(Vuex)
@@ -43,6 +44,7 @@ export default new Vuex.Store({
     tamanos,
     proveedores,
     ventastipos,
+    compras,
     disparator
   }
 })
