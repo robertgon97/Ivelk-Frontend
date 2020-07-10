@@ -1,31 +1,49 @@
 <template>
   <div>
-    <el-card>
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/' }">Inicio</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/tienda' }">Administración Tienda</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/tienda/balances' }">Balances</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/tienda/balances/lista' }">Resumen de este mes</el-breadcrumb-item>
+    </el-breadcrumb>
+    <br />
+    <div v-if="getAllBalances && getAllBalances == 'Loading'">
+      <el-button type="text" v-loading.fullscreen.lock="true"></el-button>
+    </div>
+    <el-card class="mb-3" v-else-if="getAllBalances && getAllBalances.length">
       <div slot="header" class="clearfix">
         <span>Balances Generales</span>
         <el-divider direction="vertical"></el-divider>
         <span>Total en este mes: </span>
-        <span class="text-primary">+ 50.000bs</span>
+        <span class="text-info"> {{parseMoneda(getBalance(getAllBalances))}}</span>
       </div>
       <div class="contenido">
-        <el-table :data="tableData" class="w-100">
-          <el-table-column fixed prop="id" label="#" width="50"></el-table-column>
-          <el-table-column prop="orden" label="Orden N°"></el-table-column>
-          <el-table-column prop="usuario" label="Cliente"></el-table-column>
-          <el-table-column prop="debito" label="Tipo"></el-table-column>
-          <el-table-column prop="total" label="Total">
+        <el-table :data="getAllBalances" class="w-100">
+          <el-table-column fixed prop="balances_id" label="#" width="50"></el-table-column>
+          <el-table-column prop="Fecha" label="Fecha" width="210">
+            <template slot-scope="props">
+              <div class="">
+                {{parseFecha(props.row.Fecha)}}
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column prop="orden" label="Orden N°">
+            <template slot-scope="props">
+              {{props.row.compras_id || props.row.ventas_id}}
+            </template>
+          </el-table-column>
+          <el-table-column prop="personas_name" label="Responsable"></el-table-column>
+          <el-table-column prop="balances_tipo_nombre" label="Tipo"></el-table-column>
+          <el-table-column prop="Monto" label="Monto">
             <template slot-scope="props">
               <div>
-                <i v-if="props.row.tipodebito == 2" class="el-icon-plus"></i>
-                <i v-if="props.row.tipodebito == 1" class="el-icon-minus"></i>
-                <span :class="`text-${(props.row.tipodebito == 1) ? 'danger' : 'primary'}`"> {{props.row.total}} </span>
+                <span :class="`text-${(props.row.balances_tipo_id == 1) ? 'danger' : 'primary'}`"> {{props.row.Monto}} </span>
               </div>
             </template>
           </el-table-column>
           <el-table-column fixed="right" label="Operaciones" width="150">
-            <template slot-scope="">
-              <el-button class="text-primary" type="text" size="small" icon="el-icon-edit">Ver</el-button>
-              <el-button class="text-danger" type="text" size="small" icon="el-icon-delete">Eliminar</el-button>
+            <template slot-scope="props">
+              <el-button class="text-primary" type="text" size="small" icon="el-icon-edit" @click="$router.push(`/tienda/balances/${props.row.balances_id}`)">Ver</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -33,53 +51,54 @@
       <el-divider></el-divider>
       <div>
         <div class="d-flex justify-content-center">
-          <p class="m-0 p-0"><small>Mostrando 4 Registros</small></p>
+          <p class="m-0 p-0"><small>Mostrando {{getAllBalances.length}} Registros</small></p>
         </div>
       </div>
     </el-card>
+    <div v-else class="d-flex my-5 justify-content-center">
+      <div class="col-10 my-5">
+        <h1 class="display-3 text-center"><i class="el-icon-s-custom"></i></h1>
+        <div class="text-center">
+          <h3>No hay balances registrados</h3>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
+  import moment from 'moment'
   export default {
     metaInfo: {
       titleTemplate: '%s | Balances Generales'
     },
     data () {
       return {
-        tableData: [
-          {
-            id: 1,
-            usuario: 'Deni Aguirre',
-            debito: 'Debito',
-            tipodebito: 1,
-            total: 50000,
-            orden: 234
-          },
-          {
-            id: 2,
-            usuario: 'Deni Aguirre',
-            debito: 'Credito',
-            tipodebito: 2,
-            total: 50000,
-            orden: 235
-          },
-          {
-            id: 3,
-            usuario: 'Deni Aguirre',
-            debito: 'Debito',
-            tipodebito: 1,
-            total: 50000,
-            orden: 236
-          },
-          {
-            id: 4,
-            usuario: 'Deni Aguirre',
-            debito: 'Credito',
-            tipodebito: 2,
-            total: 100000,
-            orden: 237
-          }
-        ]
+        tableData: []
+      }
+    },
+    methods: {
+      getBalance (array) {
+        var total = 0
+        array.forEach(element => {
+          total = total + (element.Monto)
+        })
+        return total
+      },
+      parseMoneda(value) {
+        var numer = parseFloat(value || 0)
+        if (numer) return numer.toLocaleString('es-VE') + ' Bs.'
+        else return 'Gratis'
+      },
+      parseFecha(value) {
+        if (value) {
+          moment.locale('es-VE')
+          return moment(value).format('LL hh:mm A')
+        } else return 'Fecha Inválida'
+      }
+    },
+    computed: {
+      getAllBalances () {
+        return this.$store.getters.getAllBalances
       }
     }
   }
