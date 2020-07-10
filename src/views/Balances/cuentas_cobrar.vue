@@ -7,16 +7,16 @@
       <el-breadcrumb-item :to="{ path: '/tienda/balances/cuentas/pagar' }">Cuentas por pagar</el-breadcrumb-item>
     </el-breadcrumb>
     <br />
-    <div v-if="getAllCuentasPagar && getAllCuentasPagar == 'Loading'">
+    <div v-if="getAllCuentasCobrar && getAllCuentasCobrar == 'Loading'">
       <el-button type="text" v-loading.fullscreen.lock="true"></el-button>
     </div>
-    <el-card class="mb-3" v-else-if="getAllCuentasPagar && getAllCuentasPagar.length">
+    <el-card class="mb-3" v-else-if="getAllCuentasCobrar && getAllCuentasCobrar.length">
       <div slot="header" class="clearfix">
         <span>Cuentas Pendientes por pagar</span>
         <el-divider direction="vertical"></el-divider>
       </div>
       <div class="contenido">
-        <el-table :data="getAllCuentasPagar" class="w-100">
+        <el-table :data="getAllCuentasCobrar" class="w-100">
           <el-table-column fixed prop="balances_id" label="#" width="50"></el-table-column>
           <el-table-column prop="Fecha" label="Fecha" width="210">
             <template slot-scope="props">
@@ -48,7 +48,7 @@
       <el-divider></el-divider>
       <div>
         <div class="d-flex justify-content-center">
-          <p class="m-0 p-0"><small>Mostrando {{getAllCuentasPagar.length}} Registros</small></p>
+          <p class="m-0 p-0"><small>Mostrando {{getAllCuentasCobrar.length}} Registros</small></p>
         </div>
       </div>
     </el-card>
@@ -94,8 +94,8 @@
       }
     },
     computed: {
-      getAllCuentasPagar () {
-        return this.$store.getters.getAllCuentasPagar
+      getAllCuentasCobrar () {
+        return this.$store.getters.getAllCuentasCobrar
       }
     }
   }
