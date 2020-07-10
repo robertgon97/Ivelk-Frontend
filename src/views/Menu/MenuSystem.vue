@@ -86,6 +86,8 @@
         </template>
         <el-menu-item-group>
           <router-link tag="el-menu-item" exact to="/tienda/balances/lista">Balances Generales</router-link>
+          <router-link tag="el-menu-item" exact to="/tienda/balances/cuentas/cobrar">Cuentas por cobrar</router-link>
+          <router-link tag="el-menu-item" exact to="/tienda/balances/cuentas/pagar">Cuentas por pagar</router-link>
           <router-link tag="el-menu-item" exact to="/tienda/balances/tipo">Tipos de Balances</router-link>
         </el-menu-item-group>
       </el-submenu>

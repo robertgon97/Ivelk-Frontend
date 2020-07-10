@@ -246,6 +246,16 @@ const routes = [
         component: () => import('./../views/Balances/type.vue')
       },
       {
+        path: 'balances/cuentas/cobrar',
+        name: 'Cuentas por Cobrar',
+        component: () => import('./../views/Balances/cuentas_cobrar.vue')
+      },
+      {
+        path: 'balances/cuentas/pagar',
+        name: 'Cuentas por Pagar',
+        component: () => import('./../views/Balances/cuentas_pagar.vue')
+      },
+      {
         path: 'balances/:ID',
         name: 'Ver Balance',
         component: () => import('./../views/Balances/edit.vue')
