@@ -84,7 +84,7 @@
       <div class="col-10 my-5">
         <h1 class="display-3 text-center"><i class="el-icon-s-custom"></i></h1>
         <div class="text-center">
-          <h3>Error al cargar su información</h3>
+          <h3>No hay compras realizadas</h3>
         </div>
       </div>
     </div>

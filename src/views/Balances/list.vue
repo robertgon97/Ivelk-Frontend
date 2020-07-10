@@ -37,7 +37,7 @@
           <el-table-column prop="Monto" label="Monto">
             <template slot-scope="props">
               <div>
-                <span :class="`text-${(props.row.balances_tipo_id == 1) ? 'danger' : 'primary'}`"> {{props.row.Monto}} </span>
+                <span :class="`text-${(props.row.balances_tipo_id == 1) ? 'danger' : 'primary'}`"> {{parseMoneda(props.row.Monto)}} </span>
               </div>
             </template>
           </el-table-column>
