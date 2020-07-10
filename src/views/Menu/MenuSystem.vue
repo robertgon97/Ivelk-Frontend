@@ -86,7 +86,7 @@
         </template>
         <el-menu-item-group>
           <router-link tag="el-menu-item" exact to="/tienda/balances/lista">Balances Generales</router-link>
-          <el-menu-item>Tipos de Balances</el-menu-item>
+          <router-link tag="el-menu-item" exact to="/tienda/balances/tipo">Tipos de Balances</router-link>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="99">

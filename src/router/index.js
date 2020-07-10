@@ -240,11 +240,11 @@ const routes = [
         name: 'Lista de Balances',
         component: () => import('./../views/Balances/list.vue')
       },
-      // {
-      //   path: 'balances/crear',
-      //   name: 'Nuevo Balance',
-      //   component: () => import('./../views/Balances/add.vue')
-      // },
+      {
+        path: 'balances/tipo',
+        name: 'Tipos de Balances',
+        component: () => import('./../views/Balances/type.vue')
+      },
       {
         path: 'balances/:ID',
         name: 'Ver Balance',

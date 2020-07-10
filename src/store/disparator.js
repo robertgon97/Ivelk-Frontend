@@ -28,6 +28,7 @@ export default {
       context.dispatch('getAllProveedores')
       context.dispatch('getAllTypeVentas')
       context.dispatch('getAllCompras')
+      context.dispatch('getAllBalancesTipos')
     }
   }
 }
