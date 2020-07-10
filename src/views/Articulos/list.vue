@@ -81,7 +81,7 @@
             </el-table-column>
             <el-table-column fixed="right" label="Operaciones" width="150">
               <template slot-scope="props">
-                <el-button class="text-primary" type="text" size="small" icon="el-icon-edit" @click="$router.push(`/tienda/usuarios/${props.row.usuario_id}`)">Ver</el-button>
+                <el-button class="text-primary" type="text" size="small" icon="el-icon-edit" @click="$router.push(`/tienda/articulos/${props.row.articulos_id}`)">Ver</el-button>
                 <el-button class="text-danger" type="text" size="small" icon="el-icon-delete" @click="eliminar(props.row)">Eliminar</el-button>
               </template>
             </el-table-column>

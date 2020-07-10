@@ -4,7 +4,7 @@
 <script>
   export default {
     metaInfo: {
-      titleTemplate: '%s | Editar Compra'
+      titleTemplate: '%s | Ver Compra'
     },
   }
 </script>

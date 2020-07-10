@@ -167,7 +167,7 @@ const routes = [
       {
         path: 'articulos/:ID',
         name: 'Editar Artículo',
-        component: () => import('./../views/Articulos/add.vue')
+        component: () => import('./../views/Articulos/edit.vue')
       },
       {
         path: 'proveedores',
