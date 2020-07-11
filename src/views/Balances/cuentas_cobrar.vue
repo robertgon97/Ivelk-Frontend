@@ -4,7 +4,7 @@
       <el-breadcrumb-item :to="{ path: '/' }">Inicio</el-breadcrumb-item>
       <el-breadcrumb-item :to="{ path: '/tienda' }">Administración Tienda</el-breadcrumb-item>
       <el-breadcrumb-item :to="{ path: '/tienda/balances' }">Balances</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ path: '/tienda/balances/cuentas/pagar' }">Cuentas por pagar</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/tienda/balances/cuentas/cobrar' }">Cuentas por cobrar</el-breadcrumb-item>
     </el-breadcrumb>
     <br />
     <div v-if="getAllCuentasCobrar && getAllCuentasCobrar == 'Loading'">
