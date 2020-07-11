@@ -57,6 +57,7 @@
         <h1 class="display-3 text-center"><i class="el-icon-s-custom"></i></h1>
         <div class="text-center">
           <h3>No hay cuentas por pagar pendientes</h3>
+          <small>Para tener cuentas por pagar debes tener compras con pagos pendientes</small>
         </div>
       </div>
     </div>
