@@ -40,7 +40,7 @@
           </el-table-column>
           <el-table-column fixed="right" label="Operaciones" width="150">
             <template slot-scope="props">
-              <el-button class="text-primary" type="text" size="small" icon="el-icon-edit" @click="$router.push(`/tienda/balances/${props.row.balances_id}`)">Ver</el-button>
+              <el-button class="text-primary" type="text" size="small" icon="el-icon-edit" @click="$router.push(`/tienda/${props.row.ventas_id ? `ventas/${props.row.ventas_id}` : `compras/${props.row.compras_id}`}`)">Ver</el-button>
             </template>
           </el-table-column>
         </el-table>
