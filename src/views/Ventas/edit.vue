@@ -104,7 +104,7 @@
                   <el-popconfirm v-if="getVentaID.venta.status_id != 3" confirmButtonText='Sí' cancelButtonText='No, Gracias' icon="el-icon-info" iconColor="red" title="Estás seguro de anular esta orden?" @onConfirm="anular(getVentaID.venta.ventas_id)">
                     <el-button slot="reference" class="btn-primario m-2" plain :loading="uploading">Anular Orden</el-button>
                   </el-popconfirm>
-                  <div v-if="getVentaID.venta.status_id == ((getVentaID.venta.status_id == 4 || getVentaID.venta.status_id == 5) ? false : true)">
+                  <div v-if="((getVentaID.venta.status_id == 4 || getVentaID.venta.status_id == 5) ? false : true)">
                     <el-tooltip placement="top">
                       <div slot="content">Aquí puedes agregar las transacciones confirmadas del usuario y así abonar el monto a la venta</div>
                       <el-button class="btn-primario m-2" plain @click="agregarPago = true" :loading="uploading">+ Transacción de Pago</el-button>
@@ -197,7 +197,7 @@
             </div>
             <div class="col-12 mb-3">
               <label>Ingrese el Monto del Pago</label>
-              <el-input type="number" placeholder="Monto del Pago" min="0" step="0.01" v-model="abonado.balances_abonado_abonado" prefix-icon="el-icon-money"></el-input>
+              <el-input type="number" placeholder="Monto del Pago" min="0" :max="(getVentaID.venta.venta_total - getTotalAbonado(getVentaID.pagosAbonados))" step="0.01" v-model="abonado.balances_abonado_abonado" prefix-icon="el-icon-money"></el-input>
             </div>
           </form>
           <el-divider></el-divider>
@@ -253,8 +253,7 @@
       },
       parseMoneda(value) {
         var numer = parseFloat(value || 0)
-        if (numer) return numer.toLocaleString('es-VE') + ' Bs.'
-        else return 'Gratis'
+        return numer.toLocaleString('es-VE') + ' Bs.'
       },
       parseFecha(value) {
         if (value) {
