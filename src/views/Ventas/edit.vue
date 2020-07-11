@@ -99,6 +99,10 @@
                   <el-popconfirm confirmButtonText='Sí' cancelButtonText='No, Gracias' icon="el-icon-info" iconColor="red" title="Estás seguro de anular esta orden?" @onConfirm="anular(getVentaID.venta.ventas_id)">
                     <el-button slot="reference" class="btn-primario m-2" plain :loading="uploading">Anular Orden</el-button>
                   </el-popconfirm>
+                  <el-tooltip placement="top">
+                    <div slot="content">Aquí puedes agregar las transacciones confirmadas del usuario y así abonar el monto a la venta</div>
+                    <el-button class="btn-primario m-2" plain @click="agregarPago = true" :loading="uploading">+ Transacción de Pago</el-button>
+                  </el-tooltip>
                 </div>
               </div>
             </div>
@@ -116,16 +120,23 @@
             <div>
               <el-table :data="getVentaID.pagosAbonados" class="h-100 w-100" v-loading="uploading">
                 <el-table-column fixed prop="balances_abonado_id" label="#" width="80" sortable></el-table-column>
-                <el-table-column prop="balances_abonado_transaccion" label="N° Transacción" sortable></el-table-column>
-                <el-table-column prop="balances_abonado_abonado" label="Monto Abonado" sortable>
+                <el-table-column prop="balances_abonado_transaccion" label="N° Transacción" width="150" sortable></el-table-column>
+                <el-table-column prop="balances_abonado_abonado" label="Monto Abonado" width="200" sortable>
                   <template slot-scope="props">
                     <div>
                       <span> {{parseMoneda(props.row.balances_abonado_abonado)}} </span>
                     </div>
                   </template>
                 </el-table-column>
-                <el-table-column prop="bancos_nombre" label="Nombre del Banco" sortable></el-table-column>
-                <el-table-column prop="bancos_cuenta" label="Cuenta Destino" sortable></el-table-column>
+                <el-table-column prop="bancos_nombre" label="Nombre del Banco" width="190" sortable></el-table-column>
+                <el-table-column prop="bancos_cuenta" label="Cuenta Destino"  width="200" sortable></el-table-column>
+                <el-table-column fixed="right" label="Operaciones" width="100">
+                  <template slot-scope="props">
+                    <el-popconfirm v-if="props.row.balances_abonado_credito != 9" confirmButtonText='Sí' cancelButtonText='No, Gracias' icon="el-icon-info" iconColor="red" title="Estás seguro de anular esta operación?" @onConfirm="anularPagoBalance(props.row)">
+                      <el-button slot="reference" class="text-danger" type="text" size="small" :loading="uploading">Anular</el-button>
+                    </el-popconfirm>
+                  </template>
+                </el-table-column>
               </el-table>
               <el-divider></el-divider>
               <div>
@@ -137,7 +148,7 @@
           </el-card>
         </el-col>
       </el-row>
-      <el-drawer title="Cambio del Estatus de la Orden" ref="drawer" :before-close="handleClose" :visible.sync="modificarEstatus" direction="rtl" custom-class="demo-drawer">
+      <el-drawer title="Cambio del Estatus de la Orden" ref="drawer" :before-close="handleClose" :visible.sync="modificarEstatus" direction="rtl" custom-class="demo-drawer overflow-auto">
         <div class="Contenido p-2">
           <form class="" @submit.prevent="modificar(getVentaID.venta)">
             <div class="col-12">
@@ -151,6 +162,31 @@
           <div class="d-flex flex-wrap justify-content-between" >
             <el-button class="btn-primario" @click="modificarEstatus = false">Cancelar</el-button>
             <el-button class="btn-primario" @click="modificar(getVentaID.venta)" :loading="uploading">{{ uploading ? 'Enviando ...' : 'Enviar' }}</el-button>
+          </div>
+        </div>
+      </el-drawer>
+      <el-drawer title="Abonar referencia de pago" ref="drawerpago" :before-close="handleClose" :visible.sync="agregarPago" direction="rtl" custom-class="demo-drawer overflow-auto">
+        <div class="Contenido p-2">
+          <form class="" @submit.prevent="agregarPagoBalance(abonado)">
+            <div class="col-12 mb-3">
+              <label>Seleccione donde se realizó el pago</label>
+              <el-select class="w-100" placeholder="Banco donde se realizó el pago" v-model="abonado.banco_id">
+                <el-option v-for="banco of getAllBancos" :key="banco.banco_id" :label="banco.bancos_nombre" :value="banco.banco_id" />
+              </el-select>
+            </div>
+            <div class="col-12 mb-3">
+              <label>Ingrese el número de transacción del banco</label>
+              <el-input type="number" min="0" placeholder="Número de transacción" v-model="abonado.balances_abonado_transaccion" prefix-icon="el-icon-document"></el-input>
+            </div>
+            <div class="col-12 mb-3">
+              <label>Ingrese el Monto del Pago</label>
+              <el-input type="number" placeholder="Monto del Pago" min="0" step="0.01" v-model="abonado.balances_abonado_abonado" prefix-icon="el-icon-money"></el-input>
+            </div>
+          </form>
+          <el-divider></el-divider>
+          <div class="d-flex flex-wrap justify-content-between" >
+            <el-button class="btn-primario" @click="modificarEstatus = false">Cancelar</el-button>
+            <el-button class="btn-primario" @click="agregarPagoBalance(abonado, getVentaID.venta.balances_id)" :loading="uploading">{{ uploading ? 'Enviando ...' : 'Enviar' }}</el-button>
           </div>
         </div>
       </el-drawer>
@@ -182,7 +218,16 @@
     data () {
       return {
         uploading: false,
-        modificarEstatus: false
+        modificarEstatus: false,
+        agregarPago: false,
+        abonado: {
+          balances_abonado_id: 0,
+          balances_id: 0,
+          banco_id: null,
+          balances_abonado_transaccion: null,
+          balances_abonado_abonado: 0,
+          balances_abonado_credito: 1
+        }
       }
     },
     methods: {
@@ -219,6 +264,7 @@
           .then(() => {
             this.loading = false
             this.modificarEstatus = false
+            this.agregarPago = false
             done()
             this.$message({
               type: 'success',
@@ -320,6 +366,93 @@
           this.uploading = false
           // console.clear()
         })
+      },
+      agregarPagoBalance (venta, balance) {
+        venta.balances_id = balance
+        this.uploading = true
+        this.axios({
+          method: `POST`,
+          url: `/balances/abonar`,
+          data: venta
+        })
+        .then(() => {
+          this.$notify({
+            title: 'Realizado!',
+            message: `La referencia de pago se abonó exitosamente!`,
+            type: 'success'
+          })
+          this.$store.dispatch('startupEscencial')
+          this.$store.dispatch('startupAdmin')
+          this.find()
+          this.uploading = false
+          this.modificarEstatus = false
+          this.agregarPago = false
+        })
+        .catch(err => {
+          if (err.response) {
+            this.$notify({
+              title: 'Error',
+              message: 'Hubo un error del servidor',
+              type: 'info'
+            })
+            console.log (err.response.data.message)
+          } else {
+            this.$notify({
+              title: 'Error',
+              message: 'Hubo un problema con la conexión',
+              type: 'error'
+            })
+          }
+          this.uploading = false
+          // console.clear()
+        })
+      },
+      anularPagoBalance (venta) {
+        venta.balances_abonado_abonado = (venta.balances_abonado_abonado * -1)
+        venta.balances_abonado_credito = 9
+        this.axios({
+          method: `POST`,
+          url: `/balances/abonar`,
+          data: {
+            balances_abonado_id: venta.balances_abonado_id,
+            balances_id: venta.balances_id,
+            banco_id: venta.banco_id,
+            balances_abonado_transaccion: venta.balances_abonado_transaccion,
+            balances_abonado_abonado: venta.balances_abonado_abonado,
+            balances_abonado_credito: venta.balances_abonado_credito
+          }
+        })
+        .then(() => {
+          this.$notify({
+            title: 'Realizado!',
+            message: `La referencia de pago se anuló exitosamente!`,
+            type: 'success'
+          })
+          this.$store.dispatch('startupEscencial')
+          this.$store.dispatch('startupAdmin')
+          this.find()
+          this.uploading = false
+          this.modificarEstatus = false
+          this.agregarPago = false
+        })
+        .catch(err => {
+          if (err.response) {
+            this.$notify({
+              title: 'Error',
+              message: 'Hubo un error del servidor',
+              type: 'info'
+            })
+            console.log (err.response.data.message)
+          } else {
+            this.$notify({
+              title: 'Error',
+              message: 'Hubo un problema con la conexión',
+              type: 'error'
+            })
+          }
+          this.uploading = false
+          // console.clear()
+        })
       }
     },
     computed: {
@@ -328,6 +461,9 @@
       },
       getAllStatus () {
         return this.$store.getters.getAllStatus
+      },
+      getAllBancos () {
+        return this.$store.getters.getAllBancos
       }
     }
   }
