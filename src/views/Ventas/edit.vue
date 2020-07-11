@@ -90,6 +90,11 @@
                     </div>
                   </template>
                 </el-table-column>
+                <el-table-column fixed="right" label="Operaciones" width="100">
+                  <template slot-scope="props">
+                    <el-button type="text" class="text-primary" @click="$router.push(`/tienda/articulos/devolucion?ventas_id=${props.row.ventas_id}&ventas_detalle_id=${props.row.ventas_detalle_id}`)">Devolución</el-button>
+                  </template>
+                </el-table-column>
               </el-table>
               <br>
               <div class="clearfix">
