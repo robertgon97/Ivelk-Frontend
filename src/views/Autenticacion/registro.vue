@@ -177,11 +177,22 @@
             type: 'success',
             duration: 0
           })
+          const loading = this.$loading({
+            lock: true,
+            text: 'Cargando...',
+            spinner: 'el-icon-loading',
+            background: 'rgba(0, 0, 0, 0.6)'
+          })
           localStorage.setItem('token_ivelk', response.data.data.token)
           localStorage.setItem('ud_ivelk', JSON.stringify(response.data.data.usuario))
           this.$store.dispatch('startupClient')
+          this.$store.dispatch('startupEscencial')
           this.$router.push(`/`)
           this.uploading = false
+          location.reload()
+          setTimeout(() => {
+            loading.close()
+          }, 2000)
         })
         .catch(err => {
           if (err.response) {

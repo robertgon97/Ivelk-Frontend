@@ -56,8 +56,15 @@
             type: 'success',
             duration: 0
           })
+          const loading = this.$loading({
+            lock: true,
+            text: 'Cargando...',
+            spinner: 'el-icon-loading',
+            background: 'rgba(0, 0, 0, 0.6)'
+          })
           localStorage.setItem('token_ivelk', response.data.data.token)
           localStorage.setItem('ud_ivelk', JSON.stringify(response.data.data.usuario))
+          this.$store.dispatch('startupEscencial')
           switch (response.data.data.usuario.usuarios_tipo_id) {
             case 6:
               this.$store.dispatch('startupClient')
@@ -68,6 +75,10 @@
               this.$router.push(`/tienda`)
               break;
           }
+          location.reload()
+          setTimeout(() => {
+            loading.close()
+          }, 2000)
         })
         .catch(err => {
           if (err.response) {
