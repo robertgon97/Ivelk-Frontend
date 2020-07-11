@@ -197,7 +197,13 @@
           // console.clear()
         })
         .finally(() => {
-          this.$store.dispatch('getCarritoAll')
+          this.$store.dispatch('startupEscencial')
+          let user = JSON.parse(localStorage.getItem('ud_ivelk'))
+          if (user && user.usuarios_tipo_id == 6) {
+            this.$store.dispatch('startupClient')
+          } else {
+            this.$store.dispatch('startupAdmin')
+          }
         })
       }
     },
