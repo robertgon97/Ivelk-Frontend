@@ -185,7 +185,7 @@
           </form>
           <el-divider></el-divider>
           <div class="d-flex flex-wrap justify-content-between" >
-            <el-button class="btn-primario" @click="modificarEstatus = false">Cancelar</el-button>
+            <el-button class="btn-primario" @click="agregarPago = false">Cancelar</el-button>
             <el-button class="btn-primario" @click="agregarPagoBalance(abonado, getVentaID.venta.balances_id)" :loading="uploading">{{ uploading ? 'Enviando ...' : 'Enviar' }}</el-button>
           </div>
         </div>
@@ -428,12 +428,6 @@
             message: `La referencia de pago se anuló exitosamente!`,
             type: 'success'
           })
-          this.$store.dispatch('startupEscencial')
-          this.$store.dispatch('startupAdmin')
-          this.find()
-          this.uploading = false
-          this.modificarEstatus = false
-          this.agregarPago = false
         })
         .catch(err => {
           if (err.response) {
@@ -452,6 +446,14 @@
           }
           this.uploading = false
           // console.clear()
+        })
+        .finally(() => {
+          this.$store.dispatch('startupEscencial')
+          this.$store.dispatch('startupAdmin')
+          this.find()
+          this.uploading = false
+          this.modificarEstatus = false
+          this.agregarPago = false
         })
       }
     },
