@@ -104,6 +104,38 @@
             </div>
           </el-card>
         </el-col>
+        <el-col class="col-md-12 mb-3">
+          <el-card shadow="hover">
+            <div slot="header" class="clearfix text-primary">
+              <i class="el-icon-shopping-bag-1"></i>
+              <span> Lista de Pagos</span>
+              <el-divider direction="vertical"></el-divider>
+              <span class="text-dark">Total Abonado: </span>
+              <span class="text-success"> {{parseMoneda(getTotalAbonado(getVentaID.pagosAbonados))}} </span>
+            </div>
+            <div>
+              <el-table :data="getVentaID.pagosAbonados" class="h-100 w-100" v-loading="uploading">
+                <el-table-column fixed prop="balances_abonado_id" label="#" width="80" sortable></el-table-column>
+                <el-table-column prop="balances_abonado_transaccion" label="N° Transacción" sortable></el-table-column>
+                <el-table-column prop="balances_abonado_abonado" label="Monto Abonado" sortable>
+                  <template slot-scope="props">
+                    <div>
+                      <span> {{parseMoneda(props.row.balances_abonado_abonado)}} </span>
+                    </div>
+                  </template>
+                </el-table-column>
+                <el-table-column prop="bancos_nombre" label="Nombre del Banco" sortable></el-table-column>
+                <el-table-column prop="bancos_cuenta" label="Cuenta Destino" sortable></el-table-column>
+              </el-table>
+              <el-divider></el-divider>
+              <div>
+                <div class="d-flex justify-content-center">
+                  <p class="m-0 p-0"><small>Mostrando {{getVentaID.pagosAbonados.length}} Registros</small></p>
+                </div>
+              </div>
+            </div>
+          </el-card>
+        </el-col>
       </el-row>
       <el-drawer title="Cambio del Estatus de la Orden" ref="drawer" :before-close="handleClose" :visible.sync="modificarEstatus" direction="rtl" custom-class="demo-drawer">
         <div class="Contenido p-2">
@@ -167,6 +199,13 @@
           moment.locale('es-VE')
           return moment(value).format('LL hh:mm A')
         } else return 'Fecha Inválida'
+      },
+      getTotalAbonado (array) {
+        var total = 0
+        array.forEach(element => {
+          total = total + (element.balances_abonado_abonado)
+        })
+        return total
       },
       handleClose(done) {
         if (this.uploading) {
