@@ -19,22 +19,22 @@
       </div>
       <div class="contenido">
         <el-table :data="getAllBalances" class="w-100">
-          <el-table-column fixed prop="balances_id" label="#" width="50"></el-table-column>
-          <el-table-column prop="Fecha" label="Fecha" width="210">
+          <el-table-column fixed prop="balances_id" label="#" width="80" sortable></el-table-column>
+          <el-table-column prop="Fecha" label="Fecha" width="210" sortable>
             <template slot-scope="props">
               <div class="">
                 {{parseFecha(props.row.Fecha)}}
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="orden" label="Orden N°">
+          <el-table-column prop="orden" label="Orden N°" sortable>
             <template slot-scope="props">
               {{props.row.compras_id || props.row.ventas_id}}
             </template>
           </el-table-column>
-          <el-table-column prop="personas_name" label="Responsable"></el-table-column>
-          <el-table-column prop="balances_tipo_nombre" label="Tipo"></el-table-column>
-          <el-table-column prop="Monto" label="Monto">
+          <el-table-column prop="personas_name" label="Responsable" sortable></el-table-column>
+          <el-table-column prop="balances_tipo_nombre" label="Tipo" sortable></el-table-column>
+          <el-table-column prop="Monto" label="Monto" sortable>
             <template slot-scope="props">
               <div>
                 <span :class="`text-${(props.row.balances_tipo_id == 1) ? 'danger' : 'primary'}`"> {{parseMoneda(props.row.Monto)}} </span>
