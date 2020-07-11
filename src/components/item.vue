@@ -108,7 +108,7 @@
             if (err.response) {
               this.$notify({
                 title: 'Error',
-                message: err.response.data.message,
+                message: `Primero debes iniciar sesión` || err.response.data.message,
                 type: 'info'
               })
             } else {
