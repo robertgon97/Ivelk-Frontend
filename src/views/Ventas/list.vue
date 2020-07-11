@@ -33,7 +33,7 @@
                 <el-input placeholder="Nombre del cliente" type="text" v-model="search.personas_name" clearable></el-input>
               </div>
               <div class="col-12 p-0 mb-3">
-                <label>N° Orden</label>
+                <label>N° Factura</label>
                 <el-input placeholder="123456789" type="number" min="1" v-model="search.ventas_id" clearable></el-input>
               </div>
               <div class="col-12 p-0 mb-3 text-center">
@@ -52,7 +52,7 @@
               <span> Lista</span>
             </div>
             <el-table class="h-100 w-100" :data="getAllVentas" >
-              <el-table-column fixed prop="ventas_id" label="N° Orden" width="100"></el-table-column>
+              <el-table-column fixed prop="ventas_id" label="N° Factura" width="100"></el-table-column>
               <el-table-column prop="venta_date" label="Fecha" width="220">
                 <template slot-scope="props">
                   <div class="">
