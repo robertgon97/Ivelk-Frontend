@@ -95,14 +95,16 @@
               <div class="clearfix">
                 <p class="text-center text-info"><span>Acciones rápidas de la venta</span></p>
                 <div class="d-flex flex-wrap my-3 justify-content-center">
-                  <el-button class="btn-primario m-2" plain @click="modificarEstatus = true" :loading="uploading">Cambiar Estatus</el-button>
-                  <el-popconfirm confirmButtonText='Sí' cancelButtonText='No, Gracias' icon="el-icon-info" iconColor="red" title="Estás seguro de anular esta orden?" @onConfirm="anular(getVentaID.venta.ventas_id)">
+                  <el-button v-if="false" class="btn-primario m-2" plain @click="modificarEstatus = true" :loading="uploading">Cambiar Estatus</el-button>
+                  <el-popconfirm v-if="getVentaID.venta.status_id != 3" confirmButtonText='Sí' cancelButtonText='No, Gracias' icon="el-icon-info" iconColor="red" title="Estás seguro de anular esta orden?" @onConfirm="anular(getVentaID.venta.ventas_id)">
                     <el-button slot="reference" class="btn-primario m-2" plain :loading="uploading">Anular Orden</el-button>
                   </el-popconfirm>
-                  <el-tooltip placement="top">
-                    <div slot="content">Aquí puedes agregar las transacciones confirmadas del usuario y así abonar el monto a la venta</div>
-                    <el-button class="btn-primario m-2" plain @click="agregarPago = true" :loading="uploading">+ Transacción de Pago</el-button>
-                  </el-tooltip>
+                  <div v-if="getVentaID.venta.status_id == ((getVentaID.venta.status_id == 4 || getVentaID.venta.status_id == 5) ? false : true)">
+                    <el-tooltip placement="top">
+                      <div slot="content">Aquí puedes agregar las transacciones confirmadas del usuario y así abonar el monto a la venta</div>
+                      <el-button class="btn-primario m-2" plain @click="agregarPago = true" :loading="uploading">+ Transacción de Pago</el-button>
+                    </el-tooltip>
+                  </div>
                 </div>
               </div>
             </div>
