@@ -116,6 +116,10 @@
               <el-divider direction="vertical"></el-divider>
               <span class="text-dark">Total Abonado: </span>
               <span class="text-success"> {{parseMoneda(getTotalAbonado(getVentaID.pagosAbonados))}} </span>
+              <div v-if="getVentaID.venta.venta_total - getTotalAbonado(getVentaID.pagosAbonados) > 0">
+                <span class="text-dark">Total por abonar: </span>
+                <span class="text-info"> {{parseMoneda(getVentaID.venta.venta_total - getTotalAbonado(getVentaID.pagosAbonados))}} </span>
+              </div>
             </div>
             <div>
               <el-table :data="getVentaID.pagosAbonados" class="h-100 w-100" v-loading="uploading">
