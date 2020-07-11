@@ -92,7 +92,7 @@
                 </el-table-column>
                 <el-table-column fixed="right" label="Operaciones" width="100">
                   <template slot-scope="props">
-                    <el-button type="text" class="text-primary" @click="$router.push(`/tienda/articulos/devolucion?ventas_id=${props.row.ventas_id}&ventas_detalle_id=${props.row.ventas_detalle_id}`)">Devolución</el-button>
+                    <el-button :disabled="((getVentaID.venta.status_id == 5) ? false : true)" type="text" class="text-primary" @click="$router.push(`/tienda/articulos/devolucion?ventas_id=${props.row.ventas_id}&ventas_detalle_id=${props.row.ventas_detalle_id}`)">Devolución</el-button>
                   </template>
                 </el-table-column>
               </el-table>
@@ -100,7 +100,7 @@
               <div class="clearfix">
                 <p class="text-center text-info"><span>Acciones rápidas de la venta</span></p>
                 <div class="d-flex flex-wrap my-3 justify-content-center">
-                  <el-button v-if="false" class="btn-primario m-2" plain @click="modificarEstatus = true" :loading="uploading">Cambiar Estatus</el-button>
+                  <el-button v-if="(getVentaID.venta.status_id == 3 || getVentaID.venta.status_id == 5) ? false : true" class="btn-primario m-2" plain @click="modificarEstatus = true" :loading="uploading">Cambiar Estatus</el-button>
                   <el-popconfirm v-if="getVentaID.venta.status_id != 3" confirmButtonText='Sí' cancelButtonText='No, Gracias' icon="el-icon-info" iconColor="red" title="Estás seguro de anular esta orden?" @onConfirm="anular(getVentaID.venta.ventas_id)">
                     <el-button slot="reference" class="btn-primario m-2" plain :loading="uploading">Anular Orden</el-button>
                   </el-popconfirm>
