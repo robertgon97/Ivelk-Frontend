@@ -105,6 +105,12 @@
                       <el-button class="btn-primario m-2" plain @click="agregarPago = true" :loading="uploading">+ Transacción de Pago</el-button>
                     </el-tooltip>
                   </div>
+                  <el-tooltip placement="top">
+                    <div slot="content">Aquí puedes obtener el comprobante de la venta para el usuario</div>
+                    <el-button class="btn-primario m-2" plain>
+                      <a class="text-white" href="" target="_BLANK">Imprimir Factura</a>
+                    </el-button>
+                  </el-tooltip>
                 </div>
               </div>
             </div>
