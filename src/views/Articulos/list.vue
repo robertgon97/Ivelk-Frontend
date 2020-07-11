@@ -71,7 +71,7 @@
             <el-table-column sortable fixed prop="articulos_id" label="ID" width="80"></el-table-column>
             <el-table-column width="300" sortable prop="articulos_nombres" label="Nombre"></el-table-column>
             <el-table-column width="150" sortable prop="articulo_tipo_nombre" label="Categoría"></el-table-column>
-            <el-table-column width="140" sortable prop="stock_id" label="Disponibilidad"></el-table-column>
+            <el-table-column width="140" sortable prop="stock_cantidad" label="Disponibilidad"></el-table-column>
             <el-table-column width="150" sortable prop="stock_precio" label="Precio">
               <template slot-scope="props">
                 <div class="text-primary">

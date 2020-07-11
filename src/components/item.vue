@@ -22,6 +22,7 @@
     <div v-if="!admin" class="py-1 mx-2 d-flex flex-wrap justify-content-between align-items-center">
       <el-input-number v-model="cantidad" :min="1" :max="complete.stock_cantidad" size="mini"></el-input-number>
       <el-button type="primary" icon="el-icon-goods" size="mini" round @click="agregarCarrito(complete)" :loading="uploading">Agregar</el-button>
+      <p class="text-center w-100 d-block m-0 p-0"><small>Cantidades Disponibles: {{complete.stock_cantidad}}</small></p>
     </div>
   </el-card>
 </template>
@@ -97,9 +98,8 @@
             this.uploading = false
             this.$notify({
               title: 'Hecho!',
-              message: `El artículo fué agregado exitosamente a tu carrito!`,
-              type: 'success',
-              duration: 5000
+              message: `Se agregaron ${this.cantidad} unidades de ${value.articulos_nombres} exitosamente a tu carrito!`,
+              type: 'success'
             })
             this.cantidad = 1
             console.log('Agregado el articulo ', response.data.appData.config_id)
