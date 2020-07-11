@@ -177,6 +177,7 @@
             type: 'success',
             duration: 5000
           })
+          this.$router.push('/compras')
           console.log('Confirmado ', response.data.appData.config_id)
         })
         .catch(err => {
