@@ -111,7 +111,7 @@
         </div>
       </el-card>
       <div class="d-flex flex-wrap justify-content-end mt-2">
-        <div v-if="((getVentaID.venta.status_id == 4 || getVentaID.venta.status_id == 5) ? false : true)">
+        <div v-if="((getVentaID.venta.status_id == 3 || getVentaID.venta.status_id == 4 || getVentaID.venta.status_id == 5) ? false : true)">
           <el-tooltip placement="top">
             <div slot="content">En esta opción puedes añadir las transferencias que hagas al banco</div>
             <el-button class="btn-primario m-2" @click="agregarPago = true" :loading="uploading">+ Referencia de Pago</el-button>
