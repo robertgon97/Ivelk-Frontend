@@ -65,8 +65,8 @@
           localStorage.setItem('token_ivelk', response.data.data.token)
           localStorage.setItem('ud_ivelk', JSON.stringify(response.data.data.usuario))
           this.$store.dispatch('startupEscencial')
-          switch (response.data.data.usuario.usuarios_tipo_id) {
-            case 6:
+          switch (response.data.data.usuario.usuarios_tipo_trabajador) {
+            case 1:
               this.$store.dispatch('startupClient')
               this.$router.push(`/`)
               break
