@@ -80,8 +80,8 @@
                   </el-select>
                 </div>
                 <div class="col-12 col-md-6 mb-3">
-                  <label>Fecha de cumpleaños</label>
-                  <el-input placeholder="Fecha de Cumpleaños" type="date" autocomplete="nacimiento" :max="maxDate" clearable v-model="getMyUser.personas_cumple">
+                  <label>Fecha de Nacimiento</label>
+                  <el-input placeholder="Fecha de Nacimiento" type="date" autocomplete="nacimiento" :max="maxDate" clearable v-model="getMyUser.personas_cumple">
                   </el-input>
                 </div>
                 <div class="col-12 mt-3">
