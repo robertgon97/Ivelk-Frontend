@@ -155,6 +155,11 @@ const routes = [
         component: () => import('./../views/Articulos/devolucion.vue')
       },
       {
+        path: 'articulos/garantias',
+        name: 'Lista de Garantias',
+        component: () => import('./../views/Articulos/garantias.vue')
+      },
+      {
         path: 'articulos/marcas',
         name: 'Gestión de Marcas',
         component: () => import('./../views/Articulos/marcas.vue')

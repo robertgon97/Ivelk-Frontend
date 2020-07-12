@@ -22,6 +22,7 @@ import ventastipos from './ventas.tipos'
 import compras from './compras'
 import balances from './balances'
 import devoluciones from './devoluciones'
+import garantias from './garantias'
 import disparator from './disparator'
 
 Vue.use(Vuex)
@@ -49,6 +50,7 @@ export default new Vuex.Store({
     compras,
     balances,
     devoluciones,
+    garantias,
     disparator
   }
 })
