@@ -76,7 +76,7 @@
         <el-menu-item-group>
           <router-link tag="el-menu-item" exact to="/tienda/ventas/lista">Todas las Ventas</router-link>
           <!-- <router-link tag="el-menu-item" exact to="/tienda/ventas/crear">Nueva Venta</router-link> -->
-          <router-link tag="el-menu-item" exact to="/tienda/ventas/tipo">Tipos de Ventas</router-link>
+          <!-- <router-link tag="el-menu-item" exact to="/tienda/ventas/tipo">Tipos de Ventas</router-link> -->
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="7">
