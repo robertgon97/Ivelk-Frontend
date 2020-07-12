@@ -53,7 +53,7 @@
             <el-input type="number" placeholder="Cantidad del artículo" min="0" v-model="article.stock_cantidad" prefix-icon="el-icon-takeaway-box" clearable></el-input>
           </div>
           <div class="col-md-6 mb-3">
-            <label>Precio Inical</label>
+            <label>Precio Inicial</label>
             <el-input type="number" placeholder="Precio del artículo" min="0" step="0.01" v-model="article.stock_precio" prefix-icon="el-icon-money" clearable></el-input>
           </div>
         </div>

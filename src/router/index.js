@@ -99,8 +99,9 @@ const routes = [
     component: () => import('./../views/Menu/MenuViewAdmin.vue'),
     children: [
       {
-        path: 'perfil',
-        redirect: 'perfil/editar'
+        path: '/',
+        name: 'Resumen',
+        component: () => import('./../views/Sumary.vue')
       },
       {
         path: 'perfil/editar',
