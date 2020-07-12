@@ -19,7 +19,7 @@
         <el-table :data="getAllProveedores">
           <el-table-column fixed width="80" prop="proveedor_id" label="ID"></el-table-column>
           <el-table-column width="350" prop="proveedor_razon_social" label="Razón Social"></el-table-column>
-          <el-table-column width="110" prop="tipo_documento_letra" label="Nacionalidad"></el-table-column>
+          <el-table-column width="110" prop="tipo_documento_letra" label="Tipo de Documento"></el-table-column>
           <el-table-column width="110" prop="proveedor_rif" label="Rif"></el-table-column>
           <el-table-column width="200" prop="proveedor_correo" label="Correo"></el-table-column>
           <el-table-column width="200" prop="proveedor_telefono" label="Teléfono"></el-table-column>

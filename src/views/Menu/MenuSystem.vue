@@ -101,7 +101,7 @@
           <router-link tag="el-menu-item" exact to="/tienda/configuracion/status">Estatus</router-link>
           <router-link tag="el-menu-item" exact to="/tienda/configuracion/auditoria">Auditoría</router-link>
           <router-link tag="el-menu-item" exact to="/tienda/configuracion/bancos">Bancos</router-link>
-          <router-link tag="el-menu-item" exact to="/tienda/configuracion/nacionalidades">Nacionalidades</router-link>
+          <router-link tag="el-menu-item" exact to="/tienda/configuracion/nacionalidades">Tipo de Documento</router-link>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>

@@ -4,7 +4,7 @@
       <el-breadcrumb-item :to="{ path: '/' }">Inicio</el-breadcrumb-item>
       <el-breadcrumb-item :to="{ path: '/tienda' }">Administración Tienda</el-breadcrumb-item>
       <el-breadcrumb-item :to="{ path: '/tienda/configuracion' }">Configuración</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ path: '/tienda/configuracion/nacionalidades' }">Lista de Nacionalidades</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/tienda/configuracion/nacionalidades' }">Tipos de Documentos</el-breadcrumb-item>
     </el-breadcrumb>
     <br />
     <div v-if="getAllTypeDocumento && getAllTypeDocumento == 'Loading'">
@@ -13,7 +13,7 @@
     <el-card class="mb-3" v-else-if="getAllTypeDocumento && getAllTypeDocumento.length">
       <div slot="header" class="clearfix">
         <i class="el-icon-finished"></i>
-        <span> Lista de Nacionalidades</span>
+        <span> Lista de Tipos de Documentos</span>
       </div>
       <div class="contenido">
         <el-table :data="getAllTypeDocumento">
@@ -41,7 +41,7 @@
       <div class="col-10 my-5">
         <h1 class="display-3 text-center"><i class="el-icon-s-custom"></i></h1>
         <div class="text-center">
-          <h3>No hay nacionalidades registradas</h3>
+          <h3>No hay Tipo de Documento registradas</h3>
         </div>
       </div>
     </div>

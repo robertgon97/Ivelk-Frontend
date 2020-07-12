@@ -54,8 +54,8 @@
             </el-input>
           </div>
           <div class="col-12 col-md-2 mb-3">
-            <label class="w-100">Nacionalidad</label>
-            <el-select placeholder="Selecciona tu nacionalidad" v-model="registro.tipo_documento_id">
+            <label class="w-100">Tip. Doc.</label>
+            <el-select placeholder="Selecciona tu Tipo de Documento" v-model="registro.tipo_documento_id">
               <el-option v-for="item in getAllTypeDocumento" :key="item.tipo_documento_id" :label="`${item.tipo_documento_nombre} (${item.tipo_documento_letra})`" :value="item.tipo_documento_id" />
             </el-select>
           </div>

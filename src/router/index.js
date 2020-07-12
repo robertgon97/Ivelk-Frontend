@@ -276,7 +276,7 @@ const routes = [
       },
       {
         path: 'configuracion/nacionalidades',
-        name: 'Configuración de Nacionalidades',
+        name: 'Configuración de Tipos de Documentos',
         component: () => import('./../views/Configuracion/nacionalidades.vue')
       },
       {
