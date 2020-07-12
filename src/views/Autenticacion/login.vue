@@ -52,7 +52,7 @@
           this.uploading = false
           this.$notify({
             title: 'Autenticación Exitosa!',
-            message: `Bienvenido, ${response.data.data.usuario.usuario_username}!`,
+            message: `Bienvenido, ${response.data.data.usuario.usuarios_tipo_nombre} ${response.data.data.usuario.usuario_username}!`,
             type: 'success',
             duration: 0
           })

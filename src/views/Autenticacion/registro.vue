@@ -173,7 +173,7 @@
         .then(response => {
           this.$notify({
             title: 'Registro Exitoso!',
-            message: `Bienvenido, ${response.data.data.usuario.usuario_username}!`,
+            message: `Bienvenido, ${response.data.data.usuario.usuarios_tipo_nombre} ${response.data.data.usuario.usuario_username}!`,
             type: 'success',
             duration: 0
           })
@@ -181,7 +181,7 @@
             lock: true,
             text: 'Cargando...',
             spinner: 'el-icon-loading',
-            background: 'rgba(0, 0, 0, 0.6)'
+            background: 'rgba(0, 0, 0, 0)'
           })
           localStorage.setItem('token_ivelk', response.data.data.token)
           localStorage.setItem('ud_ivelk', JSON.stringify(response.data.data.usuario))
