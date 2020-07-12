@@ -12,7 +12,7 @@
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item v-for="(not, index) in getAllSummary.alertaNiveles" :key="index">
-              <router-link :to="`/tienda/articulos/${not.articulos_id}`">Alertas de niveles {{(getgetAppConfig.config_inventario_minimo >= not.stock_cantidad) ? 'Bajos' : 'Altos'}} del artículo {{not.articulos_nombres}}</router-link>
+              <router-link :to="`/tienda/articulos/${not.articulos_id}`">Alertas de niveles {{(getgetAppConfig.config_inventario_minimo >= not.stock_cantidad) ? 'Bajos' : 'Altos'}} del artículo <b>{{not.articulos_nombres}}</b> </router-link>
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
