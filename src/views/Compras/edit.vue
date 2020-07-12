@@ -269,7 +269,6 @@
         </div>
       </div>
     </div>
-    {{getCompraID}}
   </div>
 </template>
 <script>
