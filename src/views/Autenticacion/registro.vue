@@ -143,7 +143,7 @@
     data () {
       return {
         registro: {
-          usuarios_tipo_id: 6,
+          usuarios_tipo_id: 3,
           usuario_username: null,
           usuario_password: null,
           usuario_email: null,

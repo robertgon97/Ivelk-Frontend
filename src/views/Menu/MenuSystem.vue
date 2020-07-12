@@ -9,7 +9,7 @@
           <h5 class="text-center mt-2 mx-2">{{titleApp || 'Sin título'}}</h5>
         </div>
       </router-link>
-      <hr />
+      <el-divider class="my-2 p-0">Menú</el-divider>
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-user"></i>
@@ -20,8 +20,11 @@
           <router-link tag="el-menu-item" exact to="/logout">Cerrar Sesión</router-link>
         </el-menu-item-group>
       </el-submenu>
-      <hr />
-      <el-submenu index="2">
+      <el-divider class="m-0 p-0"></el-divider>
+      <el-menu-item-group index="2">
+        <router-link tag="el-menu-item" exact to="/tienda"><i class="el-icon-s-home"></i> Inicio</router-link>
+      </el-menu-item-group>
+      <el-submenu v-if="userdata.usuarios_tipo_super_admin" index="3">
         <template slot="title">
           <i class="el-icon-user"></i>
           <span>Usuarios</span>
@@ -32,7 +35,7 @@
           <router-link tag="el-menu-item" exact to="/tienda/nivelesusuario/lista">Niveles de Usuario</router-link>
         </el-menu-item-group>
       </el-submenu>
-      <el-submenu index="3">
+      <el-submenu index="4">
         <template slot="title">
           <i class="el-icon-goods"></i>
           <span>Artículos</span>
@@ -48,7 +51,7 @@
           <el-menu-item>Categorias</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
-      <el-submenu index="4">
+      <el-submenu index="5">
         <template slot="title">
           <i class="el-icon-document-copy"></i>
           <span>Proveedores</span>
@@ -58,7 +61,7 @@
           <router-link tag="el-menu-item" exact to="/tienda/proveedores/crear">Añadir Proveedor</router-link>
         </el-menu-item-group>
       </el-submenu>
-      <el-submenu index="5">
+      <el-submenu index="6">
         <template slot="title">
           <i class="el-icon-sold-out"></i>
           <span>Compras</span>
@@ -68,7 +71,7 @@
           <router-link tag="el-menu-item" exact to="/tienda/compras/crear">Crear Orden</router-link>
         </el-menu-item-group>
       </el-submenu>
-      <el-submenu index="6">
+      <el-submenu index="7">
         <template slot="title">
           <i class="el-icon-shopping-cart-full"></i>
           <span>Ventas</span>
@@ -79,7 +82,7 @@
           <!-- <router-link tag="el-menu-item" exact to="/tienda/ventas/tipo">Tipos de Ventas</router-link> -->
         </el-menu-item-group>
       </el-submenu>
-      <el-submenu index="7">
+      <el-submenu v-if="userdata.usuarios_tipo_super_admin" index="8">
         <template slot="title">
           <i class="el-icon-coin"></i>
           <span>Balances</span>
@@ -91,7 +94,7 @@
           <router-link tag="el-menu-item" exact to="/tienda/balances/tipo">Tipos de Balances</router-link>
         </el-menu-item-group>
       </el-submenu>
-      <el-submenu index="99">
+      <el-submenu v-if="userdata.usuarios_tipo_super_admin" index="99">
         <template slot="title">
           <i class="el-icon-setting"></i>
           <span>Configuración</span>
@@ -110,10 +113,14 @@
 <script>
   import config from './../../config'
   export default {
+    created () {
+      this.userdata = JSON.parse(localStorage.getItem('ud_ivelk'))
+    },
     data () {
       return {
         uploading: false,
-        titleApp: config.frontend.titulo
+        titleApp: config.frontend.titulo,
+        userdata: null
       }
     }
   }
