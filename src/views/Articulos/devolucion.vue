@@ -51,22 +51,6 @@
           </div>
         </div>
       </el-card>
-      <el-dialog center class="overflow-auto" :visible.sync="verFormulario" title="Crear Devolución del Artículo" :before-close="handleClose" width="70%">
-        <form @submit.prevent="enviar(devolucion)">
-          <div class="container">
-            <div class="d-flex flex-wrap">
-              <div class="col-12 mb-3">
-                <label>Describa la razón del porqué la devolución de este artículo</label>
-                <el-input type="textarea" placeholder="Resumen de la razón de la devolución" v-model="devolucion.devolucion_razon" prefix-icon="el-icon-s-flag" maxlength="500" show-word-limit></el-input>
-              </div>
-            </div>
-          </div>
-        </form>
-        <span slot="footer" class="dialog-footer text-center">
-          <el-button class="btn-primario" @click="handleClose" :loading="uploading">Cancelar</el-button>
-          <el-button class="btn-primario" @click="enviar(devolucion)" :loading="uploading">{{ uploading ? 'Creando ...' : 'Crear' }}</el-button>
-        </span>
-      </el-dialog>
     </div>
     <div v-else class="d-flex my-5 justify-content-center">
       <div class="col-10 my-5">
@@ -76,6 +60,22 @@
         </div>
       </div>
     </div>
+    <el-dialog center class="overflow-auto" :visible.sync="verFormulario" title="Crear Devolución del Artículo" :before-close="handleClose" width="70%">
+      <form @submit.prevent="enviar(devolucion)">
+        <div class="container">
+          <div class="d-flex flex-wrap">
+            <div class="col-12 mb-3">
+              <label>Describa la razón del porqué la devolución de este artículo</label>
+              <el-input type="textarea" placeholder="Resumen de la razón de la devolución" v-model="devolucion.devolucion_razon" prefix-icon="el-icon-s-flag" maxlength="500" show-word-limit></el-input>
+            </div>
+          </div>
+        </div>
+      </form>
+      <span slot="footer" class="dialog-footer text-center">
+        <el-button class="btn-primario" @click="handleClose" :loading="uploading">Cancelar</el-button>
+        <el-button class="btn-primario" @click="enviar(devolucion)" :loading="uploading">{{ uploading ? 'Creando ...' : 'Crear' }}</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -157,7 +157,16 @@
             this.$store.dispatch('startupEscencial')
             this.$store.dispatch('startupAdmin')
             this.uploading = false
-            this.router.push('/tienda/articulos/devoluciones')
+            this.verFormulario = false
+            this.devolucion = {
+              devolucion_id: 0,
+              ventas_detalle_id: 0,
+              compras_detalles_id: 0,
+              devolucion_razon: null,
+              devolucion_date: Date.now(),
+              ventas_id: 0,
+              compras_id: 0
+            }
           })
           .catch(err => {
             if (err.response) {
