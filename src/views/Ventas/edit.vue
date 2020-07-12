@@ -275,7 +275,7 @@
   import moment from 'moment'
   export default {
     metaInfo: {
-      titleTemplate: '%s | Ver Orden de Compra'
+      titleTemplate: '%s | Ver Orden de Venta'
     },
     created() {
       this.find(this.$route.params.ID)
