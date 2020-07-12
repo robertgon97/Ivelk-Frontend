@@ -17,6 +17,12 @@
         </el-collapse-item>
         <el-collapse-item title="Cómo contactarnos?" name="2">
           <el-image class="w-100" src="/contacto.jpg" :preview-src-list="['/contacto.jpg']">
+            <div slot="error" class="image-slot">
+              <i class="el-icon-picture-outline"></i>
+            </div>
+            <div slot="placeholder" class="image-slot">
+              Cargando<span class="dot">...</span>
+            </div>
           </el-image>
         </el-collapse-item>
       </el-collapse>
