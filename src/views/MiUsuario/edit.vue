@@ -21,6 +21,16 @@
               <p><i class="el-icon-view"></i> <b>{{getMyUser.usuarios_tipo_nombre}}</b></p>
             </div>
           </el-card>
+          <el-card class="my-2">
+            <div slot="header" class="clearfix text-info d-flex flex-wrap justify-content-between aling-items-center">
+              <span> Preguntas de Seguridad</span>
+              <el-button type="text" class="m-0 p-0" @click="formularioregistro = true">+ Agregar</el-button>
+            </div>
+            <div v-for="o in getMyquestions" :key="o.usuario_pregunta_seguridad_id" class="d-flex flex-wrap justify-content-between">
+              <span>{{o.usuario_pregunta_seguridad_pregunta}}</span>
+              <el-button type="text" class="m-0 p-0" size="small" @click="delPregunta(o)">Eliminar</el-button>
+            </div>
+          </el-card>
         </el-col>
         <el-col class="col-md-8 mb-3">
           <el-card shadow="">
@@ -152,6 +162,25 @@
         </div>
       </el-card>
     </div>
+    <el-drawer title="Abonar referencia de pago" ref="drawerpago" :before-close="handleClose" :visible.sync="formularioregistro" direction="rtl" custom-class="demo-drawer overflow-auto">
+      <div class="Contenido p-2">
+        <form class="" @submit.prevent="AddPregunta(preguntas)">
+          <div class="col-12 mb-3">
+            <label>Escriba su pregunta de seguridad <small>(Requerido)</small></label>
+            <el-input placeholder="Pregunta de Seguridad" v-model="preguntas.usuario_pregunta_seguridad_pregunta" maxlength="50" show-word-limit />
+          </div>
+          <div class="col-12 mb-3">
+            <label>Ingrese la respuesta de seguridad <small>(Requerido)</small></label>
+            <el-input placeholder="Contraseña" type="password" autocomplete="password" show-password v-model="preguntas.usuario_pregunta_seguridad_respuesta" maxlength="50" show-word-limit />
+          </div>
+        </form>
+        <el-divider></el-divider>
+        <div class="d-flex flex-wrap justify-content-between" >
+          <el-button class="btn-primario" @click="formularioregistro = false">Cancelar</el-button>
+          <el-button class="btn-primario" :loading="uploading" @click="AddPregunta(preguntas)">{{ uploading ? 'Enviando ...' : 'Enviar' }}</el-button>
+        </div>
+      </div>
+    </el-drawer>
   </div>
 </template>
 <script>
@@ -162,7 +191,14 @@
     },
     data () {
       return {
-        uploading: false
+        uploading: false,
+        formularioregistro: false,
+        preguntas: {
+          usuario_pregunta_seguridad_id: 0,
+          usuario_id: 0,
+          usuario_pregunta_seguridad_pregunta: null,
+          usuario_pregunta_seguridad_respuesta: null
+        }
       }
     },
     methods: {
@@ -221,7 +257,112 @@
         .finally(() => {
           this.$store.dispatch('startupEscencial')
         })
-      }
+      },
+      AddPregunta (pregunta) {
+        this.uploading = true
+        this.axios({
+          method: `POST`,
+          url: `/user/questions`,
+          data: { ...pregunta }
+        })
+        .then(() => {
+          this.uploading = false
+          this.$notify({
+            title: 'Hecho!',
+            message: `Tu pregunta fue agregada exitosamente!`,
+            type: 'success',
+            duration: 5000
+          })
+          this.$store.dispatch('startupEscencial')
+          this.$store.dispatch('startupClient')
+          this.formularioregistro = false
+          this.preguntas = {
+            usuario_pregunta_seguridad_id: 0,
+            usuario_id: 0,
+            usuario_pregunta_seguridad_pregunta: null,
+            usuario_pregunta_seguridad_respuesta: null
+          }
+        })
+        .catch(err => {
+          if (err.response) {
+            this.$notify({
+              title: 'Error',
+              message: err.response.data.message,
+              type: 'info'
+            })
+          } else {
+            this.$notify({
+              title: 'Error',
+              message: 'No tienes conexión a internet. Verifica e inténtalo de nuevo',
+              type: 'error'
+            })
+          }
+          this.uploading = false
+          // console.clear()
+        })
+      },
+      delPregunta (pregunta) {
+        this.uploading = true
+        this.axios({
+          method: `DELETE`,
+          url: `/user/questions`,
+          data: { ...pregunta }
+        })
+        .then(() => {
+          this.uploading = false
+          this.$notify({
+            title: 'Hecho!',
+            message: `Tu pregunta fue eliminada exitosamente!`,
+            type: 'success',
+            duration: 5000
+          })
+          this.$store.dispatch('startupEscencial')
+          this.$store.dispatch('startupClient')
+          this.formularioregistro = false
+        })
+        .catch(err => {
+          if (err.response) {
+            this.$notify({
+              title: 'Error',
+              message: err.response.data.message,
+              type: 'info'
+            })
+          } else {
+            this.$notify({
+              title: 'Error',
+              message: 'No tienes conexión a internet. Verifica e inténtalo de nuevo',
+              type: 'error'
+            })
+          }
+          this.uploading = false
+          // console.clear()
+        })
+      },
+      handleClose(done) {
+        if (this.uploading) {
+          return
+        }
+        this.$confirm('Esto descartará los cambios.', 'Deseas cerrar el formulario?', {
+          confirmButtonText: 'SI',
+          cancelButtonText: 'NO',
+          type: 'warning'
+        })
+          .then(() => {
+            this.uploading = false
+            this.formularioregistro = false
+            done()
+            this.$message({
+              type: 'success',
+              message: 'Listo'
+            })
+          })
+          .catch(() => {
+            this.$message({
+              type: 'info',
+              message: 'Uff Estuvo Cerca'
+            })
+          })
+      },
     },
     computed: {
       getMyUser () {
@@ -229,6 +370,9 @@
       },
       getAllTypeDocumento () {
         return this.$store.getters.getAllTypeDocumento
+      },
+      getMyquestions () {
+        return this.$store.getters.getMyquestions
       },
       maxDate () {
         return moment().subtract(18, 'years').format('YYYY-MM-DD')

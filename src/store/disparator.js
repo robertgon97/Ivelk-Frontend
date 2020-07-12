@@ -2,6 +2,7 @@ export default {
   actions: {
     startupEscencial (context) {
       context.dispatch('getMyUser')
+      context.dispatch('getMyquestions')
       context.dispatch('getAllTypeUsers')
       context.dispatch('getAllTypeDocumento')
       context.dispatch('getAllArticulos', { articulos_id: null, articulos_nombres: null, articulo_tipo_nombre: null, articulo_marcas_nombre: null, articulo_medidas_nombre: null, articulo_tamano_nombre: null })
