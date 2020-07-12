@@ -10,7 +10,7 @@
     <el-card class="mb-3">
       <div slot="header" class="clearfix">
         <i class="el-icon-plus"></i>
-        <span> Agregar Medida</span>
+        <span> Agregar Tamaño</span>
       </div>
       <div class="contenido">
         <form @submit.prevent="addStatus">
@@ -36,7 +36,7 @@
           </div>
           <div class="row m-0 p-0 justify-content-center">
             <div class="col-md-5 mb-3 pt-4 text-center">
-              <el-button class="btn-primario mt-2" round @click="addStatus" v-loading.fullscreen.lock="uploading">Agregar Medida</el-button>
+              <el-button class="btn-primario mt-2" round @click="addStatus" v-loading.fullscreen.lock="uploading">Agregar Tamaño</el-button>
             </div>
           </div>
         </form>
@@ -51,7 +51,7 @@
     <el-card class="mb-3" v-else-if="getAllTamanos && getAllTamanos.length">
       <div slot="header" class="clearfix">
         <i class="el-icon-finished"></i>
-        <span> Lista de Medidas</span>
+        <span> Lista de Tamaños</span>
       </div>
       <div class="contenido">
         <el-table :data="getAllTamanos">
