@@ -32,6 +32,7 @@ export default {
       context.dispatch('getAllBalances')
       context.dispatch('getAllCuentasCobrar')
       context.dispatch('getAllCuentasPagar')
+      context.dispatch('getAllDevoluciones')
     }
   }
 }

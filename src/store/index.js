@@ -21,6 +21,7 @@ import proveedores from './proveedores'
 import ventastipos from './ventas.tipos'
 import compras from './compras'
 import balances from './balances'
+import devoluciones from './devoluciones'
 import disparator from './disparator'
 
 Vue.use(Vuex)
@@ -47,6 +48,7 @@ export default new Vuex.Store({
     ventastipos,
     compras,
     balances,
+    devoluciones,
     disparator
   }
 })
