@@ -170,6 +170,11 @@ const routes = [
         component: () => import('./../views/Articulos/medidas.vue')
       },
       {
+        path: 'articulos/tamanos',
+        name: 'Gestión de Tamaños',
+        component: () => import('./../views/Articulos/tamano.vue')
+      },
+      {
         path: 'articulos/:ID',
         name: 'Editar Artículo',
         component: () => import('./../views/Articulos/edit.vue')
