@@ -101,7 +101,7 @@
                 <p class="text-center text-info"><span>Acciones rápidas de la venta</span></p>
                 <div class="d-flex flex-wrap my-3 justify-content-center">
                   <el-button v-if="(getCompraID.compra.status_id == 3 || getCompraID.compra.status_id == 5) ? false : true" class="btn-primario m-2" plain @click="modificarEstatus = true" :loading="uploading">Cambiar Estatus</el-button>
-                  <el-popconfirm v-if="getCompraID.compra.status_id != 3" confirmButtonText='Sí' cancelButtonText='No, Gracias' icon="el-icon-info" iconColor="red" title="Estás seguro de anular esta orden?" @onConfirm="anular(getCompraID.compra.compras_id)">
+                  <el-popconfirm v-if="getCompraID.compra.status_id != 3" confirmButtonText='Sí' cancelButtonText='No, Gracias' icon="el-icon-info" iconColor="red" title="Estás seguro de anular esta orden?" @onConfirm="anular(getCompraID.compra)">
                     <el-button slot="reference" class="btn-primario m-2" plain :loading="uploading">Cancelar Orden</el-button>
                   </el-popconfirm>
                   <div v-if="((getCompraID.compra.status_id == 3 || getCompraID.compra.status_id == 4 || getCompraID.compra.status_id == 5) ? false : true)">
@@ -348,44 +348,8 @@
           })
       },
       anular (idventa) {
-        this.uploading = true
-        this.axios({
-          method: `PUT`,
-          url: `/orden/anular`,
-          data: {
-            ventas_id: idventa
-          }
-        })
-        .then(() => {
-          this.$notify({
-            title: 'Anulación Exitosa!',
-            message: `La Orden ${idventa} se anuló correctamente!`,
-            type: 'success',
-            duration: 0
-          })
-          this.$store.dispatch('startupEscencial')
-          this.$store.dispatch('startupAdmin')
-          this.find()
-          this.uploading = false
-        })
-        .catch(err => {
-          if (err.response) {
-            this.$notify({
-              title: 'Error',
-              message: 'Hubo un error del servidor',
-              type: 'info'
-            })
-            console.log (err.response.data.message)
-          } else {
-            this.$notify({
-              title: 'Error',
-              message: 'Hubo un problema con la conexión',
-              type: 'error'
-            })
-          }
-          this.uploading = false
-          // console.clear()
-        })
+        idventa.status_id = 3
+        this.modificar(idventa)
       },
       modificar (venta) {
         this.uploading = true
