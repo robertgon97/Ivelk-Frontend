@@ -164,6 +164,59 @@
             </div>
           </el-card>
         </el-col>
+        <el-col class="col-md-12 mb-3">
+          <el-card shadow="hover">
+            <div slot="header" class="clearfix text-primary">
+              <i class="el-icon-s-ticket"></i>
+              <span> Lista de Garantías Realizadas</span>
+            </div>
+            <el-table v-loading="uploading" :data="getVentaID.garantias" class="w-100" :default-sort = "{prop: 'articulos_id', order: 'descending'}">
+              <el-table-column sortable fixed prop="garantia_id" label="ID" width="80"></el-table-column>
+              <el-table-column width="100" sortable prop="garantia_valido" label="Valido">
+                <template slot-scope="props">
+                  <div>
+                    <span :class="(props.row.garantia_valido == 1) ? 'text-primary' : 'text-danger'">{{(props.row.garantia_valido == 1) ? 'Válido' : 'No Válido'}}</span>
+                  </div>
+                </template>
+              </el-table-column>
+              <el-table-column width="200" sortable prop="NombreItem" label="Nombre del Artículo"></el-table-column>
+              <el-table-column width="250" sortable prop="garantia_date" label="Inicio de la Garantía">
+                <template slot-scope="props">
+                  <div>
+                    {{parseFecha(props.row.garantia_date)}}
+                  </div>
+                </template>
+              </el-table-column>
+              <el-table-column width="250" sortable prop="garantia_expiracion" label="Fin de la Garantía">
+                <template slot-scope="props">
+                  <div>
+                    {{parseFecha(props.row.garantia_expiracion)}}
+                  </div>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-card>
+        </el-col>
+        <el-col class="col-md-12 mb-3" v-if="getVentaID.devoluciones.length">
+          <el-card shadow="hover">
+            <div slot="header" class="clearfix text-danger">
+              <i class="el-icon-s-release"></i>
+              <span> Lista de Devoluciones realizadas</span>
+            </div>
+            <el-table v-loading="uploading" :data="getVentaID.devoluciones" class="w-100" :default-sort = "{prop: 'articulos_id', order: 'descending'}">
+              <el-table-column sortable fixed prop="devolucion_id" label="ID" width="100"></el-table-column>
+              <el-table-column width="200" sortable prop="NombreItem" label="Nombre del Artículo"></el-table-column>
+              <el-table-column width="400" sortable prop="devolucion_razon" label="Razón"></el-table-column>
+              <el-table-column width="250" sortable prop="devolucion_date" label="Fecha de Devolución">
+                <template slot-scope="props">
+                  <div>
+                    {{parseFecha(props.row.devolucion_date)}}
+                  </div>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-card>
+        </el-col>
       </el-row>
       <el-drawer title="Cambio del Estatus de la Orden" ref="drawer" :before-close="handleClose" :visible.sync="modificarEstatus" direction="rtl" custom-class="demo-drawer overflow-auto">
         <div class="Contenido p-2">
