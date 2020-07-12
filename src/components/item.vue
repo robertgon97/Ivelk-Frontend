@@ -21,7 +21,7 @@
     </router-link>
     <div v-if="!admin" class="py-1 mx-2 d-flex flex-wrap justify-content-between align-items-center">
       <el-input-number v-model="cantidad" :min="1" :max="complete.stock_cantidad" size="mini"></el-input-number>
-      <el-button type="primary" icon="el-icon-goods" size="mini" round @click="agregarCarrito(complete)" :loading="uploading">Agregar</el-button>
+      <el-button :disabled="(complete.stock_cantidad < 1) ? true : false" type="primary" icon="el-icon-goods" size="mini" round @click="agregarCarrito(complete)" :loading="uploading">Agregar</el-button>
       <p class="text-center w-100 d-block m-0 p-0"><small>Cantidades Disponibles: {{complete.stock_cantidad}}</small></p>
     </div>
   </el-card>
@@ -106,11 +106,22 @@
           })
           .catch(err => {
             if (err.response) {
-              this.$notify({
-                title: 'Error',
-                message: `Primero debes iniciar sesión` || err.response.data.message,
-                type: 'info'
-              })
+              switch (err.response.status) {
+                case 400:
+                  this.$notify({
+                    title: 'Error',
+                    message: err.response.data.message,
+                    type: 'info'
+                  })
+                  break
+                default:
+                  this.$notify({
+                    title: 'Error',
+                    message: `Primero debes iniciar sesión` || err.response.data.message,
+                    type: 'info'
+                  })
+                  break
+              }
             } else {
               this.$notify({
                 title: 'Error',

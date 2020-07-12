@@ -15,11 +15,21 @@
       <el-card shadow="hover" class="container" id="print">
         <div slot="header" class="clearfix">
           <i class="el-icon-shopping-cart-full"></i>
-          <span> Orden de Compra</span>
+          <span> Factura</span>
           <el-divider direction="vertical"></el-divider>
           <span class="text-primary">N° {{getVentaID.venta.ventas_id}}</span>
           <el-divider direction="vertical"></el-divider>
           <span class="text-info">Estatus: {{getVentaID.venta.status_nombre}}</span>
+        </div>
+        <div class="info mb-2">
+          <p class="p-0 m-0"> Factura Emitida a nombre de: <b>{{getMyUser.personas_name}} {{getMyUser.personas_apellido}}</b></p>
+          <p class="p-0 m-0"> Razón Social: <b>{{getMyUser.tipo_documento_letra}}{{getMyUser.personas_documento_identidad}}</b></p>
+          <p class="p-0 m-0"> Dirección: <b>{{getMyUser.personas_direccion}}</b></p>
+          <p class="p-0 m-0"> Ciudad: <b>{{getMyUser.personas_ciudad}}</b></p>
+          <p class="p-0 m-0"> Estado: <b>{{getMyUser.personas_estado}}</b></p>
+          <p class="p-0 m-0"> País: <b>{{getMyUser.personas_pais}}</b></p>
+          <p class="p-0 m-0"> Teléfono: <b>{{getMyUser.personas_telefono}}</b></p>
+          <p class="p-0 m-0"> Artículos: </p>
         </div>
         <el-table :data="getVentaID.items" class="w-100" v-loading="uploading">
           <el-table-column fixed label="Imagen" width="150">
@@ -311,6 +321,9 @@
       },
       getAllBancos () {
         return this.$store.getters.getAllBancos
+      },
+      getMyUser () {
+        return this.$store.getters.getMyUser
       }
     }
   }
