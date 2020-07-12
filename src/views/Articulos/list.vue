@@ -7,58 +7,58 @@
       <el-breadcrumb-item :to="{ path: '/tienda/articulos/lista' }">Lista de Artículos</el-breadcrumb-item>
     </el-breadcrumb>
     <br />
+    <el-card shadow="hover">
+      <div slot="header" class="clearfix">
+        <i class="el-icon-s-operation"></i>
+        <span> Filtros</span>
+      </div>
+      <div>
+        <form @submit.prevent="searchapi" class="text items">
+          <div class="d-flex flex-wrap justify-content-around">
+            <div class="col-md-3 p-0 mb-2 mx-1">
+              <label>Nombre del Artículo</label>
+              <el-input placeholder="Nombre del Artículo" size="mini" type="text" v-model="search.articulos_nombres" clearable></el-input>
+            </div>
+            <div class="col-md-3 p-0 mb-2 mx-1">
+              <label>Categoría del Artículo</label>
+              <el-select class="w-100" placeholder="Categoría del Artículo" size="mini" v-model="search.articulo_tipo_nombre" clearable>
+                <el-option v-for="categoria of getAllCategoria" :key="categoria.articulo_tipo_id" :label="categoria.articulo_tipo_nombre" :value="categoria.articulo_tipo_nombre" />
+              </el-select>
+            </div>
+            <div class="col-md-3 p-0 mb-2 mx-1">
+              <label>Marca del Artículo</label>
+              <el-select class="w-100" placeholder="Marca del Artículo" size="mini" v-model="search.articulo_marcas_nombre" clearable>
+                <el-option v-for="marca of getAllMarcas" :key="marca.articulo_marcas_id" :label="marca.articulo_marcas_nombre" :value="marca.articulo_marcas_nombre" />
+              </el-select>
+            </div>
+            <div class="col-md-3 p-0 mb-2 mx-1">
+              <label>Medida del Artículo</label>
+              <el-select class="w-100" placeholder="Medida del Artículo" size="mini" v-model="search.articulo_medidas_nombre" clearable>
+                <el-option v-for="medida of getAllMedidas" :key="medida.articulo_medida_id" :label="medida.articulo_medidas_nombre" :value="medida.articulo_medidas_nombre" />
+              </el-select>
+            </div>
+            <div class="col-md-3 p-0 mb-2 mx-1">
+              <label>Tamaño del Artículo</label>
+              <el-select class="w-100" placeholder="Medida del Artículo" size="mini" v-model="search.articulo_tamano_nombre" clearable>
+                <el-option v-for="tamano of getAllTamanos" :key="tamano.articulo_tamano_id" :label="tamano.articulo_tamano_nombre" :value="tamano.articulo_tamano_nombre" />
+              </el-select>
+            </div>
+            <div class="col-md-3 p-0 mb-2 mx-1">
+              <label>ID de Artículo</label>
+              <el-input placeholder="123456789" size="mini" type="number" min="1" v-model="search.articulos_id" clearable></el-input>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center flex-wrap">
+            <el-button size="small" class="btn-primario" @click="searchapi">Buscar Artículo</el-button>
+          </div>
+        </form>
+      </div>
+    </el-card>
+    <br>
     <div v-if="getAllArticulos && getAllArticulos == 'Loading'">
       <el-button type="text" v-loading.fullscreen.lock="true"></el-button>
     </div>
     <div v-else-if="getAllArticulos && getAllArticulos.length">
-      <el-card shadow="hover">
-        <div slot="header" class="clearfix">
-          <i class="el-icon-s-operation"></i>
-          <span> Filtros</span>
-        </div>
-        <div>
-          <form @submit.prevent="searchapi" class="text items">
-            <div class="d-flex flex-wrap justify-content-around">
-              <div class="col-md-3 p-0 mb-2 mx-1">
-                <label>Nombre del Artículo</label>
-                <el-input placeholder="Nombre del Artículo" size="mini" type="text" v-model="search.articulos_nombres" clearable></el-input>
-              </div>
-              <div class="col-md-3 p-0 mb-2 mx-1">
-                <label>Categoría del Artículo</label>
-                <el-select class="w-100" placeholder="Categoría del Artículo" size="mini" v-model="search.articulo_tipo_nombre" clearable>
-                  <el-option v-for="categoria of getAllCategoria" :key="categoria.articulo_tipo_id" :label="categoria.articulo_tipo_nombre" :value="categoria.articulo_tipo_nombre" />
-                </el-select>
-              </div>
-              <div class="col-md-3 p-0 mb-2 mx-1">
-                <label>Marca del Artículo</label>
-                <el-select class="w-100" placeholder="Marca del Artículo" size="mini" v-model="search.articulo_marcas_nombre" clearable>
-                  <el-option v-for="marca of getAllMarcas" :key="marca.articulo_marcas_id" :label="marca.articulo_marcas_nombre" :value="marca.articulo_marcas_nombre" />
-                </el-select>
-              </div>
-              <div class="col-md-3 p-0 mb-2 mx-1">
-                <label>Medida del Artículo</label>
-                <el-select class="w-100" placeholder="Medida del Artículo" size="mini" v-model="search.articulo_medidas_nombre" clearable>
-                  <el-option v-for="medida of getAllMedidas" :key="medida.articulo_medida_id" :label="medida.articulo_medidas_nombre" :value="medida.articulo_medidas_nombre" />
-                </el-select>
-              </div>
-              <div class="col-md-3 p-0 mb-2 mx-1">
-                <label>Tamaño del Artículo</label>
-                <el-select class="w-100" placeholder="Medida del Artículo" size="mini" v-model="search.articulo_tamano_nombre" clearable>
-                  <el-option v-for="tamano of getAllTamanos" :key="tamano.articulo_tamano_id" :label="tamano.articulo_tamano_nombre" :value="tamano.articulo_tamano_nombre" />
-                </el-select>
-              </div>
-              <div class="col-md-3 p-0 mb-2 mx-1">
-                <label>ID de Artículo</label>
-                <el-input placeholder="123456789" size="mini" type="number" min="1" v-model="search.articulos_id" clearable></el-input>
-              </div>
-            </div>
-            <div class="d-flex justify-content-center flex-wrap">
-              <el-button size="small" class="btn-primario" @click="searchapi">Buscar Artículo</el-button>
-            </div>
-          </form>
-        </div>
-      </el-card>
-      <br>
       <el-card>
         <div slot="header" class="clearfix">
           <div slot="header" class="clearfix">
