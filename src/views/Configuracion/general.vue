@@ -19,6 +19,7 @@
             <p><i class="el-icon-d-arrow-left"></i> Inventario Mínimo: <b>{{getgetAppConfig.config_inventario_minimo}} Unidades</b></p>
             <p><i class="el-icon-d-arrow-right"></i> Inventario Máximo: <b>{{getgetAppConfig.config_inventario_maximo}} Unidades</b></p>
           </div>
+          <el-button class="btn-primario" @click="getSQL">Crear Respaldo de Base de Datos</el-button>
         </el-card>
       </el-col>
       <el-col class="col-md-8 mb-3">
@@ -84,6 +85,7 @@
   </div>
 </template>
 <script>
+  import fileDownload from 'js-file-download'
   export default {
     metaInfo: {
       titleTemplate: '%s | Configuración General'
@@ -144,6 +146,16 @@
         })
         .finally(() => {
           //
+        })
+      },
+      getSQL () {
+        this.axios({
+          method: `GET`,
+          url: `/respaldo/get`,
+          data: this.newconfig
+        })
+        .then((response) => {
+          fileDownload(response.data, 'ivelk.sql');
         })
       }
     },
