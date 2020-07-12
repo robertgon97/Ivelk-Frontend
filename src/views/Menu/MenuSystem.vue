@@ -22,7 +22,7 @@
       </el-submenu>
       <el-divider class="m-0 p-0"></el-divider>
       <el-menu-item-group index="2">
-        <router-link tag="el-menu-item" exact to="/tienda"><i class="el-icon-s-home"></i> Inicio</router-link>
+        <router-link tag="el-menu-item" exact to="/tienda"><i class="el-icon-house"></i> Inicio</router-link>
       </el-menu-item-group>
       <el-submenu v-if="userdata.usuarios_tipo_super_admin" index="3">
         <template slot="title">
