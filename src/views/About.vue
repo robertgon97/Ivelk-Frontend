@@ -15,6 +15,10 @@
             <p>Puedes descargar nuestro manual básico haciendo <a href="/ManualdeUsuarioIvelk-Cliente.pdf" download="Manual de Usuario">click aquí!</a></p>
           </el-card>
         </el-collapse-item>
+        <el-collapse-item title="Cómo contactarnos?" name="2">
+          <el-image class="w-100" src="/contacto.jpg" :preview-src-list="['/contacto.jpg']">
+          </el-image>
+        </el-collapse-item>
       </el-collapse>
     </div>
   </div>
