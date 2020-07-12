@@ -12,7 +12,7 @@
       </el-card>
     </div>
     <div v-else-if="getVentaID && getVentaID.venta.ventas_id">
-      <el-card shadow="hover" class="container" id="print">
+      <el-card shadow="hover" class="container">
         <div slot="header" class="clearfix">
           <i class="el-icon-shopping-cart-full"></i>
           <span> Factura</span>
@@ -128,8 +128,10 @@
           </el-tooltip>
         </div>
         <el-tooltip placement="top">
-          <div slot="content">Imprime esta vista si deseas algún comprobante no oficial</div>
-          <el-button class="btn-primario m-2" :loading="uploading" @click="print('print')">Imprimir Pantalla</el-button>
+          <div slot="content">Imprime esta vista si deseas algún comprobante</div>
+          <a :href="`http://localhost:4010/orden/ID/${getVentaID.venta.ventas_id}?pdf=true`" target="_BLANK">
+            <el-button class="btn-primario m-2" :loading="uploading">Imprimir comprobante</el-button>
+          </a>
         </el-tooltip>
       </div>
       <el-drawer title="Abonar referencia de pago" ref="drawerpago" :before-close="handleClose" :visible.sync="agregarPago" direction="rtl" custom-class="demo-drawer overflow-auto">
@@ -180,7 +182,7 @@
 </template>
 <script>
   import moment from 'moment'
-  import html2pdf from 'html2pdf.js'
+  import fileDownload from 'js-file-download'
   export default {
     metaInfo: {
       titleTemplate: '%s | Visualizar órden'
@@ -222,8 +224,14 @@
           return moment(value).format('LL hh:mm A')
         } else return 'Fecha Inválida'
       },
-      print (id = 'print') {
-        html2pdf().from(document.getElementById(id)).save('Comprobante.pdf')
+      print (id) {
+        this.axios({
+          method: `GET`,
+          url: `/orden/ID/${id}?pdf=true`
+        })
+        .then((response) => {
+          fileDownload(response.data, 'Comprobante.pdf');
+        })
       },
       handleClose(done) {
         if (this.uploading) {

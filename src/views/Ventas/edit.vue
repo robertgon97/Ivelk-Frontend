@@ -112,9 +112,12 @@
                   </div>
                   <el-tooltip placement="top">
                     <div slot="content">Aquí puedes obtener el comprobante de la venta para el usuario</div>
-                    <el-button class="btn-primario m-2" plain>
-                      <a class="text-white" href="" target="_BLANK">Imprimir Factura</a>
-                    </el-button>
+                    <el-tooltip placement="top">
+                      <div slot="content">Imprime esta vista si deseas algún comprobante</div>
+                      <a :href="`http://localhost:4010/orden/ID/${getVentaID.venta.ventas_id}?pdf=true`" target="_BLANK">
+                        <el-button class="btn-primario m-2" :loading="uploading">Imprimir comprobante</el-button>
+                      </a>
+                    </el-tooltip>
                   </el-tooltip>
                 </div>
               </div>
