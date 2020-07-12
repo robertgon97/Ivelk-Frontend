@@ -51,6 +51,22 @@
           </div>
         </div>
       </el-card>
+      <el-dialog center class="overflow-auto" :visible.sync="verFormulario" title="Crear Devolución del Artículo" :before-close="handleClose" width="70%">
+        <form @submit.prevent="enviar(devolucion)">
+          <div class="container">
+            <div class="d-flex flex-wrap">
+              <div class="col-12 mb-3">
+                <label>Describa la razón del porqué la devolución de este artículo</label>
+                <el-input type="textarea" placeholder="Resumen de la razón de la devolución" v-model="devolucion.devolucion_razon" prefix-icon="el-icon-s-flag" maxlength="500" show-word-limit></el-input>
+              </div>
+            </div>
+          </div>
+        </form>
+        <span slot="footer" class="dialog-footer text-center">
+          <el-button class="btn-primario" @click="handleClose" :loading="uploading">Cancelar</el-button>
+          <el-button class="btn-primario" @click="enviar(devolucion)" :loading="uploading">{{ uploading ? 'Creando ...' : 'Crear' }}</el-button>
+        </span>
+      </el-dialog>
     </div>
     <div v-else class="d-flex my-5 justify-content-center">
       <div class="col-10 my-5">
@@ -68,6 +84,24 @@
     metaInfo: {
       titleTemplate: '%s | Lista de Devoluciones'
     },
+    created () {
+      if (this.$route.query) {
+        if (this.$route.query.ventas_id) this.devolucion.ventas_id = this.$route.query.ventas_id, this.verFormulario = true
+        if (this.$route.query.ventas_detalle_id) this.devolucion.ventas_detalle_id = this.$route.query.ventas_detalle_id
+        if (this.$route.query.compras_id) this.devolucion.compras_id = this.$route.query.compras_id, this.verFormulario = true
+        if (this.$route.query.compras_detalles_id) this.devolucion.compras_detalles_id = this.$route.query.compras_detalles_id
+      }
+    },
+    watch: {
+      $route () {
+        if (this.$route.query) {
+          if (this.$route.query.ventas_id) this.devolucion.ventas_id = this.$route.query.ventas_id, this.verFormulario = true
+          if (this.$route.query.ventas_detalle_id) this.devolucion.ventas_detalle_id = this.$route.query.ventas_detalle_id
+          if (this.$route.query.compras_id) this.devolucion.compras_id = this.$route.query.compras_id, this.verFormulario = true
+          if (this.$route.query.compras_detalles_id) this.devolucion.compras_detalles_id = this.$route.query.compras_detalles_id
+        }
+      }
+    },
     data () {
       return {
         search: {
@@ -78,15 +112,20 @@
           articulo_medidas_nombre: null,
           articulo_tamano_nombre: null
         },
+        devolucion: {
+          devolucion_id: 0,
+          ventas_detalle_id: 0,
+          compras_detalles_id: 0,
+          devolucion_razon: null,
+          devolucion_date: Date.now(),
+          ventas_id: 0,
+          compras_id: 0
+        },
+        verFormulario: false,
         uploading: false
       }
     },
     methods: {
-      parseMoneda(value) {
-        var numer = parseFloat(value || 0)
-        if (numer) return numer.toLocaleString('es-VE') + ' Bs.'
-        else return 'Gratis'
-      },
       parseFecha(value) {
         if (value) {
           moment.locale('es-VE')
@@ -96,8 +135,8 @@
       searchapi () {
         this.$store.dispatch('getAllDevoluciones', this.search)
       },
-      eliminar (articulo) {
-        this.$confirm('Deseas eliminar este artículo?', 'Estás Seguro de esto?', {
+      enviar (devolucion) {
+        this.$confirm('Estás seguro de hacer esta devolución?. Esta acción no se puede deshacer.', 'Estás Seguro de confirmar esta devolución?', {
           confirmButtonText: 'OK',
           cancelButtonText: 'Cancelar',
           type: 'warning'
@@ -105,40 +144,39 @@
         .then(() => {
           this.uploading = true
           this.axios({
-            method: `DELETE`,
-            url: `/articulos`,
-            data: {
-              articulos_id: articulo.articulos_id,
-              stock_id: articulo.stock_id,
-              articulo_tipo_id: 1,
-              articulo_marcas_id: 1,
-              articulo_medida_id: 1,
-              articulo_tamano_id: 1,
-              articulos_nombres: 'aaaa',
-              articulos_descripcion: 'aaa',
-              articulos_imagen_principal: 'aaa',
-              stock_cantidad: 0,
-              stock_precio: 0
-            }
+            method: `POST`,
+            url: `/devoluciones`,
+            data: devolucion
           })
           .then(() => {
             this.$notify({
-              title: 'Eliinación Exitosa!',
-              message: `El articulo ${articulo.articulos_nombres} se eliminó correctamente!`,
+              title: 'Devolución exitosa!',
+              message: `La devolución se realizó de forma correcta en la base de datos`,
               type: 'success'
             })
             this.$store.dispatch('startupEscencial')
             this.$store.dispatch('startupAdmin')
             this.uploading = false
+            this.router.push('/tienda/articulos/devoluciones')
           })
           .catch(err => {
             if (err.response) {
-              this.$notify({
-                title: 'Error',
-                message: 'Agunos datos son requeridos o son inválidos',
-                type: 'info'
-              })
-              console.log (err.response.data.message)
+              switch (err.response.status) {
+                case 400:
+                  this.$notify({
+                    title: 'Error',
+                    message: err.response.data.message,
+                    type: 'info'
+                  })
+                  break
+                default:
+                  this.$notify({
+                    title: 'Error',
+                    message: `Tienes problemas con la conexión a internet. Intente nuevamente.`,
+                    type: 'info'
+                  })
+                  break
+              }
             } else {
               this.$notify({
                 title: 'Error',
@@ -156,6 +194,32 @@
             message: 'Uff... cancelado'
           })
         })
+      },
+      handleClose(done) {
+        if (this.uploading) {
+          return
+        }
+        this.$confirm('Esto descartará los cambios.', 'Deseas cerrar el formulario?', {
+          confirmButtonText: 'SI',
+          cancelButtonText: 'NO',
+          type: 'warning'
+        })
+          .then(() => {
+            this.$router.push(`/tienda/${this.devolucion.ventas_id ? `ventas/${this.devolucion.ventas_id}` : `compras/${this.devolucion.compras_id}`}`)
+            this.uploading = false
+            this.verFormulario = false
+            done()
+            this.$message({
+              type: 'success',
+              message: 'Listo'
+            })
+          })
+          .catch(() => {
+            this.$message({
+              type: 'info',
+              message: 'Uff Estuvo Cerca'
+            })
+          })
       }
     },
     computed: {
