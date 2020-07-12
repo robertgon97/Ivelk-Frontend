@@ -48,7 +48,7 @@
           <router-link tag="el-menu-item" exact to="/tienda/articulos/marcas">Marcas</router-link>
           <router-link tag="el-menu-item" exact to="/tienda/articulos/medidas">Medidas</router-link>
           <router-link tag="el-menu-item" exact to="/tienda/articulos/tamanos">Tamaños</router-link>
-          <el-menu-item>Categorias</el-menu-item>
+          <router-link tag="el-menu-item" exact to="/tienda/articulos/categoria">Categorias</router-link>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="5">
