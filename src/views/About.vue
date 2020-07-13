@@ -12,7 +12,11 @@
               <span class="text-primary"> Nuestra Respuesta:</span>
             </div>
             <p>Claro que sí!.</p>
-            <p>Puedes descargar nuestro manual básico haciendo <a href="/ManualdeUsuarioIvelk-Cliente.pdf" download="Manual de Usuario">click aquí!</a></p>
+            <p>Puedes descargar nuestro manual básico haciendo
+              <a v-if="usuario && usuario.usuarios_tipo_id == 1" href="/ManualdeUsuarioIvelk-Administrador.pdf" download="Manual de Usuario"> click aquí!</a>
+              <a v-else-if="usuario && usuario.usuarios_tipo_id == 2" href="/ManualdeUsuarioIvelk-Vendedor.pdf" download="Manual de Usuario"> click aquí!</a>
+              <a v-else href="ManualdeUsuarioIvelk-Cliente.pdf" download="Manual de Usuario"> Cliente click aquí!</a>
+            </p>
           </el-card>
         </el-collapse-item>
         <el-collapse-item title="Cómo contactarnos?" name="2">
@@ -29,3 +33,15 @@
     </div>
   </div>
 </template>
+<script>
+  export default {
+    created () {
+      this.usuario = JSON.parse(localStorage.getItem('ud_ivelk'))
+    },
+    data () {
+      return {
+        usuario: null
+      }
+    }
+  }
+</script>
