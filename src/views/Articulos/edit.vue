@@ -114,10 +114,50 @@
         </el-col>
         <el-col class="col-md-12 mb-3">
           <el-card>
-            {{getIDArticulo.proveedores}}
+            <div slot="header" class="text-primary d-flex flex-wrap justify-content-between">
+              <p class="m-0 p-0">
+                <i class="el-icon-s-cooperation text-dark"></i>
+                <span class="text-dark"> Proveedores Asociados</span>
+                <el-divider direction="vertical"></el-divider>
+                <span v-if="getIDArticulo.proveedores">{{getIDArticulo.proveedores.length}} Asociados</span>
+              </p>
+              <el-button type="text" @click="abrirAddProveedor = true">+ Agregar Proveedor</el-button>
+            </div>
+            <el-table :data="getIDArticulo.proveedores">
+              <el-table-column prop="articulo_proveedor_id" label="#" width="100"></el-table-column>
+              <el-table-column prop="proveedor_razon_social" label="Raxón Social" width="250"></el-table-column>
+              <el-table-column prop="proveedor_correo" label="Correo" width="200"></el-table-column>
+              <el-table-column prop="proveedor_telefono" label="Teléfono" width="150"></el-table-column>
+              <el-table-column prop="proveedor_direccion" label="Dirección" width="300"></el-table-column>
+              <el-table-column fixed="right" label="Eliminar" width="100">
+                <template slot-scope="scope">
+                  <el-button type="text" size="small" class="text-danger" @click="delProveedor(scope.row)">Eliminar</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
           </el-card>
         </el-col>
       </el-row>
+      <el-drawer title="Agregar Proveedor Asociado" ref="drawerpago" :visible.sync="abrirAddProveedor" direction="rtl" custom-class="demo-drawer overflow-auto">
+        <div class="contenido p-2">
+          <form @submit.prevent="AddProvedor(proveedor, getIDArticulo.articulo.articulos_id)">
+            <div class="col-12 mb-3">
+              <label>Proveedor</label>
+              <el-select class="w-100" placeholder="Proveedor" v-model="proveedor.proveedor_id" :loading="(getAllProveedores == 'Loading') ? true : false">
+                <el-option v-for="proveedor of getAllProveedores" :key="proveedor.proveedor_id" :label="proveedor.proveedor_razon_social" :value="proveedor.proveedor_id" />
+              </el-select>
+            </div>
+            <div class="col-12 mb-3">
+              <el-checkbox v-model="proveedor.disponibilidad" label="Disponible para el proveedor" border></el-checkbox>
+            </div>
+          </form>
+          <el-divider></el-divider>
+          <div class="d-flex flex-wrap justify-content-between" >
+            <el-button class="btn-primario" @click="abrirAddProveedor = false">Cancelar</el-button>
+            <el-button class="btn-primario" @click="AddProvedor(proveedor, getIDArticulo.articulo.articulos_id)" :loading="uploading">{{ uploading ? 'Enviando ...' : 'Enviar' }}</el-button>
+          </div>
+        </div>
+      </el-drawer>
     </div>
     <div v-else class="d-flex my-5 justify-content-center">
       <div class="col-10 my-5">
@@ -146,7 +186,12 @@
     data () {
       return {
         uploading: false,
-        formData: new FormData()
+        formData: new FormData(),
+        abrirAddProveedor: false,
+        proveedor: {
+          proveedor_id: null,
+          disponibilidad: true
+        }
       }
     },
     methods: {
@@ -247,6 +292,105 @@
           this.uploading = false
           // console.clear()
         })
+      },
+      AddProvedor(datos, id) {
+        datos.articulos_id = id
+        datos.disponibilidad = datos.disponibilidad ? 1 : 0
+        this.uploading = true
+        this.axios({
+          method: `POST`,
+          url: `/articulos/proveedor`,
+          data: datos
+        })
+        .then(() => {
+          this.$notify({
+            title: 'Actualización Exitosa!',
+            message: `Se añadió el proveedor correctamente!`,
+            type: 'success'
+          })
+          this.$store.dispatch('startupEscencial')
+          this.$store.dispatch('startupAdmin')
+          this.find()
+          this.uploading = false
+          this.proveedor.proveedor_id = null
+
+        })
+        .catch(err => {
+          if (err.response) {
+            this.$notify({
+              title: 'Error',
+              message: 'Agunos datos son requeridos o son inválidos',
+              type: 'info'
+            })
+            console.log (err.response.data.message)
+          } else {
+            this.$notify({
+              title: 'Error',
+              message: 'Agunos datos son requeridos o son inválidos',
+              type: 'error'
+            })
+          }
+          this.uploading = false
+          // console.clear()
+        })
+        .finally(() => {
+          this.abrirAddProveedor = false
+        })
+      },
+      delProveedor(value) {
+        this.$confirm('Deseas eliminar ese registro?', 'Estás Seguro de esto?', {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancelar',
+          type: 'warning'
+        })
+        .then(() => {
+          this.uploading = true
+          this.axios({
+            method: `DELETE`,
+            url: `/articulos/proveedor`,
+            data: value
+          })
+          .then(() => {
+            this.$notify({
+              title: 'Eliminación Exitosa!',
+              message: `Se eliminó el proveedor de la lista correctamente!`,
+              type: 'success'
+            })
+            this.$store.dispatch('startupEscencial')
+            this.$store.dispatch('startupAdmin')
+            this.find()
+            this.uploading = false
+            this.proveedor.proveedor_id = null
+
+          })
+          .catch(err => {
+            if (err.response) {
+              this.$notify({
+                title: 'Error',
+                message: 'Agunos datos son requeridos o son inválidos',
+                type: 'info'
+              })
+              console.log (err.response.data.message)
+            } else {
+              this.$notify({
+                title: 'Error',
+                message: 'Agunos datos son requeridos o son inválidos',
+                type: 'error'
+              })
+            }
+            this.uploading = false
+            // console.clear()
+          })
+          .finally(() => {
+            this.abrirAddProveedor = false
+          })
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: 'Uff... cancelado'
+          })
+        })
       }
     },
     computed: {
@@ -264,6 +408,9 @@
       },
       getAllTamanos () {
         return this.$store.getters.getAllTamanos
+      },
+      getAllProveedores () {
+        return this.$store.getters.getAllProveedores
       }
     }
   }
