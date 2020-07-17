@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0d0f2b"],{"69c5":function(e,n,t){"use strict";t.r(n);var l=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div")},a=[],c={metaInfo:{titleTemplate:"%s | Ver Balance"}},u=c,r=t("2877"),s=Object(r["a"])(u,l,a,!1,null,null,null);n["default"]=s.exports}}]);
+//# sourceMappingURL=chunk-2d0d0f2b.2d821afa.js.map
