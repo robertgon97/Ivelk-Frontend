@@ -85,11 +85,11 @@
               </div>
               <div class="row m-0 p-0 justify-content-between">
                 <div class="col-md-6 mb-3">
-                  <label>Cantidad Inicial</label>
+                  <label>Cantidad Actual</label>
                   <el-input type="number" placeholder="Cantidad del artículo" min="0" v-model="getIDArticulo.articulo.stock_cantidad" prefix-icon="el-icon-takeaway-box" clearable></el-input>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label>Precio Inicial</label>
+                  <label>Precio Actual</label>
                   <el-input type="number" placeholder="Precio del artículo" min="0" step="0.01" v-model="getIDArticulo.articulo.stock_precio" prefix-icon="el-icon-money" clearable></el-input>
                 </div>
               </div>
