@@ -21,4 +21,4 @@ jobs:
         TARGET_REPO: robertgon97/Ivelk-Frontend
         TARGET_BRANCH: gh-pages
         BUILD_SCRIPT: yarn && yarn build
-        BUILD_DIR: /
+        BUILD_DIR: /dist
