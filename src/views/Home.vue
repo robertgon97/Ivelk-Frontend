@@ -38,7 +38,7 @@
     <el-divider>Artículos Recién Agregados</el-divider>
     <div v-if="getAllArticulos && getAllArticulos != 'Loading' && getAllArticulos.length" class="d-flex overflow-auto py-5 bg-light">
       <div v-for="(articulo) in getAllArticulos.slice(0, 20)" :key="articulo.articulos_id" class="col-3">
-        <item-normal :to="`/articulo/${articulo.articulos_id}`"
+        <item-normal :to="`/articulos/${articulo.articulos_id}`"
         :title="articulo.articulos_nombres" :description="articulo.articulos_descripcion"
         :costo="articulo.stock_precio" :src="[articulo.articulos_imagen_principal || null]"
         :admin="false" :complete="articulo" />

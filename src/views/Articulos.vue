@@ -6,7 +6,7 @@
     </div>
     <div v-else-if="getAllArticulos && getAllArticulos.length" class="d-flex flex-wrap py-5 bg-light">
       <div v-for="(articulo) in getAllArticulos" :key="articulo.articulos_id" class="col-3 mb-3">
-        <item-normal :to="`/articulo/${articulo.articulos_id}`"
+        <item-normal :to="`/articulos/${articulo.articulos_id}`"
         :title="articulo.articulos_nombres" :description="articulo.articulos_descripcion"
         :costo="articulo.stock_precio" :src="[articulo.articulos_imagen_principal || false]"
         :admin="false" :complete="articulo" />
