@@ -1,7 +1,7 @@
 <template>
   <el-card :body-style="{ padding: '0px' }" shadow="hover">
     <router-link :to="to || '#'" class="text-decoration-none">
-      <el-image class="w-100" fit="cover" :src="src[0] || false" :preview-src-list="src">
+      <el-image style="height: 100px" fit="scale-down" :src="src[0] || false" :preview-src-list="src">
         <div slot="placeholder" class="image-slot">
           Cargando<span class="dot">...</span>
         </div>
@@ -158,6 +158,11 @@
   .image {
     width: 100%;
     display: block;
+  }
+
+  .el-image {
+    max-height: 300px;
+    min-height: 300px;
   }
 
   .clearfix:before,
