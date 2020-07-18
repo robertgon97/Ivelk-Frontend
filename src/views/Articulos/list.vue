@@ -64,6 +64,8 @@
           <div slot="header" class="clearfix">
             <i class="el-icon-finished"></i>
             <span> Lista de Artículos</span>
+            <el-divider direction="vertical"></el-divider>
+            <el-button class="btn-primario" icon="el-icon-sort-down" @click="print">Imprimir reporte</el-button>
           </div>
         </div>
         <div class="contenido">
@@ -106,6 +108,7 @@
   </div>
 </template>
 <script>
+  import fileDownload from 'js-file-download'
   export default {
     metaInfo: {
       titleTemplate: '%s | Lista de Artículos'
@@ -191,6 +194,16 @@
             type: 'info',
             message: 'Uff... cancelado'
           })
+        })
+      },
+      print () {
+        this.axios({
+          method: `GET`,
+          url: `/articulos?pdf=true`,
+          responseType: 'blob'
+        })
+        .then((response) => {
+          fileDownload(response.data, 'Articulos.pdf');
         })
       }
     },
