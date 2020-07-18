@@ -162,7 +162,7 @@
         </div>
       </el-card>
     </div>
-    <el-drawer title="Abonar referencia de pago" ref="drawerpago" :before-close="handleClose" :visible.sync="formularioregistro" direction="rtl" custom-class="demo-drawer overflow-auto">
+    <el-drawer title="Agregar Preguntas de Seguridad" ref="drawerpago" :before-close="handleClose" :visible.sync="formularioregistro" direction="rtl" custom-class="demo-drawer overflow-auto">
       <div class="Contenido p-2">
         <form class="" @submit.prevent="AddPregunta(preguntas)">
           <div class="col-12 mb-3">

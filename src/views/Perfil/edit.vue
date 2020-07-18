@@ -136,6 +136,7 @@
             </div>
           </div>
         </el-card>
+        <p class="text-center"><router-link to="/miuser">Gestionar Preguntas de Seguridad</router-link></p>
       </el-col>
     </el-row>
     <div v-else class="d-flex my-5 justify-content-center">
