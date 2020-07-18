@@ -14,6 +14,8 @@
       <div slot="header" class="clearfix">
         <i class="el-icon-finished"></i>
         <span> Lista de Proveedores</span>
+        <el-divider direction="vertical"></el-divider>
+        <el-button class="btn-primario" icon="el-icon-sort-down" @click="print">Imprimir reporte</el-button>
       </div>
       <div class="contenido">
         <el-table :data="getAllProveedores">
@@ -49,6 +51,7 @@
   </div>
 </template>
 <script>
+  import fileDownload from 'js-file-download'
   export default {
     metaInfo: {
       titleTemplate: '%s | Lista de Proveedores'
@@ -117,6 +120,16 @@
             type: 'info',
             message: 'Uff... cancelado'
           })
+        })
+      },
+      print () {
+        this.axios({
+          method: `GET`,
+          url: `/proveedores?pdf=true`,
+          responseType: 'blob'
+        })
+        .then((response) => {
+          fileDownload(response.data, 'Proveedores.pdf');
         })
       }
     },
