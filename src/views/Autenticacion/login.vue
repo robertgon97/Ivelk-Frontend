@@ -53,14 +53,7 @@
           this.$notify({
             title: 'Autenticación Exitosa!',
             message: `Bienvenido, ${response.data.data.usuario.usuarios_tipo_nombre} ${response.data.data.usuario.usuario_username}!`,
-            type: 'success',
-            duration: 0
-          })
-          const loading = this.$loading({
-            lock: true,
-            text: 'Cargando...',
-            spinner: 'el-icon-loading',
-            background: 'rgba(0, 0, 0, 0.6)'
+            type: 'success'
           })
           localStorage.setItem('token_ivelk', response.data.data.token)
           localStorage.setItem('ud_ivelk', JSON.stringify(response.data.data.usuario))
@@ -75,9 +68,8 @@
               this.$router.push(`/tienda`)
               break;
           }
-          location.reload()
           setTimeout(() => {
-            loading.close()
+            location.reload()
           }, 2000)
         })
         .catch(err => {
