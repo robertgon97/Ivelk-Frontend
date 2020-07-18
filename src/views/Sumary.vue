@@ -19,6 +19,15 @@
           </el-alert>
         </el-card>
       </el-col>
+      <el-col class="col-md-6 mb-3">
+        <el-card shadow="hover">
+          <highcharts :options="{
+            series: [{
+              data: [1,2,3] // sample data
+            }]
+          }"></highcharts>
+        </el-card>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -26,6 +35,9 @@
   export default {
     metaInfo: {
       titleTemplate: '%s | Resumen'
+    },
+    created () {
+      // https://github.com/highcharts/highcharts-vue
     },
     computed: {
       getAllSummary () {

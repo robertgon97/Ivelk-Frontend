@@ -10,6 +10,7 @@ import store from './store'
 import Meta from 'vue-meta'
 import VueAxios from 'vue-axios'
 import Axios from 'axios'
+import HighchartsVue from 'highcharts-vue'
 
 Vue.config.productionTip = false
 Axios.defaults.baseURL = Config.backend.url
@@ -24,6 +25,7 @@ Vue.use(Element, { Locale })
 Vue.use(Meta)
 Vue.use(Componentsglobals)
 Vue.use(VueAxios, Axios)
+Vue.use(HighchartsVue)
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
