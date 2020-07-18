@@ -13,7 +13,7 @@
       <el-row class="m-0 p-0" :gutter="20">
         <el-col class="col-md-7 mb-3">
           <el-carousel class="bg-light">
-            <el-carousel-item>
+            <el-carousel-item class="text-center">
               <el-image fit="scale-down" class="h-100" :src="getIDArticulo.articulo.articulos_imagen_principal || null">
                 <div slot="placeholder" class="image-slot">
                   Cargando<span class="dot">...</span>
@@ -25,7 +25,7 @@
                 </div>
               </el-image>
             </el-carousel-item>
-            <el-carousel-item v-for="img of getIDArticulo.imagenes" :key="img.imagen_id">
+            <el-carousel-item class="text-center" v-for="img of getIDArticulo.imagenes" :key="img.imagen_id">
               <el-image fit="scale-down" class="h-100" :src="img.imagen_url || null" :preview-src-list="[img.imagen_url || null]">
                 <div slot="placeholder" class="image-slot">
                   Cargando<span class="dot">...</span>
