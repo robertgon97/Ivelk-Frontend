@@ -12,7 +12,7 @@
         </div>
       </el-image>
       <div style="padding: 14px;">
-        <span>{{title}}</span>
+        <span>{{title | titulo}}</span>
         <div class="bottom clearfix">
           <time class="time">{{ description | limitador }}</time>
           <el-button type="text" class="button">{{parseMoneda(costo)}}</el-button>
@@ -142,6 +142,12 @@
         if (!value) return 'Sin Descripción'
         else {
           return value.substr(0, 30) + '...'
+        }
+      },
+      titulo: (value) => {
+        if (!value) return 'Sin Título'
+        else {
+          return value.substr(0, 20) + '...'
         }
       }
     }
