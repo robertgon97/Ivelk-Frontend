@@ -16,7 +16,7 @@
         </div>
         <div class="col-12 text-center">
           <p class="m-0 p-0">Quieres crear un nuevo usuario? <router-link to="/autenticador/registro">Regístrate!</router-link> </p>
-          <p class="m-0 p-0">recordastes tus datos? <router-link to="/autenticador/login">Regresa al login!</router-link> </p>
+          <p class="m-0 p-0">Recordastes tus datos? <router-link to="/autenticador/login">Regresa al login!</router-link> </p>
         </div>
       </div>
     </form>
