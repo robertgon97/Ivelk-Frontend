@@ -96,7 +96,12 @@ const routes = [
         path: 'registro',
         name: 'Registro de Usuario',
         component: () => import('./../views/Autenticacion/registro.vue')
-      }
+      },
+      {
+        path: 'recuperar',
+        name: 'Busqueda de Usuario',
+        component: () => import('./../views/Autenticacion/recuperar.vue')
+      },
     ],
     meta: {
       requiresAuth: false,
