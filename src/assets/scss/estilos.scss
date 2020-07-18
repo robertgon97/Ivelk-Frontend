@@ -8,6 +8,10 @@
   font-family: 'Roboto', sans-serif;
 }
 
+body {
+  overflow: auto !important;
+}
+
 ::-webkit-scrollbar {
   width: 9px;
   height: 9px;
