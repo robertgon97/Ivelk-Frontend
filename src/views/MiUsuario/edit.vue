@@ -302,40 +302,53 @@
         })
       },
       delPregunta (pregunta) {
-        this.uploading = true
-        this.axios({
-          method: `DELETE`,
-          url: `/user/questions`,
-          data: { ...pregunta }
+        this.$confirm('Deseas eliminar esta pregunta?', 'Estás Seguro de esto?', {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancelar',
+          type: 'warning'
         })
         .then(() => {
-          this.uploading = false
-          this.$notify({
-            title: 'Hecho!',
-            message: `Tu pregunta fue eliminada exitosamente!`,
-            type: 'success',
-            duration: 5000
+          this.uploading = true
+          this.axios({
+            method: `DELETE`,
+            url: `/user/questions`,
+            data: { ...pregunta }
           })
-          this.$store.dispatch('startupEscencial')
-          this.$store.dispatch('startupClient')
-          this.formularioregistro = false
+          .then(() => {
+            this.uploading = false
+            this.$notify({
+              title: 'Hecho!',
+              message: `Tu pregunta fue eliminada exitosamente!`,
+              type: 'success',
+              duration: 5000
+            })
+            this.$store.dispatch('startupEscencial')
+            this.$store.dispatch('startupClient')
+            this.formularioregistro = false
+          })
+          .catch(err => {
+            if (err.response) {
+              this.$notify({
+                title: 'Error',
+                message: err.response.data.message,
+                type: 'info'
+              })
+            } else {
+              this.$notify({
+                title: 'Error',
+                message: 'No tienes conexión a internet. Verifica e inténtalo de nuevo',
+                type: 'error'
+              })
+            }
+            this.uploading = false
+            // console.clear()
+          })
         })
-        .catch(err => {
-          if (err.response) {
-            this.$notify({
-              title: 'Error',
-              message: err.response.data.message,
-              type: 'info'
-            })
-          } else {
-            this.$notify({
-              title: 'Error',
-              message: 'No tienes conexión a internet. Verifica e inténtalo de nuevo',
-              type: 'error'
-            })
-          }
-          this.uploading = false
-          // console.clear()
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: 'Uff... cancelado'
+          })
         })
       },
       handleClose(done) {
