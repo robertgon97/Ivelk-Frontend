@@ -107,6 +107,7 @@
     },
     created () {
       this.search.articulos_nombres = this.$route.query.search
+      this.search.articulo_tipo_nombre = this.$route.query.categoria
       this.searchFunction()
     },
     data () {

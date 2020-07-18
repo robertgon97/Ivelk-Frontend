@@ -91,7 +91,7 @@
     <br />
     <el-divider>Nuestras Categorías</el-divider>
     <div v-if="getAllCategoria && getAllCategoria != 'Loading' && getAllCategoria.length" class="d-flex flex-wrap py-5 justify-content-center bg-light">
-      <div v-for="category of getAllCategoria" :key="category.articulo_tipo_id" class="border border-primary p-4 m-1 text-center">
+      <router-link v-for="category of getAllCategoria" :to="`search?categoria=${category.articulo_tipo_nombre}`" :key="category.articulo_tipo_id" class="border border-primary p-4 m-1 text-center">
         <el-image class="" fit="cover" :src="category.articulo_imagen || null">
           <div slot="placeholder" class="image-slot">
             Cargando<span class="dot">...</span>
@@ -104,7 +104,7 @@
         </el-image>
         <p class="p-0 m-0 text-primary"><small class="text-primary">{{category.articulo_tipo_nombre || 'Sin Nombre'}} </small></p>
         <!-- <p class="p-0 m-0"><small>{{category.articulo_tipo_descripcion || 'Sin Nombre'}} </small></p> -->
-      </div>
+      </router-link>
     </div>
     <div v-else-if="getAllCategoria == 'Loading'">
       <h3>Cargando</h3>
