@@ -12,8 +12,11 @@
     <el-card v-else-if="getAllUsers && getAllUsers.length">
       <div slot="header" class="clearfix">
         <form class="d-flex flex-wrap justify-content-between">
-          <div class="col-md-3 my-1">
+          <div class="col-md-3 text-center my-1">
             <el-button class="btn-primario" @click="$store.dispatch('getAllUsers')">Actualizar Lista</el-button>
+          </div>
+          <div class="col-md-3 text-center my-1">
+            <el-button class="btn-primario" @click="print">Imprimir reporte</el-button>
           </div>
         </form>
       </div>
@@ -50,6 +53,7 @@
   </div>
 </template>
 <script>
+  import fileDownload from 'js-file-download'
   export default {
     metaInfo: {
       titleTemplate: '%s | Lista de Usuarios'
@@ -57,6 +61,18 @@
     data () {
       return {
         search: null
+      }
+    },
+    methods: {
+      print () {
+        this.axios({
+          method: `GET`,
+          url: `/user?pdf=true`,
+          responseType: 'blob'
+        })
+        .then((response) => {
+          fileDownload(response.data, 'Usuarios.pdf');
+        })
       }
     },
     computed: {
