@@ -16,6 +16,8 @@
           <div slot="header" class="clearfix">
             <i class="el-icon-finished"></i>
             <span> Lista de Garantías</span>
+            <el-divider direction="vertical"></el-divider>
+            <el-button class="btn-primario" icon="el-icon-sort-down" @click="print">Imprimir reporte</el-button>
           </div>
         </div>
         <div class="contenido">
@@ -77,6 +79,7 @@
 </template>
 <script>
   import moment from 'moment'
+  import fileDownload from 'js-file-download'
   export default {
     metaInfo: {
       titleTemplate: '%s | Lista de Garantías'
@@ -168,6 +171,16 @@
             type: 'info',
             message: 'Uff... cancelado'
           })
+        })
+      },
+      print () {
+        this.axios({
+          method: `GET`,
+          url: `/garantias?pdf=true`,
+          responseType: 'blob'
+        })
+        .then((response) => {
+          fileDownload(response.data, 'Garantías.pdf');
         })
       }
     },
