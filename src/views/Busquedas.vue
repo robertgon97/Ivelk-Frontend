@@ -57,30 +57,43 @@
       <el-col class="col-md-8 mb-3">
         <h2>Resultados para: <small>{{$route.query.search}}</small></h2>
         <el-divider></el-divider>
-        <router-link v-for="item of resultados" tag="a" :key="item.articulos_id" :to="`/articulos/${item.articulos_id}`" class="d-block my-2 text-decoration-none">
-          <el-card shadow="hover">
-            <div class="media">
-              <el-image style="width: 60px;height: 60px" fit="contain" class="align-self-center mr-3" :src="item.articulos_imagen_principal || false">
-                <div slot="placeholder" class="image-slot">
-                  Cargando<span class="dot">...</span>
-                </div>
-                <div slot="error" class="image-slot">
-                  <div class="p-5 text-center">
-                    <h1 class="m-0 p-0"><i class="el-icon-picture-outline"></i></h1>
+        <div v-if="resultados && resultados == 'Loading'">
+          <el-button type="text" v-loading.fullscreen.lock="true"></el-button>
+        </div>
+        <div v-else-if="resultados && resultados.length">
+          <router-link v-for="item of resultados" tag="a" :key="item.articulos_id" :to="`/articulos/${item.articulos_id}`" class="d-block my-2 text-decoration-none">
+            <el-card shadow="hover">
+              <div class="media">
+                <el-image style="width: 60px;height: 60px" fit="contain" class="align-self-center mr-3" :src="item.articulos_imagen_principal || false">
+                  <div slot="placeholder" class="image-slot">
+                    Cargando<span class="dot">...</span>
                   </div>
+                  <div slot="error" class="image-slot">
+                    <div class="p-5 text-center">
+                      <h1 class="m-0 p-0"><i class="el-icon-picture-outline"></i></h1>
+                    </div>
+                  </div>
+                </el-image>
+                <div class="media-body">
+                  <h5 class="mt-0">{{item.articulos_nombres}}</h5>
+                  <p class="m-0 p-0">{{item.articulos_descripcion}}</p>
+                  <span class="badge badge-primary mx-2">{{item.articulo_tipo_nombre}}</span>
+                  <span class="badge badge-primary mx-2">{{item.articulo_marcas_nombre}}</span>
+                  <span class="badge badge-primary mx-2">{{item.articulo_medidas_nombre}}</span>
+                  <span class="badge badge-primary mx-2">{{item.articulo_tamano_nombre}}</span>
                 </div>
-              </el-image>
-              <div class="media-body">
-                <h5 class="mt-0">{{item.articulos_nombres}}</h5>
-                <p class="m-0 p-0">{{item.articulos_descripcion}}</p>
-                <span class="badge badge-primary mx-2">{{item.articulo_tipo_nombre}}</span>
-                <span class="badge badge-primary mx-2">{{item.articulo_marcas_nombre}}</span>
-                <span class="badge badge-primary mx-2">{{item.articulo_medidas_nombre}}</span>
-                <span class="badge badge-primary mx-2">{{item.articulo_tamano_nombre}}</span>
               </div>
+            </el-card>
+          </router-link>
+        </div>
+        <div v-else class="d-flex my-5 justify-content-center">
+          <div class="col-10 my-5">
+            <h1 class="display-3 text-center"><i class="el-icon-s-custom"></i></h1>
+            <div class="text-center">
+              <h3>Este artículo no existe</h3>
             </div>
-          </el-card>
-        </router-link>
+          </div>
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -119,6 +132,7 @@
       searchFunction() {
         this.uploading = true
         this.$route.query.search = this.search.articulos_nombres
+        this.resultados = 'Loading'
         var query = this.search
         axios({
           method: `GET`,
@@ -172,6 +186,7 @@
             })
           }
           this.uploading = false
+          this.resultados = []
           // console.clear()
         })
       }
