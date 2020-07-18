@@ -3,7 +3,7 @@
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">Inicio</el-breadcrumb-item>
       <el-breadcrumb-item :to="{ path: '/articulos' }">Artículos</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ path: `/tienda/articulos/${$route.params.ID}` }">Artículo #{{$route.params.ID}}</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: `/articulos/${$route.params.ID}` }">Artículo #{{$route.params.ID}}</el-breadcrumb-item>
     </el-breadcrumb>
     <br />
     <div v-if="getIDArticulo && getIDArticulo == 'Loading'">
