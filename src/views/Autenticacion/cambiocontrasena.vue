@@ -50,6 +50,7 @@
       return {
         usuario_id: null,
         questions: [],
+        uploading: false,
         cambio: {
           usuario_pregunta_seguridad_id: null,
           usuario_pregunta_seguridad_respuesta: null,
@@ -101,7 +102,41 @@
         })
       },
       changuePassword() {
-        //
+        if (!this.usuario_id) return false
+        this.cambio.usuario_id = this.usuario_id
+        this.uploading = true
+        this.axios({
+          method: `PUT`,
+          url: `/user/restorepassword`,
+          data: this.cambio
+        })
+        .then(() => {
+          this.uploading = false
+          this.$notify({
+            title: 'Modificación Exitosa!',
+            message: `La contraseña de este usuario se modificó exitosamente!`,
+            type: 'success',
+            duration: 0
+          })
+          this.$router.push(`/autenticador`)
+        })
+        .catch(err => {
+          if (err.response) {
+            this.$notify({
+              title: 'Error',
+              message: err.response.data.message,
+              type: 'info'
+            })
+          } else {
+            this.$notify({
+              title: 'Error',
+              message: 'No tienes conexión a internet. Verifica e inténtalo de nuevo',
+              type: 'error'
+            })
+          }
+          this.uploading = false
+          // console.clear()
+        })
       }
     }
   }
