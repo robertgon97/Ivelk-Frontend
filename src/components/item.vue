@@ -14,7 +14,7 @@
       <div style="padding: 14px;">
         <span>{{title}}</span>
         <div class="bottom clearfix">
-          <time class="time">{{ description }}</time>
+          <time class="time">{{ description | limitador }}</time>
           <el-button type="text" class="button">{{parseMoneda(costo)}}</el-button>
         </div>
       </div>
@@ -135,6 +135,14 @@
           .finally(() => {
             this.$store.dispatch('getCarritoAll')
           })
+      }
+    },
+    filters: {
+      limitador: (value) => {
+        if (!value) return 'Sin Descripción'
+        else {
+          return value.substr(0, 30) + '...'
+        }
       }
     }
   }
