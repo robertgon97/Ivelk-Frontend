@@ -102,6 +102,11 @@ const routes = [
         name: 'Busqueda de Usuario',
         component: () => import('./../views/Autenticacion/recuperar.vue')
       },
+      {
+        path: 'cambiocontrasena',
+        name: 'Restablecimiento de Contraseña',
+        component: () => import('./../views/Autenticacion/cambiocontrasena.vue')
+      }
     ],
     meta: {
       requiresAuth: false,
