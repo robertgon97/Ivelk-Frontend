@@ -65,9 +65,11 @@
     <div>
       <h1 class="display-4 text-center">Bienvenido a {{title}}! </h1>
       <div class="px-5">
-        <el-input placeholder="Buscador de Artículos" v-model="search" clearable>
-          <i slot="prefix" class="el-input__icon el-icon-search"></i>
-        </el-input>
+        <form action="search" method="get">
+          <el-input placeholder="Buscador de Artículos" name="search" v-model="search" clearable>
+            <i slot="prefix" class="el-input__icon el-icon-search"></i>
+          </el-input>
+        </form>
       </div>
     </div>
     <br />
