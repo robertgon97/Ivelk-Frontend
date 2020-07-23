@@ -27,11 +27,12 @@
       <el-submenu v-if="userdata.usuarios_tipo_super_admin" index="3">
         <template slot="title">
           <i class="el-icon-user"></i>
-          <span>Usuarios</span>
+          <span>Usuarios y Clientes</span>
         </template>
         <el-menu-item-group>
-          <router-link tag="el-menu-item" exact to="/tienda/usuarios/lista">Lista de Usuarios</router-link>
-          <router-link tag="el-menu-item" exact to="/tienda/usuarios/crear">Crear Usuarios</router-link>
+          <router-link tag="el-menu-item" exact to="/tienda/usuarios/lista">Lista</router-link>
+          <router-link tag="el-menu-item" exact to="/tienda/usuarios/crear">Crear Usuario</router-link>
+          <router-link tag="el-menu-item" exact to="/tienda/usuarios/crearclientes">Crear Cliente</router-link>
           <router-link tag="el-menu-item" exact to="/tienda/nivelesusuario/lista">Niveles de Usuario</router-link>
         </el-menu-item-group>
       </el-submenu>

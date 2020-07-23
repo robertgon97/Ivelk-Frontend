@@ -143,6 +143,11 @@ const routes = [
         component: () => import('./../views/Usuarios/add.vue')
       },
       {
+        path: 'usuarios/crearclientes',
+        name: 'Nuevo Cliente',
+        component: () => import('./../views/Usuarios/addcliente.vue')
+      },
+      {
         path: 'usuarios/:ID',
         name: 'Editar Usuario',
         component: () => import('./../views/Usuarios/add.vue')
