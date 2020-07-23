@@ -3,7 +3,7 @@
     <form @submit.prevent="register">
       <div class="row m-0 p-0 justify-content-center">
         <div class="col-md-12 mb-3 text-center">
-          <h3>Registro de Usuario</h3>
+          <h3>Registro de Cliente</h3>
         </div>
       </div>
       <br />
@@ -73,7 +73,7 @@
           </el-input>
         </div>
         <div class="col-12 mt-3">
-          <h5><small>Dirección del usuario</small></h5>
+          <h5><small>Dirección del cliente</small></h5>
         </div>
         <div class="col-12 col-md-6 mb-3">
           <label>Dirección</label>
