@@ -86,6 +86,7 @@
 </template>
 <script>
   import fileDownload from 'js-file-download'
+  import moment from 'moment'
   export default {
     metaInfo: {
       titleTemplate: '%s | Configuración General'
@@ -155,7 +156,7 @@
           data: this.newconfig
         })
         .then((response) => {
-          fileDownload(response.data, 'ivelk.sql');
+          fileDownload(response.data, `ivelk_db_${moment().format('YYYY-MM-DD_hh:mm:ss')}.sql`);
         })
       }
     },
