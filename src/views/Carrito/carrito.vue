@@ -52,8 +52,17 @@
           <div class="col-md-5 mb-3">
             <label class="w-100">Seleccione su Método de Pago</label>
             <el-select v-model="orden.banco_id" class="w-100" clearable placeholder="Seleccione el banco">
-              <el-option v-for="banco in getAllBancos" :key="banco.banco_id" :label="banco.bancos_nombre" :value="banco.banco_id" />
+              <el-option v-for="banco in getAllBancos" :key="banco.banco_id" :label="banco.bancos_nombre" :value="banco.banco_id" :disabled="false"/>
             </el-select>
+            <div v-if="orden.banco_id && orden.banco_id > 0" class="col-12 mb-3">
+              <b>
+                <span class="d-block text-info">{{returnBanco(getAllBancos, orden.banco_id).bancos_nombre}} </span>
+                <span class="d-block text-info">{{returnBanco(getAllBancos, orden.banco_id).bancos_dni}} </span>
+                <span class="d-block text-info">{{returnBanco(getAllBancos, orden.banco_id).bancos_tipo_cuenta}} </span>
+                <span class="d-block text-info">{{returnBanco(getAllBancos, orden.banco_id).bancos_cuenta}} </span>
+                <span class="d-block text-info">{{returnBanco(getAllBancos, orden.banco_id).bancos_telefono}} </span>
+              </b>
+            </div>
           </div>
           <div class="col-md-5 mb-3">
             <div class="d-flex flex-wrap">
@@ -206,6 +215,13 @@
             this.$store.dispatch('startupAdmin')
           }
         })
+      },
+      returnBanco(bancos, idbanco) {
+        var banco = null
+        bancos.forEach(banca => {
+          if(banca.banco_id == idbanco) banco = banca
+        })
+        return banco
       }
     },
     computed: {
