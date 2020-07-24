@@ -91,7 +91,12 @@
               <i slot="prefix" class="el-input__icon el-icon-phone-outline"></i>
             </el-input>
           </div>
-          <div class="col-md-6 mb-3"></div>
+          <div class="col-md-6 mb-3">
+            <label>Artículos que Vende</label>
+            <el-select class="w-100" placeholder="Seleccionar Varios.." multiple v-model="proveedores.articulos" :loading="(getAllArticulos == 'Loading') ? true : false">
+              <el-option v-for="articulo of getAllArticulos" :key="articulo.articulos_id" :label="articulo.articulos_nombres" :value="articulo.articulos_id" />
+            </el-select>
+          </div>
         </div>
         <hr />
         <div class="row m-0 p-0 justify-content-center">
@@ -120,7 +125,8 @@
           proveedor_estado: null,
           proveedor_pais: 'Venezuela',
           proveedor_correo: null,
-          proveedor_telefono: null
+          proveedor_telefono: null,
+          articulos: []
         },
         uploading: false
       }
@@ -167,6 +173,9 @@
     computed: {
       getAllTypeDocumento () {
         return this.$store.getters.getAllTypeDocumento
+      },
+      getAllArticulos () {
+        return this.$store.getters.getAllArticulos
       }
     }
   }

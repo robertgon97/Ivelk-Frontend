@@ -62,6 +62,12 @@
             <label for="articulos_imagen_principal">Imagen</label>
             <input class="form-control" type="file" name="articulos_imagen_principal" id="articulos_imagen_principal" placeholder="Selecciona tu imagen" accept="image/*" @change="updateImage" />
           </div>
+          <div class="col-md-6 mb-3">
+            <label>Proveedores Asociados</label>
+            <el-select class="w-100" placeholder="Seleccionar Varios.." multiple v-model="article.proveedores" :loading="(getAllProveedores == 'Loading') ? true : false">
+              <el-option v-for="articulo of getAllProveedores" :key="articulo.proveedor_id" :label="articulo.proveedor_razon_social" :value="articulo.proveedor_id" />
+            </el-select>
+          </div>
         </div>
         <hr />
         <div class="row m-0 p-0 justify-content-center">
@@ -90,7 +96,8 @@
           articulos_descripcion: null,
           articulos_imagen_principal: null,
           stock_cantidad: 0,
-          stock_precio: 0
+          stock_precio: 0,
+          proveedores: []
         },
         uploading: false,
         formData: new FormData()
@@ -117,6 +124,8 @@
         this.formData.append('stock_cantidad', this.article.stock_cantidad)
         this.formData.delete('stock_precio')
         this.formData.append('stock_precio', this.article.stock_precio)
+        this.formData.delete('proveedores')
+        this.formData.append('proveedores', this.article.proveedores)
         this.axios({
           method: `POST`,
           url: `/articulos`,
@@ -185,6 +194,9 @@
       },
       getAllTamanos () {
         return this.$store.getters.getAllTamanos
+      },
+      getAllProveedores () {
+        return this.$store.getters.getAllProveedores
       }
     }
   }
