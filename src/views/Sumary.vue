@@ -5,7 +5,7 @@
       <el-breadcrumb-item :to="{ path: '/tienda' }">Administración Tienda</el-breadcrumb-item>
     </el-breadcrumb>
     <br />
-    <el-row :gutter="20">
+    <el-row :gutter="20" v-if="getAllSummary && getAllSummary != 'Loading'">
       <el-col class="col-md-6 mb-3">
         <el-card shadow="hover">
           <div slot="header" class="clearfix text-primary">
