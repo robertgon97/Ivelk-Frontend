@@ -4,7 +4,8 @@ import config from './../config'
 export default {
   state: {
     AllArticulos: null,
-    IDArticulo: null
+    IDArticulo: null,
+    ArticulosProveedores: null
   },
   mutations: {
     setAllArticulos: (state, value) => {
@@ -12,6 +13,9 @@ export default {
     },
     setIDArticulo: (state, value) => {
       state.IDArticulo = value
+    },
+    setArticulosProveedores: (state, value) => {
+      state.ArticulosProveedores = value
     }
   },
   getters: {
@@ -20,6 +24,9 @@ export default {
     },
     getIDArticulo: (state) => {
       return state.IDArticulo
+    },
+    getArticulosProveedores: (state) => {
+      return state.ArticulosProveedores
     }
   },
   actions: {
@@ -76,6 +83,37 @@ export default {
       .then(res => {
         context.commit('setgetAppConfig', res.data.appData)
         context.commit('setIDArticulo', res.data.data)
+      })
+      .catch(error => {
+        if (error.response) {
+          switch (error.response.status) {
+            default:
+              // eslint-disable-next-line
+              console.log(error.response.data)
+              break
+          }
+        } else {
+          // eslint-disable-next-line
+          console.log(error)
+          // eslint-disable-next-line
+          console.clear()
+        }
+      })
+    },
+    getArticulosProveedores (context, ID) {
+      context.commit('setArticulosProveedores', 'Loading')
+      axios({
+        method: `GET`,
+        baseURL: config.backend.url,
+        url: `/articulos/proveedor/${ID.value}`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.token_ivelk ? `Bearer ${localStorage.token_ivelk}` : ''
+        }
+      })
+      .then(res => {
+        context.commit('setgetAppConfig', res.data.appData)
+        context.commit('setArticulosProveedores', res.data.data)
       })
       .catch(error => {
         if (error.response) {

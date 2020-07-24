@@ -18,10 +18,10 @@
           </div>
           <div class="col-md-6 mb-3">
             <label>Artículo</label>
-            <el-select class="w-100" placeholder="Nombre del Artículo" v-model="item.stock_id" :loading="(getAllArticulos == 'Loading') ? true : false">
-              <el-option v-for="articulo of getAllArticulos" :key="articulo.stock_id" :label="articulo.articulos_nombres" :value="articulo.stock_id" />
+            <el-select class="w-100" placeholder="Nombre del Artículo" v-model="item.stock_id" :loading="(getArticulosProveedores == 'Loading') ? true : false">
+              <el-option v-for="articulo of getArticulosProveedores" :key="articulo.stock_id" :label="articulo.articulos_nombres" :value="articulo.stock_id" />
             </el-select>
-            <!-- {{getAllArticulos}} -->
+            <!-- {{getArticulosProveedores}} -->
           </div>
         </div>
         <div class="row m-0 p-0 justify-content-center">
@@ -138,9 +138,14 @@
         uploading: false
       }
     },
+    watch: {
+      'item.proveedor_id'() {
+        this.$store.dispatch('getArticulosProveedores', { value: this.item.proveedor_id })
+      }
+    },
     methods: {
       AddToCart (item) {
-        this.getAllArticulos.forEach(element => {
+        this.getArticulosProveedores.forEach(element => {
           if (element.stock_id == item.stock_id) {
             var elemento = {
               compras_detalles_id: 0,
@@ -236,8 +241,8 @@
       }
     },
     computed: {
-      getAllArticulos () {
-        return this.$store.getters.getAllArticulos
+      getArticulosProveedores () {
+        return this.$store.getters.getArticulosProveedores
       },
       getAllProveedores () {
         return this.$store.getters.getAllProveedores
