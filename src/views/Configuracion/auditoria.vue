@@ -60,7 +60,7 @@
             <el-divider direction="vertical"></el-divider>
             <el-button class="btn-primario" icon="el-icon-sort-down" @click="print">Imprimir reporte</el-button>
           </div>
-          <el-table class="h-100 w-100" :data="getAllAuditoria" >
+          <el-table class="h-100 w-100" :data="getAllAuditoria.slice(0, 100)" >
             <el-table-column fixed prop="auditoria_id" label="ID" width="50"></el-table-column>
             <el-table-column prop="auditoria_date" label="Fecha" width="220">
               <template slot-scope="props">
