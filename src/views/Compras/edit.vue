@@ -50,18 +50,13 @@
                 <div><span class="text-primary">{{parseMoneda(getCompraID.compra.compras_total)}}</span></div>
               </div>
             </div>
-            <div class="clearfix mt-3 text-center text-primary">
-              <el-button class="btn-primario" icon="el-icon-printer" :loading="uploading">
-                Imprimir
-              </el-button>
-            </div>
           </el-card>
         </el-col>
         <el-col class="col-md-9 mb-3">
           <el-card shadow="hover">
             <div slot="header" class="clearfix text-success">
               <i class="el-icon-shopping-bag-1"></i>
-              <span> Contenido de la Venta</span>
+              <span> Contenido de la Compra</span>
             </div>
             <div class="contenido">
               <el-table :data="getCompraID.items" class="h-100 w-100" v-loading="uploading">
@@ -98,7 +93,7 @@
               </el-table>
               <br>
               <div class="clearfix">
-                <p class="text-center text-info"><span>Acciones rápidas de la venta</span></p>
+                <p class="text-center text-info"><span>Acciones rápidas de la compra</span></p>
                 <div class="d-flex flex-wrap my-3 justify-content-center">
                   <el-button v-if="(getCompraID.compra.status_id == 3 || getCompraID.compra.status_id == 5) ? false : true" class="btn-primario m-2" plain @click="modificarEstatus = true" :loading="uploading">Cambiar Estatus</el-button>
                   <el-popconfirm v-if="getCompraID.compra.status_id != 3" confirmButtonText='Sí' cancelButtonText='No, Gracias' icon="el-icon-info" iconColor="red" title="Estás seguro de anular esta orden?" @onConfirm="anular(getCompraID.compra)">
@@ -106,14 +101,14 @@
                   </el-popconfirm>
                   <div v-if="((getCompraID.compra.status_id == 3 || getCompraID.compra.status_id == 4 || getCompraID.compra.status_id == 5) ? false : true)">
                     <el-tooltip placement="top">
-                      <div slot="content">Aquí puedes agregar las transacciones confirmadas del usuario y así abonar el monto a la venta</div>
+                      <div slot="content">Aquí puedes agregar las transacciones confirmadas del usuario y así abonar el monto a la compra</div>
                       <el-button class="btn-primario m-2" plain @click="agregarPago = true" :loading="uploading">+ Transacción de Pago</el-button>
                     </el-tooltip>
                   </div>
                   <el-tooltip placement="top">
-                    <div slot="content">Aquí puedes obtener el comprobante de la venta para el usuario</div>
+                    <div slot="content">Aquí puedes obtener el comprobante de la compra</div>
                     <el-button class="btn-primario m-2" plain>
-                      <a class="text-white" href="" target="_BLANK">Imprimir Factura</a>
+                      <a class="text-white" :href="`http://localhost:4010/compra/ID/${getCompraID.compra.compras_id}?pdf=true`" target="_BLANK">Imprimir Comprobante</a>
                     </el-button>
                   </el-tooltip>
                 </div>
