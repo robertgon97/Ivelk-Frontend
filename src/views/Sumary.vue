@@ -6,7 +6,7 @@
     </el-breadcrumb>
     <br />
     <el-row :gutter="20" v-if="getAllSummary && getAllSummary != 'Loading'">
-      <el-col class="col-md-6 mb-3">
+      <el-col class="col-md-6 mb-3" v-if="getAllSummary && getAllSummary.alertaNiveles && getAllSummary.alertaNiveles.length">
         <el-card shadow="hover">
           <div slot="header" class="clearfix text-primary">
             <i class="el-icon-warning-outline"></i>

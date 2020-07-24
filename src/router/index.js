@@ -115,7 +115,6 @@ const routes = [
   },
   {
     path: '/tienda',
-    name: 'Gestión de la tienda',
     component: () => import('./../views/Menu/MenuViewAdmin.vue'),
     children: [
       {
