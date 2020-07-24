@@ -16,8 +16,8 @@
           </div>
           <div class="text item">
             <p><i class="el-icon-tickets"></i> IVA: <b>{{getgetAppConfig.config_iva}} %</b></p>
-            <p><i class="el-icon-d-arrow-left"></i> Inventario Mínimo: <b>{{getgetAppConfig.config_inventario_minimo}} Unidades</b></p>
-            <p><i class="el-icon-d-arrow-right"></i> Inventario Máximo: <b>{{getgetAppConfig.config_inventario_maximo}} Unidades</b></p>
+            <p><i class="el-icon-d-arrow-left"></i> Stock Mínimo: <b>{{getgetAppConfig.config_inventario_minimo}} Unidades</b></p>
+            <p><i class="el-icon-d-arrow-right"></i> Stock Máximo: <b>{{getgetAppConfig.config_inventario_maximo}} Unidades</b></p>
           </div>
           <el-button class="btn-primario" @click="getSQL">Crear Respaldo de Base de Datos</el-button>
         </el-card>
@@ -32,12 +32,12 @@
             <form @submit.prevent="add">
               <div class="row m-0 p-0 justify-content-center">
                 <div class="col-md-6 mb-3">
-                  <label>Inventario Mínimo</label>
-                  <el-input type="number" min="0" placeholder="Número mínimo" prefix-icon="el-icon-d-arrow-left" v-model="newconfig.config_inventario_minimo" clearable></el-input>
+                  <label>Stock Mínimo</label>
+                  <el-input type="number" min="0" placeholder="Stock mínimo" prefix-icon="el-icon-d-arrow-left" v-model="newconfig.config_inventario_minimo" clearable></el-input>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label>Inventario Máximo</label>
-                  <el-input type="number" min="0" placeholder="Número máximo" prefix-icon="el-icon-d-arrow-right" v-model="newconfig.config_inventario_maximo" clearable></el-input>
+                  <label>Stock Máximo</label>
+                  <el-input type="number" min="0" placeholder="Stock máximo" prefix-icon="el-icon-d-arrow-right" v-model="newconfig.config_inventario_maximo" clearable></el-input>
                 </div>
               </div>
               <div class="row m-0 p-0 justify-content-center">
@@ -68,8 +68,8 @@
       <div class="contenido">
         <el-table :data="getAllConfig" :default-sort="{prop: 'config_id', order: 'descending'}">
           <el-table-column fixed width="50" prop="config_id" label="#"></el-table-column>
-          <el-table-column prop="config_inventario_minimo" label="Inventario Mínimo"></el-table-column>
-          <el-table-column prop="config_inventario_maximo" label="Inventario Máximo"></el-table-column>
+          <el-table-column prop="config_inventario_minimo" label="Stock Mínimo"></el-table-column>
+          <el-table-column prop="config_inventario_maximo" label="Stock Máximo"></el-table-column>
           <el-table-column prop="config_iva" label="IVA %"></el-table-column>
         </el-table>
       </div>
