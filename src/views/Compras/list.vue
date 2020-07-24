@@ -40,9 +40,6 @@
               <div class="col-12 p-0 mb-3 text-center">
                 <button type="submit" class="btn btn-primario">Buscar</button>
               </div>
-              <div class="col-12 p-0 text-center">
-                <el-button class="btn btn-primario" @click="print('print')">Imprimir Resultados</el-button>
-              </div>
             </form>
           </el-card>
         </el-col>
@@ -51,6 +48,8 @@
             <div slot="header" class="clearfix">
               <i class="el-icon-finished"></i>
               <span> Lista</span>
+              <el-divider direction="vertical"></el-divider>
+              <el-button class="btn-primario" icon="el-icon-sort-down" @click="print">Imprimir reporte</el-button>
             </div>
             <el-table class="h-100 w-100" :data="getAllCompras" >
               <el-table-column fixed prop="compras_id" label="N° Orden" width="100"></el-table-column>
@@ -92,7 +91,7 @@
 </template>
 <script>
   import moment from 'moment'
-  import html2pdf from 'html2pdf.js'
+  import fileDownload from 'js-file-download'
   export default {
     metaInfo: {
       titleTemplate: '%s | Lista de Compras'
@@ -123,8 +122,21 @@
       searchapi () {
         this.$store.dispatch('getAllCompras', this.search)
       },
-      print (id = 'print') {
-        html2pdf().from(document.getElementById(id)).save('Compras.pdf')
+      print () {
+        this.axios({
+          method: `GET`,
+          url: `/compra?pdf=true`,
+          responseType: 'blob',
+          params: {
+            compras_created: this.search.compras_created ? this.search.compras_created : null,
+            status_id: this.search.status_id ? this.search.status_id : null,
+            personas_name: this.search.personas_name ? this.search.personas_name : null,
+            compras_id: this.search.compras_id ? this.search.compras_id : null
+          }
+        })
+        .then((response) => {
+          fileDownload(response.data, 'Compras.pdf');
+        })
       }
     },
     computed: {

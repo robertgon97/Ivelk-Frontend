@@ -39,9 +39,6 @@
               <div class="col-12 p-0 mb-3 text-center">
                 <button type="submit" class="btn btn-primario">Buscar</button>
               </div>
-              <div class="col-12 p-0 text-center">
-                <el-button class="btn btn-primario" @click="print('print')">Imprimir Resultados</el-button>
-              </div>
             </form>
           </el-card>
         </el-col>
@@ -50,6 +47,8 @@
             <div slot="header" class="clearfix">
               <i class="el-icon-finished"></i>
               <span> Lista</span>
+              <el-divider direction="vertical"></el-divider>
+              <el-button class="btn-primario" icon="el-icon-sort-down" @click="print">Imprimir reporte</el-button>
             </div>
             <el-table class="h-100 w-100" :data="getAllVentas" >
               <el-table-column fixed prop="ventas_id" label="N° Factura" width="100"></el-table-column>
@@ -92,7 +91,7 @@
 </template>
 <script>
   import moment from 'moment'
-  import html2pdf from 'html2pdf.js'
+  import fileDownload from 'js-file-download'
   export default {
     metaInfo: {
       titleTemplate: '%s | Lista de Ventas del Sistema'
@@ -123,8 +122,21 @@
       searchapi () {
         this.$store.dispatch('getAllVentas', this.search)
       },
-      print (id = 'print') {
-        html2pdf().from(document.getElementById(id)).save('Ventas.pdf')
+      print () {
+        this.axios({
+          method: `GET`,
+          url: `/orden?pdf=true`,
+          responseType: 'blob',
+          params: {
+            venta_date: this.search.venta_date ? this.search.venta_date : null,
+            status_id: this.search.status_id ? this.search.status_id : null,
+            personas_name: this.search.personas_name ? this.search.personas_name : null,
+            ventas_id: this.search.ventas_id ? this.search.ventas_id : null
+          }
+        })
+        .then((response) => {
+          fileDownload(response.data, 'Ventas.pdf');
+        })
       }
     },
     computed: {
