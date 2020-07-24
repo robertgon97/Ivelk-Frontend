@@ -29,6 +29,7 @@ export default {
         },
         params: {
           auditoria_date: query.auditoria_date ? query.auditoria_date : null,
+          auditoria_date_end: query.auditoria_date_end ? query.auditoria_date_end : null,
           auditoria_id: query.auditoria_id ? query.auditoria_id : null,
           usuario_email: query.usuario_email ? query.usuario_email : null,
           personas_name: query.personas_name ? query.personas_name : null,
