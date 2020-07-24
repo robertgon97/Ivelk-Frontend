@@ -57,6 +57,8 @@
           <div slot="header" class="clearfix">
             <i class="el-icon-finished"></i>
             <span> Lista</span>
+            <el-divider direction="vertical"></el-divider>
+            <el-button class="btn-primario" icon="el-icon-sort-down" @click="print">Imprimir reporte</el-button>
           </div>
           <el-table class="h-100 w-100" :data="getAllAuditoria" >
             <el-table-column fixed prop="auditoria_id" label="ID" width="50"></el-table-column>
@@ -87,6 +89,7 @@
 </template>
 <script>
   import moment from 'moment'
+  import fileDownload from 'js-file-download'
   export default {
     metaInfo: {
       titleTemplate: '%s | Auditoría del Sistema'
@@ -120,6 +123,25 @@
       },
       searchapi () {
         this.$store.dispatch('getAllAuditoria', this.search)
+      },
+      print () {
+        this.axios({
+          method: `GET`,
+          url: `/auditoria?pdf=true`,
+          responseType: 'blob',
+          params: {
+            auditoria_date: this.search.auditoria_date ? this.search.auditoria_date : null,
+            auditoria_date_end: this.search.auditoria_date_end ? this.search.auditoria_date_end : null,
+            auditoria_id: this.search.auditoria_id ? this.search.auditoria_id : null,
+            usuario_email: this.search.usuario_email ? this.search.usuario_email : null,
+            personas_name: this.search.personas_name ? this.search.personas_name : null,
+            auditoria_accion: this.search.auditoria_accion ? this.search.auditoria_accion : null,
+            auditoria_descripcion: this.search.auditoria_descripcion ? this.search.auditoria_descripcion : null
+          }
+        })
+        .then((response) => {
+          fileDownload(response.data, 'Auditoría.pdf');
+        })
       }
     },
     computed: {
