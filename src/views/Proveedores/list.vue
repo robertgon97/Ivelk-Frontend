@@ -7,6 +7,46 @@
       <el-breadcrumb-item :to="{ path: '/tienda/proveedores/lista' }">Lista de Proveedores</el-breadcrumb-item>
     </el-breadcrumb>
     <br />
+    <el-card shadow="hover">
+      <div slot="header" class="clearfix">
+        <i class="el-icon-s-operation"></i>
+        <span> Filtros</span>
+      </div>
+      <div>
+        <form @submit.prevent="searchapi" class="text items">
+          <div class="d-flex flex-wrap justify-content-around">
+            <div class="col-md-3 p-0 mb-2 mx-1">
+              <label>Razón Social</label>
+              <el-input placeholder="Razón Social" size="mini" type="text" v-model="search.proveedor_razon_social" clearable></el-input>
+            </div>
+            <div class="col-md-3 p-0 mb-2 mx-1">
+              <label>Rif / Documento de Identidad</label>
+              <el-input placeholder="Rif" size="mini" type="text" v-model="search.proveedor_rif" clearable></el-input>
+            </div>
+            <div class="col-md-3 p-0 mb-2 mx-1">
+              <label>Correo</label>
+              <el-input placeholder="Correo electrónico" size="mini" type="email" v-model="search.proveedor_correo" clearable></el-input>
+            </div>
+            <div class="col-md-3 p-0 mb-2 mx-1">
+              <label>Teléfono</label>
+              <el-input placeholder="Teléfono" size="mini" type="number" v-model="search.proveedor_telefono" clearable></el-input>
+            </div>
+            <div class="col-md-3 p-0 mb-2 mx-1">
+              <label>Dirección</label>
+              <el-input placeholder="Dirección" size="mini" type="text" v-model="search.proveedor_direccion" clearable></el-input>
+            </div>
+            <div class="col-md-3 p-0 mb-2 mx-1">
+              <label>ID de Proveedor</label>
+              <el-input placeholder="123456789" size="mini" type="number" min="1" v-model="search.proveedor_id" clearable></el-input>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center flex-wrap">
+            <el-button size="small" class="btn-primario" @click="searchapi">Buscar Proveedor</el-button>
+          </div>
+        </form>
+      </div>
+    </el-card>
+    <br />
     <div v-if="getAllProveedores && getAllProveedores == 'Loading'">
       <el-button type="text" v-loading.fullscreen.lock="true"></el-button>
     </div>
@@ -58,10 +98,21 @@
     },
     data () {
       return {
+        search: {
+          proveedor_id: null,
+          proveedor_razon_social: null,
+          proveedor_rif: null,
+          proveedor_telefono: null,
+          proveedor_direccion: null,
+          proveedor_correo: null
+        },
         uploading: false
       }
     },
     methods: {
+      searchapi () {
+        this.$store.dispatch('getAllProveedores', this.search)
+      },
       eliminar (proveedor) {
         this.$confirm('Deseas eliminar este Proveedor?', 'Estás Seguro de esto?', {
           confirmButtonText: 'OK',
