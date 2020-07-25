@@ -20,6 +20,11 @@
             <p><i class="el-icon-d-arrow-right"></i> Stock Máximo: <b>{{getgetAppConfig.config_inventario_maximo}} Unidades</b></p>
           </div>
           <el-button class="btn-primario" @click="getSQL">Crear Respaldo de Base de Datos</el-button>
+          <el-divider>Restauración</el-divider>
+          <el-upload class="upload-demo" ref="upload" :action="`${config}respaldo/post`" :headers="{ 'Authorization': token ? `Bearer ${token}` : '', 'Accept': '*/*' }" :auto-upload="false" :multiple="false" name="restore" accept=".sql">
+            <el-button slot="trigger" size="small" type="primary">Selecciona un archivo</el-button>
+            <el-button style="margin-left: 7px;" size="small" type="success" @click="$refs.upload.submit()">Cargar al servidor</el-button>
+          </el-upload>
         </el-card>
       </el-col>
       <el-col class="col-md-8 mb-3">
@@ -32,27 +37,24 @@
             <form @submit.prevent="add">
               <div class="row m-0 p-0 justify-content-center">
                 <div class="col-md-6 mb-3">
-                  <label>Stock Mínimo</label>
-                  <el-input type="number" min="0" placeholder="Stock mínimo" prefix-icon="el-icon-d-arrow-left" v-model="newconfig.config_inventario_minimo" clearable></el-input>
+                  <label>Stock Mínimo <small>REQUERIDO</small></label>
+                  <el-input type="number" size="small" min="0" placeholder="Stock mínimo" prefix-icon="el-icon-d-arrow-left" v-model="newconfig.config_inventario_minimo" clearable></el-input>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label>Stock Máximo</label>
-                  <el-input type="number" min="0" placeholder="Stock máximo" prefix-icon="el-icon-d-arrow-right" v-model="newconfig.config_inventario_maximo" clearable></el-input>
+                  <label>Stock Máximo <small>REQUERIDO</small></label>
+                  <el-input type="number" size="small" min="0" placeholder="Stock máximo" prefix-icon="el-icon-d-arrow-right" v-model="newconfig.config_inventario_maximo" clearable></el-input>
                 </div>
               </div>
               <div class="row m-0 p-0 justify-content-center">
                 <div class="col-md-5 mb-3">
-                  <label>IVA (Porcentaje)</label>
-                  <el-input type="number" min="0" max="100" placeholder="IVA%" prefix-icon="el-icon-tickets" v-model="newconfig.config_iva" clearable></el-input>
+                  <label>IVA (Porcentaje) <small>REQUERIDO</small></label>
+                  <el-input type="number" size="small" min="0" max="100" placeholder="IVA%" prefix-icon="el-icon-tickets" v-model="newconfig.config_iva" clearable></el-input>
                 </div>
                 <div class="col-md-5 mb-3 pt-4">
-                  <el-button class="btn-primario mt-2" round @click="add" v-loading.fullscreen.lock="uploading">Aplicar esta configuración</el-button>
+                  <el-button class="btn-primario mt-2" size="small" round @click="add" v-loading.fullscreen.lock="uploading">Aplicar esta configuración</el-button>
                 </div>
               </div>
             </form>
-          </div>
-          <div class="clearfix text-center">
-            <p class="m-0 p-0"><small>Todos los campos son obligatorios</small></p>
           </div>
         </el-card>
       </el-col>
@@ -86,6 +88,7 @@
 </template>
 <script>
   import fileDownload from 'js-file-download'
+  import config from './../../config'
   import moment from 'moment'
   export default {
     metaInfo: {
@@ -94,6 +97,8 @@
     data () {
       return {
         uploading: false,
+        config: config.backend.url,
+        token: localStorage.token_ivelk,
         newconfig: {
           config_id: 0,
           config_inventario_minimo: null,

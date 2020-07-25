@@ -59,12 +59,12 @@
       </div>
       <div class="contenido">
         <el-table :data="getAllProveedores">
-          <el-table-column fixed width="80" prop="proveedor_id" label="ID"></el-table-column>
-          <el-table-column width="350" prop="proveedor_razon_social" label="Razón Social"></el-table-column>
-          <el-table-column width="110" prop="tipo_documento_letra" label="Tipo de Documento"></el-table-column>
-          <el-table-column width="110" prop="proveedor_rif" label="Rif"></el-table-column>
-          <el-table-column width="200" prop="proveedor_correo" label="Correo"></el-table-column>
-          <el-table-column width="200" prop="proveedor_telefono" label="Teléfono"></el-table-column>
+          <el-table-column sortable fixed width="80" prop="proveedor_id" label="ID"></el-table-column>
+          <el-table-column sortable width="350" prop="proveedor_razon_social" label="Razón Social"></el-table-column>
+          <el-table-column sortable width="110" prop="tipo_documento_letra" label="Tip Doc."></el-table-column>
+          <el-table-column sortable width="110" prop="proveedor_rif" label="Rif"></el-table-column>
+          <el-table-column sortable width="200" prop="proveedor_correo" label="Correo"></el-table-column>
+          <el-table-column sortable width="200" prop="proveedor_telefono" label="Teléfono"></el-table-column>
           <el-table-column fixed="right" label="Operaciones" width="150">
             <template slot-scope="props">
               <el-button class="text-primary" type="text" size="small" icon="el-icon-edit" @click="$router.push(`/tienda/proveedores/${props.row.proveedor_id}`)">Ver</el-button>
