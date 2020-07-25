@@ -24,24 +24,29 @@
             <!-- {{getArticulosProveedores}} -->
           </div>
         </div>
-        <div class="row m-0 p-0 justify-content-center">
-          <div class="col-md-6 mb-3">
-            <label>Cantidad</label>
-            <el-input type="number" placeholder="Cantidad de artículo" min="1" prefix-icon="el-icon-sell" v-model="item.compras_detalle_cantidad"></el-input>
+        <div v-if="item.stock_id && returnItemCantidadDisponible(returnItem(getArticulosProveedores, item.stock_id), getgetAppConfig.config_inventario_maximo) > 0">
+          <div class="row m-0 p-0 justify-content-center">
+            <div class="col-md-6 mb-3">
+              <label>Cantidad</label>
+              <el-input type="number" placeholder="Cantidad de artículo" min="1" :max="returnItemCantidadDisponible(returnItem(getArticulosProveedores, item.stock_id), getgetAppConfig.config_inventario_maximo)" prefix-icon="el-icon-sell" v-model="item.compras_detalle_cantidad"></el-input>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label>Precio Unidad</label>
+              <el-input type="number" placeholder="Precio del artículo" min="0" step="0.01" v-model="item.compras_detalles_preciobase" prefix-icon="el-icon-money"></el-input>
+            </div>
           </div>
-          <div class="col-md-6 mb-3">
-            <label>Precio Unidad</label>
-            <el-input type="number" placeholder="Precio del artículo" min="0" step="0.01" v-model="item.compras_detalles_preciobase" prefix-icon="el-icon-money"></el-input>
+          <div class="row m-0 p-0 justify-content-center">
+            <div class="col-md-6 mb-3">
+              <label>Precio a la venta</label>
+              <el-input type="number" placeholder="Precio de venta" min="0" step="0.01" v-model="item.montoDestino" prefix-icon="el-icon-money"></el-input>
+            </div>
+            <div class="col-md-3 pt-4 mb-3">
+              <el-button class="btn-primario mt-2" round @click="AddToCart(item)" v-loading.fullscreen.lock="uploading">Agregar Item a la Lista</el-button>
+            </div>
           </div>
         </div>
-        <div class="row m-0 p-0 justify-content-center">
-          <div class="col-md-6 mb-3">
-            <label>Precio a la venta</label>
-            <el-input type="number" placeholder="Precio de venta" min="0" step="0.01" v-model="item.montoDestino" prefix-icon="el-icon-money"></el-input>
-          </div>
-          <div class="col-md-3 pt-4 mb-3">
-            <el-button class="btn-primario mt-2" round @click="AddToCart(item)" v-loading.fullscreen.lock="uploading">Agregar Item a la Lista</el-button>
-          </div>
+        <div v-else-if="item.stock_id">
+          <p class="text-center"><small>No puedes ingresar más unidades de este artículo.</small></p>
         </div>
       </div>
     </el-card>
@@ -56,9 +61,9 @@
           <template slot-scope="props">
             <div class="">
               <el-button-group size="mini">
-                <el-button @click="ResItem(props.row)" type="danger" size="mini" icon="el-icon-minus" round plain></el-button>
+                <!-- <el-button @click="ResItem(props.row)" type="danger" size="mini" icon="el-icon-minus" round plain></el-button> -->
                 <el-button size="mini" icon="el-icon-sell" round plain disabled>{{props.row.compras_detalle_cantidad}}</el-button>
-                <el-button @click="SumItem(props.row)" type="primary" size="mini" icon="el-icon-plus" round plain></el-button>
+                <!-- <el-button @click="SumItem(props.row)" type="primary" size="mini" icon="el-icon-plus" round plain></el-button> -->
               </el-button-group>
             </div>
           </template>
@@ -141,6 +146,7 @@
     watch: {
       'item.proveedor_id'() {
         this.$store.dispatch('getArticulosProveedores', { value: this.item.proveedor_id })
+        this.item.stock_id = null
       }
     },
     methods: {
@@ -238,6 +244,16 @@
         var numer = parseFloat(value || 0)
         if (numer) return numer.toLocaleString('es-VE') + ' Bs.'
         else return 'Gratis'
+      },
+      returnItem(itemarray, id) {
+        var itemselected = null
+        itemarray.forEach(banca => {
+          if(banca.stock_id == id) itemselected = banca
+        })
+        return itemselected
+      },
+      returnItemCantidadDisponible (item, configmax) {
+        return configmax - item.stock_cantidad
       }
     },
     computed: {
