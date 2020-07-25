@@ -134,6 +134,51 @@
               <el-option label="Venezuela" value="VENEZUELA" />
             </el-select>
           </div>
+          <div class="col-12 mt-3">
+            <h5><small>Recuperación del Cliente</small></h5>
+          </div>
+          <div class="col-12 col-md-6 mb-3">
+            <label>Seleccione un pregunta de Seguridad</label>
+            <el-select class="w-100" placeholder="Seleccione..." size="large" v-model="registro.preguntas[0].pregunta">
+              <el-option label="Cual es tu Artista Favorito?" value="Cual es tu Artista Favorito?" />
+              <el-option label="Cual es el nombre de tu madre?" value="Cual es el nombre de tu madre?" />
+              <el-option label="Cual es tu color favorito?" value="Cual es tu color favorito?" />
+              <el-option label="Cual es tu comida favorita?" value="Cual es tu comida favorita?" />
+              <el-option label="Cual es el nombre de tu mejor amigo?" value="Cual es el nombre de tu mejor amigo?" />
+            </el-select>
+          </div>
+          <div class="col-12 col-md-6 mb-3">
+            <label>Respuesta</label>
+            <el-input placeholder="Respuesta de seguridad" type="password" autocomplete="question1" clearable show-password v-model="registro.preguntas[0].respuesta" />
+          </div>
+          <div class="col-12 col-md-6 mb-3">
+            <label>Seleccione un pregunta de Seguridad</label>
+            <el-select class="w-100" placeholder="Seleccione..." size="large" v-model="registro.preguntas[1].pregunta">
+              <el-option label="Cual es tu Artista Favorito?" value="Cual es tu Artista Favorito?" />
+              <el-option label="Cual es el nombre de tu madre?" value="Cual es el nombre de tu madre?" />
+              <el-option label="Cual es tu color favorito?" value="Cual es tu color favorito?" />
+              <el-option label="Cual es tu comida favorita?" value="Cual es tu comida favorita?" />
+              <el-option label="Cual es el nombre de tu mejor amigo?" value="Cual es el nombre de tu mejor amigo?" />
+            </el-select>
+          </div>
+          <div class="col-12 col-md-6 mb-3">
+            <label>Respuesta</label>
+            <el-input placeholder="Respuesta de seguridad" type="password" autocomplete="question2" clearable show-password v-model="registro.preguntas[1].respuesta" />
+          </div>
+          <div class="col-12 col-md-6 mb-3">
+            <label>Seleccione un pregunta de Seguridad</label>
+            <el-select class="w-100" placeholder="Seleccione..." size="large" v-model="registro.preguntas[2].pregunta">
+              <el-option label="Cual es tu Artista Favorito?" value="Cual es tu Artista Favorito?" />
+              <el-option label="Cual es el nombre de tu madre?" value="Cual es el nombre de tu madre?" />
+              <el-option label="Cual es tu color favorito?" value="Cual es tu color favorito?" />
+              <el-option label="Cual es tu comida favorita?" value="Cual es tu comida favorita?" />
+              <el-option label="Cual es el nombre de tu mejor amigo?" value="Cual es el nombre de tu mejor amigo?" />
+            </el-select>
+          </div>
+          <div class="col-12 col-md-6 mb-3">
+            <label>Respuesta</label>
+            <el-input placeholder="Respuesta de seguridad" type="password" autocomplete="question2" clearable show-password v-model="registro.preguntas[2].respuesta" />
+          </div>
           <div class="col-12 my-3 text-center">
             <el-button class="btn-primario" round @click="register" v-loading.fullscreen.lock="uploading">Registrar</el-button>
           </div>
@@ -165,7 +210,21 @@
           personas_ciudad: null,
           personas_estado: null,
           personas_pais: 'VENEZUELA',
-          personas_telefono: null
+          personas_telefono: null,
+          preguntas: [
+            {
+              pregunta: null,
+              respuesta: null
+            },
+            {
+              pregunta: null,
+              respuesta: null
+            },
+            {
+              pregunta: null,
+              respuesta: null
+            }
+          ]
         },
         uploading: false
       }
