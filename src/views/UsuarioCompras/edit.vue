@@ -15,14 +15,14 @@
       <el-card shadow="hover" class="container">
         <div slot="header" class="clearfix">
           <i class="el-icon-shopping-cart-full"></i>
-          <span> Factura</span>
+          <span> Orden de Compra</span>
           <el-divider direction="vertical"></el-divider>
           <span class="text-primary">N° {{getVentaID.venta.ventas_id}}</span>
           <el-divider direction="vertical"></el-divider>
           <span class="text-info">Estatus: {{getVentaID.venta.status_nombre}}</span>
         </div>
         <div class="info mb-2">
-          <p class="p-0 m-0"> Factura Emitida a nombre de: <b>{{getMyUser.personas_name}} {{getMyUser.personas_apellido}}</b></p>
+          <p class="p-0 m-0"> Emitida a nombre de: <b>{{getMyUser.personas_name}} {{getMyUser.personas_apellido}}</b></p>
           <p class="p-0 m-0"> Razón Social: <b>{{getMyUser.tipo_documento_letra}}{{getMyUser.personas_documento_identidad}}</b></p>
           <p class="p-0 m-0"> Dirección: <b>{{getMyUser.personas_direccion}}</b></p>
           <p class="p-0 m-0"> Ciudad: <b>{{getMyUser.personas_ciudad}}</b></p>
