@@ -140,7 +140,7 @@
           <div class="col-12 col-md-6 mb-3">
             <label>Seleccione un pregunta de Seguridad</label>
             <el-select class="w-100" placeholder="Seleccione..." size="large" v-model="registro.preguntas[0].pregunta">
-              <el-option label="Cual es tu Artista Favorito?" value="Cual es tu Artista Favorito?" />
+              <el-option selected label="Cual es tu Artista Favorito?" value="Cual es tu Artista Favorito?" />
               <el-option label="Cual es el nombre de tu madre?" value="Cual es el nombre de tu madre?" />
               <el-option label="Cual es tu color favorito?" value="Cual es tu color favorito?" />
               <el-option label="Cual es tu comida favorita?" value="Cual es tu comida favorita?" />
@@ -155,7 +155,7 @@
             <label>Seleccione un pregunta de Seguridad</label>
             <el-select class="w-100" placeholder="Seleccione..." size="large" v-model="registro.preguntas[1].pregunta">
               <el-option label="Cual es tu Artista Favorito?" value="Cual es tu Artista Favorito?" />
-              <el-option label="Cual es el nombre de tu madre?" value="Cual es el nombre de tu madre?" />
+              <el-option selected label="Cual es el nombre de tu madre?" value="Cual es el nombre de tu madre?" />
               <el-option label="Cual es tu color favorito?" value="Cual es tu color favorito?" />
               <el-option label="Cual es tu comida favorita?" value="Cual es tu comida favorita?" />
               <el-option label="Cual es el nombre de tu mejor amigo?" value="Cual es el nombre de tu mejor amigo?" />
@@ -170,7 +170,7 @@
             <el-select class="w-100" placeholder="Seleccione..." size="large" v-model="registro.preguntas[2].pregunta">
               <el-option label="Cual es tu Artista Favorito?" value="Cual es tu Artista Favorito?" />
               <el-option label="Cual es el nombre de tu madre?" value="Cual es el nombre de tu madre?" />
-              <el-option label="Cual es tu color favorito?" value="Cual es tu color favorito?" />
+              <el-option selected label="Cual es tu color favorito?" value="Cual es tu color favorito?" />
               <el-option label="Cual es tu comida favorita?" value="Cual es tu comida favorita?" />
               <el-option label="Cual es el nombre de tu mejor amigo?" value="Cual es el nombre de tu mejor amigo?" />
             </el-select>
@@ -213,15 +213,15 @@
           personas_telefono: null,
           preguntas: [
             {
-              pregunta: null,
+              pregunta: 'Cual es tu Artista Favorito?',
               respuesta: null
             },
             {
-              pregunta: null,
+              pregunta: 'Cual es tu Artista Favorito?',
               respuesta: null
             },
             {
-              pregunta: null,
+              pregunta: 'Cual es tu Artista Favorito?',
               respuesta: null
             }
           ]

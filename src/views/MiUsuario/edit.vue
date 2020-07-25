@@ -167,7 +167,13 @@
         <form class="" @submit.prevent="AddPregunta(preguntas)">
           <div class="col-12 mb-3">
             <label>Escriba su pregunta de seguridad <small>(Requerido)</small></label>
-            <el-input placeholder="Pregunta de Seguridad" v-model="preguntas.usuario_pregunta_seguridad_pregunta" maxlength="50" show-word-limit />
+            <el-select class="w-100" placeholder="Seleccione..." size="large" v-model="preguntas.usuario_pregunta_seguridad_pregunta">
+              <el-option selected label="Cual es tu Artista Favorito?" value="Cual es tu Artista Favorito?" />
+              <el-option label="Cual es el nombre de tu madre?" value="Cual es el nombre de tu madre?" />
+              <el-option label="Cual es tu color favorito?" value="Cual es tu color favorito?" />
+              <el-option label="Cual es tu comida favorita?" value="Cual es tu comida favorita?" />
+              <el-option label="Cual es el nombre de tu mejor amigo?" value="Cual es el nombre de tu mejor amigo?" />
+            </el-select>
           </div>
           <div class="col-12 mb-3">
             <label>Ingrese la respuesta de seguridad <small>(Requerido)</small></label>
@@ -196,7 +202,7 @@
         preguntas: {
           usuario_pregunta_seguridad_id: 0,
           usuario_id: 0,
-          usuario_pregunta_seguridad_pregunta: null,
+          usuario_pregunta_seguridad_pregunta: 'Cual es tu Artista Favorito?',
           usuario_pregunta_seguridad_respuesta: null
         }
       }
