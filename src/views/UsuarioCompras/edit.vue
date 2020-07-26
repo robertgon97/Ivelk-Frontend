@@ -154,7 +154,7 @@
             </div>
             <div class="col-12 mb-3">
               <label>Ingrese el número de transacción del banco <small>(Requerido)</small></label>
-              <el-input type="number" min="0" placeholder="Número de transacción" v-model="abonado.balances_abonado_transaccion" prefix-icon="el-icon-document"></el-input>
+              <el-input type="number" min="0" placeholder="Número de transacción" v-model="abonado.balances_abonado_transaccion" show-word-limit maxlength="20" prefix-icon="el-icon-document"></el-input>
             </div>
             <div class="col-12 mb-3">
               <label>Ingrese el Monto del Pago. <small>(Requerido)</small></label>

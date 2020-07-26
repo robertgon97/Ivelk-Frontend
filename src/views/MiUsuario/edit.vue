@@ -166,7 +166,7 @@
       <div class="Contenido p-2">
         <form class="" @submit.prevent="AddPregunta(preguntas)">
           <div class="col-12 mb-3">
-            <label>Escriba su pregunta de seguridad <small>(Requerido)</small></label>
+            <label>Seleccione su pregunta de seguridad <small>(Requerido)</small></label>
             <el-select class="w-100" placeholder="Seleccione..." size="large" v-model="preguntas.usuario_pregunta_seguridad_pregunta">
               <el-option selected label="Cual es tu Artista Favorito?" value="Cual es tu Artista Favorito?" />
               <el-option label="Cual es el nombre de tu madre?" value="Cual es el nombre de tu madre?" />

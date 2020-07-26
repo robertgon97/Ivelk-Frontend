@@ -12,7 +12,7 @@
         <div class="row m-0 p-0 justify-content-between">
           <div class="col-md-6 mb-3">
             <label>Razon Social del Proveedor</label>
-            <el-input type="text" placeholder="Razón social" v-model="proveedores.proveedor_razon_social" prefix-icon="el-icon-goods" clearable></el-input>
+            <el-input type="text" placeholder="Razón social" v-model="proveedores.proveedor_razon_social" prefix-icon="el-icon-goods" clearable show-word-limit maxlength="100"></el-input>
           </div>
           <div class="col-md-2 mb-3">
             <label class="w-100">Tip. Doc.</label>
@@ -22,13 +22,13 @@
           </div>
           <div class="col-md-4 mb-3">
             <label class="w-100">Numero de Identificación</label>
-            <el-input placeholder="123456789-0" type="text" autocomplete="dni" clearable v-model="proveedores.proveedor_rif"></el-input>
+            <el-input placeholder="123456789-0" type="text" autocomplete="dni" clearable show-word-limit maxlength="9" v-model="proveedores.proveedor_rif"></el-input>
           </div>
         </div>
         <div class="row m-0 p-0 justify-content-between">
           <div class="col-md-12 mb-3">
             <label class="w-100">Dirección</label>
-            <el-input placeholder="Dirección del proveedor" type="text" clearable v-model="proveedores.proveedor_direccion">
+            <el-input placeholder="Dirección del proveedor" type="text" clearable show-word-limit maxlength="100" v-model="proveedores.proveedor_direccion">
               <i slot="prefix" class="el-input__icon el-icon-position"></i>
             </el-input>
           </div>
@@ -36,7 +36,7 @@
         <div class="row m-0 p-0 justify-content-between">
           <div class="col-md-6 mb-3">
             <label>Ciudad</label>
-            <el-input placeholder="Ciudad" type="text" autocomplete="city" clearable v-model="proveedores.proveedor_ciudad">
+            <el-input placeholder="Ciudad" type="text" autocomplete="city" clearable show-word-limit maxlength="20" v-model="proveedores.proveedor_ciudad">
               <i slot="prefix" class="el-input__icon el-icon-position"></i>
             </el-input>
           </div>
@@ -87,7 +87,7 @@
         <div class="row m-0 p-0 justify-content-between">
           <div class="col-md-6 mb-3">
             <label>Teléfono</label>
-            <el-input placeholder="Teléfono" type="text" autocomplete="phone" clearable v-model="proveedores.proveedor_telefono">
+            <el-input placeholder="Teléfono" type="text" autocomplete="phone" clearable show-word-limit maxlength="11" v-model="proveedores.proveedor_telefono">
               <i slot="prefix" class="el-input__icon el-icon-phone-outline"></i>
             </el-input>
           </div>

@@ -17,11 +17,11 @@
           <div class="d-flex flex-wrap justify-content-around">
             <div class="col-md-3 p-0 mb-2 mx-1">
               <label>Razón Social</label>
-              <el-input placeholder="Razón Social" size="mini" type="text" v-model="search.proveedor_razon_social" clearable></el-input>
+              <el-input placeholder="Razón Social" size="mini" type="text" v-model="search.proveedor_razon_social" clearable show-word-limit maxlength="100"></el-input>
             </div>
             <div class="col-md-3 p-0 mb-2 mx-1">
               <label>Rif / Documento de Identidad</label>
-              <el-input placeholder="Rif" size="mini" type="text" v-model="search.proveedor_rif" clearable></el-input>
+              <el-input placeholder="Rif" size="mini" type="text" v-model="search.proveedor_rif" clearable show-word-limit maxlength="9"></el-input>
             </div>
             <div class="col-md-3 p-0 mb-2 mx-1">
               <label>Correo</label>
@@ -29,11 +29,11 @@
             </div>
             <div class="col-md-3 p-0 mb-2 mx-1">
               <label>Teléfono</label>
-              <el-input placeholder="Teléfono" size="mini" type="number" v-model="search.proveedor_telefono" clearable></el-input>
+              <el-input placeholder="Teléfono" size="mini" type="number" v-model="search.proveedor_telefono" clearable show-word-limit maxlength="11"></el-input>
             </div>
             <div class="col-md-3 p-0 mb-2 mx-1">
               <label>Dirección</label>
-              <el-input placeholder="Dirección" size="mini" type="text" v-model="search.proveedor_direccion" clearable></el-input>
+              <el-input placeholder="Dirección" size="mini" type="text" v-model="search.proveedor_direccion" clearable show-word-limit maxlength="100"></el-input>
             </div>
             <div class="col-md-3 p-0 mb-2 mx-1">
               <label>ID de Proveedor</label>
