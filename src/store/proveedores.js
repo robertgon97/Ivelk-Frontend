@@ -4,15 +4,22 @@ import config from './../config'
 export default {
   state: {
     AllProveedores: null,
+    IDProveedores: null
   },
   mutations: {
     setAllProveedores: (state, value) => {
       state.AllProveedores = value
+    },
+    setIDProveedores: (state, value) => {
+      state.IDProveedores = value
     }
   },
   getters: {
     getAllProveedores: (state) => {
       return state.AllProveedores
+    },
+    getIDProveedores: (state) => {
+      return state.IDProveedores
     }
   },
   actions: {
@@ -38,6 +45,37 @@ export default {
       .then(res => {
         context.commit('setgetAppConfig', res.data.appData)
         context.commit('setAllProveedores', res.data.data)
+      })
+      .catch(error => {
+        if (error.response) {
+          switch (error.response.status) {
+            default:
+              // eslint-disable-next-line
+              console.log(error.response.data)
+              break
+          }
+        } else {
+          // eslint-disable-next-line
+          console.log(error)
+          // eslint-disable-next-line
+          console.clear()
+        }
+      })
+    },
+    getIDProveedores (context, ID) {
+      context.commit('setIDProveedores', 'Loading')
+      axios({
+        method: `GET`,
+        baseURL: config.backend.url,
+        url: `/proveedores/id/${ID.value}`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.token_ivelk ? `Bearer ${localStorage.token_ivelk}` : ''
+        }
+      })
+      .then(res => {
+        context.commit('setgetAppConfig', res.data.appData)
+        context.commit('setIDProveedores', res.data.data)
       })
       .catch(error => {
         if (error.response) {
