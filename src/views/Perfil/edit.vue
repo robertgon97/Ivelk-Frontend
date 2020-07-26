@@ -18,13 +18,13 @@
                 <h5><small>Datos de autenticación y contacto</small></h5>
               </div>
               <div class="col-12 col-md-6 mb-3">
-                <label>Correo Electrónico</label>
+                <label>Correo Electrónico <small>(REQUERIDO)</small></label>
                 <el-input placeholder="Correo" type="email" autocomplete="email" clearable v-model="getMyUser.usuario_email">
                   <i slot="suffix" class="el-input__icon el-icon-message"></i>
                 </el-input>
               </div>
               <div class="col-12 col-md-6 mb-3">
-                <label>Teléfono</label>
+                <label>Teléfono <small>(REQUERIDO)</small></label>
                 <el-input placeholder="Teléfono" type="phone" autocomplete="phone" clearable show-word-limit maxlength="11" v-model="getMyUser.personas_telefono">
                   <i slot="suffix" class="el-input__icon el-icon-phone-outline"></i>
                 </el-input>
@@ -33,13 +33,13 @@
                 <h5><small>Datos básicos</small></h5>
               </div>
               <div class="col-12 col-md-6 mb-3">
-                <label>Nombres</label>
+                <label>Nombres <small>(REQUERIDO)</small></label>
                 <el-input placeholder="Nombres" type="text" autocomplete="name" clearable show-word-limit maxlength="40" v-model="getMyUser.personas_name">
                   <i slot="suffix" class="el-input__icon el-icon-s-custom"></i>
                 </el-input>
               </div>
               <div class="col-12 col-md-6 mb-3">
-                <label>Apellidos</label>
+                <label>Apellidos <small>(REQUERIDO)</small></label>
                 <el-input placeholder="Apellidos" type="text" autocomplete="lastname" clearable show-word-limit maxlength="40" v-model="getMyUser.personas_apellido">
                   <i slot="suffix" class="el-input__icon el-icon-s-custom"></i>
                 </el-input>
@@ -51,20 +51,20 @@
                 </el-select>
               </div>
               <div class="col-12 col-md-4 mb-3">
-                <label class="w-100">Numero de Identificación</label>
+                <label class="w-100">Numero de Identificación <small>(REQUERIDO)</small></label>
                 <el-input placeholder="123456789" type="text" disabled autocomplete="dni" clearable show-word-limit maxlength="9" v-model="getMyUser.personas_documento_identidad">
 
                 </el-input>
               </div>
               <div class="col-12 col-md-6 mb-3">
-                <label>Sexo</label>
+                <label>Sexo <small>(REQUERIDO)</small></label>
                 <el-select class="w-100" placeholder="Sexo" size="large" v-model="getMyUser.personas_sexo">
                   <el-option label="Hombre" value="Hombre" />
                   <el-option label="Mujer" value="Mujer" />
                 </el-select>
               </div>
               <div class="col-12 col-md-6 mb-3">
-                <label>Fecha de Nacimiento</label>
+                <label>Fecha de Nacimiento <small>(REQUERIDO)</small></label>
                 <el-input placeholder="Fecha de Nacimiento" type="date" autocomplete="nacimiento" :max="maxDate" clearable v-model="getMyUser.personas_cumple">
                 </el-input>
               </div>
@@ -72,19 +72,19 @@
                 <h5><small>Dirección del usuario</small></h5>
               </div>
               <div class="col-12 col-md-6 mb-3">
-                <label>Dirección</label>
+                <label>Dirección <small>(REQUERIDO)</small></label>
                 <el-input placeholder="Dirección completa" type="text" autocomplete="direction" clearable show-word-limit maxlength="100" v-model="getMyUser.personas_direccion">
                   <i slot="suffix" class="el-input__icon el-icon-position"></i>
                 </el-input>
               </div>
               <div class="col-12 col-md-6 mb-3">
-                <label>Ciudad</label>
+                <label>Ciudad <small>(REQUERIDO)</small></label>
                 <el-input placeholder="Ciudad" type="text" autocomplete="city" clearable show-word-limit maxlength="20" v-model="getMyUser.personas_ciudad">
                   <i slot="suffix" class="el-input__icon el-icon-position"></i>
                 </el-input>
               </div>
               <div class="col-12 col-md-6 mb-3">
-                <label>Estado</label>
+                <label>Estado <small>(REQUERIDO)</small></label>
                 <el-select class="w-100" placeholder="Estado" size="large" v-model="getMyUser.personas_estado">
                   <el-option label="Amazonas" value="Amazonas" />
                   <el-option label="Anzoátegui" value="Anzoátegui" />
@@ -113,7 +113,7 @@
                 </el-select>
               </div>
               <div class="col-12 col-md-6 mb-3">
-                <label>País</label>
+                <label>País <small>(REQUERIDO)</small></label>
                 <el-select class="w-100" placeholder="País" size="large" v-model="getMyUser.personas_pais">
                   <el-option label="Venezuela" value="VENEZUELA" />
                 </el-select>

@@ -52,7 +52,7 @@
         <el-divider></el-divider>
         <div class="clearfix mt-3 d-flex flex-wrap justify-content-between">
           <div class="col-md-5 mb-3">
-            <label class="w-100">Seleccione su Método de Pago</label>
+            <label class="w-100">Seleccione su Método de Pago <small>(REQUERIDO)</small></label>
             <el-select v-model="orden.banco_id" class="w-100" clearable placeholder="Seleccione el banco">
               <el-option v-for="banco in getAllBancos" :key="banco.banco_id" :label="banco.bancos_nombre" :value="banco.banco_id" :disabled="false"/>
             </el-select>

@@ -16,30 +16,30 @@
         <form @submit.prevent="add">
           <div class="row m-0 p-0 justify-content-center">
             <div class="col-md-6 mb-3">
-              <label>Nombre</label>
+              <label>Nombre <small>(REQUERIDO)</small></label>
               <el-input type="text" placeholder="Nombre" v-model="newbank.bancos_nombre" clearable show-word-limit maxlength="100"></el-input>
             </div>
             <div class="col-md-6 mb-3">
-              <label>N° Cuenta</label>
+              <label>N° Cuenta <small>(REQUERIDO)</small></label>
               <el-input type="number" placeholder="123456789" min="0" v-model="newbank.bancos_cuenta" clearable show-word-limit maxlength="20"></el-input>
             </div>
           </div>
           <div class="row m-0 p-0 justify-content-center">
             <div class="col-md-6 mb-3">
-              <label>Tipo de Cuenta</label>
+              <label>Tipo de Cuenta <small>(REQUERIDO)</small></label>
               <el-select class="w-100" placeholder="Tipo de cuenta" size="large" v-model="newbank.bancos_tipo_cuenta">
                 <el-option value="Ahorro" label="Ahorro" selected></el-option>
                 <el-option value="Corriente" label="Corriente"></el-option>
               </el-select>
             </div>
             <div class="col-md-6 mb-3">
-              <label>Teléfono</label>
+              <label>Teléfono <small>(REQUERIDO)</small></label>
               <el-input type="text" placeholder="0243-1234567" v-model="newbank.bancos_telefono" clearable show-word-limit maxlength="11"></el-input>
             </div>
           </div>
           <div class="row m-0 p-0 justify-content-center">
             <div class="col-md-6 mb-3">
-              <label>Identificación</label>
+              <label>Identificación <small>(REQUERIDO)</small></label>
               <el-input type="text" placeholder="V12123456" v-model="newbank.bancos_dni" clearable show-word-limit maxlength="10"></el-input>
             </div>
           </div>

@@ -16,11 +16,11 @@
         <form @submit.prevent="addStatus">
           <div class="row m-0 p-0 justify-content-center">
             <div class="col-md-6 mb-3">
-              <label>Nombre</label>
+              <label>Nombre <small>(REQUERIDO)</small></label>
               <el-input type="text" placeholder="Nombre" v-model="article.articulo_tipo_nombre" clearable show-word-limit maxlength="100"></el-input>
             </div>
             <div class="col-md-6 mb-3">
-              <label>Descripción</label>
+              <label>Descripción  <small>(REQUERIDO)</small></label>
               <el-input type="text" placeholder="Descripción" v-model="article.articulo_tipo_descripcion" clearable show-word-limit maxlength="300"></el-input>
             </div>
           </div>

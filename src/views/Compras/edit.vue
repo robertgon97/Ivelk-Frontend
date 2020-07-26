@@ -234,17 +234,17 @@
         <div class="Contenido p-2">
           <form class="" @submit.prevent="agregarPagoBalance(abonado)">
             <div class="col-12 mb-3">
-              <label>Seleccione donde se realizó el pago</label>
+              <label>Seleccione donde se realizó el pago <small>(REQUERIDO)</small></label>
               <el-select class="w-100" placeholder="Banco donde se realizó el pago" v-model="abonado.banco_id">
                 <el-option v-for="banco of getAllBancos" :key="banco.banco_id" :label="banco.bancos_nombre" :value="banco.banco_id" />
               </el-select>
             </div>
             <div class="col-12 mb-3">
-              <label>Ingrese el número de transacción del banco</label>
+              <label>Ingrese el número de transacción del banco <small>(REQUERIDO)</small></label>
               <el-input type="number" min="0" placeholder="Número de transacción" v-model="abonado.balances_abonado_transaccion" prefix-icon="el-icon-document" show-word-limit maxlength="20"></el-input>
             </div>
             <div class="col-12 mb-3">
-              <label>Ingrese el Monto del Pago</label>
+              <label>Ingrese el Monto del Pago <small>(REQUERIDO)</small></label>
               <el-input type="number" placeholder="Monto del Pago" min="0" :max="(getCompraID.compra.compras_total - getTotalAbonado(getCompraID.pagosAbonados))" step="0.01" v-model="abonado.balances_abonado_abonado" prefix-icon="el-icon-money"></el-input>
             </div>
           </form>

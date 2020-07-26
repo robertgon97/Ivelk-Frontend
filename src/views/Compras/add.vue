@@ -11,13 +11,13 @@
       <div class="contenido">
         <div class="row m-0 p-0 justify-content-center">
           <div class="col-md-6 mb-3">
-            <label>Proveedor</label>
+            <label>Proveedor <small>(REQUERIDO)</small></label>
             <el-select class="w-100" placeholder="Proveedor" v-model="item.proveedor_id" :loading="(getAllProveedores == 'Loading') ? true : false">
               <el-option v-for="proveedor of getAllProveedores" :key="proveedor.proveedor_id" :label="proveedor.proveedor_razon_social" :value="proveedor.proveedor_id" />
             </el-select>
           </div>
           <div class="col-md-6 mb-3">
-            <label>Artículo</label>
+            <label>Artículo <small>(REQUERIDO)</small></label>
             <el-select class="w-100" placeholder="Nombre del Artículo" v-model="item.stock_id" :loading="(getArticulosProveedores == 'Loading') ? true : false">
               <el-option v-for="articulo of getArticulosProveedores" :key="articulo.stock_id" :label="articulo.articulos_nombres" :value="articulo.stock_id" />
             </el-select>
@@ -27,17 +27,17 @@
         <div v-if="item.stock_id && returnItemCantidadDisponible(returnItem(getArticulosProveedores, item.stock_id), getgetAppConfig.config_inventario_maximo) > 0">
           <div class="row m-0 p-0 justify-content-center">
             <div class="col-md-6 mb-3">
-              <label>Cantidad</label>
+              <label>Cantidad <small>(REQUERIDO)</small></label>
               <el-input type="number" placeholder="Cantidad de artículo" min="1" :max="returnItemCantidadDisponible(returnItem(getArticulosProveedores, item.stock_id), getgetAppConfig.config_inventario_maximo)" prefix-icon="el-icon-sell" v-model="item.compras_detalle_cantidad"></el-input>
             </div>
             <div class="col-md-6 mb-3">
-              <label>Precio Unidad</label>
+              <label>Precio Unidad <small>(REQUERIDO)</small></label>
               <el-input type="number" placeholder="Precio del artículo" min="0" step="0.01" v-model="item.compras_detalles_preciobase" prefix-icon="el-icon-money"></el-input>
             </div>
           </div>
           <div class="row m-0 p-0 justify-content-center">
             <div class="col-md-6 mb-3">
-              <label>Precio a la venta</label>
+              <label>Precio a la venta <small>(REQUERIDO)</small></label>
               <el-input type="number" placeholder="Precio de venta" min="0" step="0.01" v-model="item.montoDestino" prefix-icon="el-icon-money"></el-input>
             </div>
             <div class="col-md-3 pt-4 mb-3">

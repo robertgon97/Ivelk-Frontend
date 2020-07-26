@@ -11,7 +11,7 @@
       <form @submit.prevent="register">
         <div class="row m-0 p-0 justify-content-between">
           <div class="col-md-6 mb-3">
-            <label>Razon Social del Proveedor</label>
+            <label>Razon Social del Proveedor <small>(REQUERIDO)</small></label>
             <el-input type="text" placeholder="Razón social" v-model="proveedores.proveedor_razon_social" prefix-icon="el-icon-goods" clearable show-word-limit maxlength="100"></el-input>
           </div>
           <div class="col-md-2 mb-3">
@@ -21,13 +21,13 @@
             </el-select>
           </div>
           <div class="col-md-4 mb-3">
-            <label class="w-100">Numero de Identificación</label>
+            <label class="w-100">Numero de Identificación <small>(REQUERIDO)</small></label>
             <el-input placeholder="123456789-0" type="text" autocomplete="dni" clearable show-word-limit maxlength="9" v-model="proveedores.proveedor_rif"></el-input>
           </div>
         </div>
         <div class="row m-0 p-0 justify-content-between">
           <div class="col-md-12 mb-3">
-            <label class="w-100">Dirección</label>
+            <label class="w-100">Dirección <small>(REQUERIDO)</small></label>
             <el-input placeholder="Dirección del proveedor" type="text" clearable show-word-limit maxlength="100" v-model="proveedores.proveedor_direccion">
               <i slot="prefix" class="el-input__icon el-icon-position"></i>
             </el-input>
@@ -35,13 +35,13 @@
         </div>
         <div class="row m-0 p-0 justify-content-between">
           <div class="col-md-6 mb-3">
-            <label>Ciudad</label>
+            <label>Ciudad <small>(REQUERIDO)</small></label>
             <el-input placeholder="Ciudad" type="text" autocomplete="city" clearable show-word-limit maxlength="20" v-model="proveedores.proveedor_ciudad">
               <i slot="prefix" class="el-input__icon el-icon-position"></i>
             </el-input>
           </div>
           <div class="col-md-6 mb-3">
-            <label>Estado</label>
+            <label>Estado <small>(REQUERIDO)</small></label>
             <el-select class="w-100" placeholder="Estado" size="large" v-model="proveedores.proveedor_estado">
               <el-option label="Amazonas" value="Amazonas" />
               <el-option label="Anzoátegui" value="Anzoátegui" />
@@ -72,13 +72,13 @@
         </div>
         <div class="row m-0 p-0 justify-content-between">
           <div class="col-md-6 mb-3">
-            <label>País</label>
+            <label>País <small>(REQUERIDO)</small></label>
             <el-select class="w-100" placeholder="País" size="large" v-model="proveedores.proveedor_pais">
               <el-option label="Venezuela" value="VENEZUELA" />
             </el-select>
           </div>
           <div class="col-md-6 mb-3">
-            <label>Correo Electrónico</label>
+            <label>Correo Electrónico <small>(REQUERIDO)</small></label>
             <el-input placeholder="Correo" type="email" autocomplete="email" clearable v-model="proveedores.proveedor_correo">
               <i slot="suffix" class="el-input__icon el-icon-message"></i>
             </el-input>
@@ -86,7 +86,7 @@
         </div>
         <div class="row m-0 p-0 justify-content-between">
           <div class="col-md-6 mb-3">
-            <label>Teléfono</label>
+            <label>Teléfono <small>(REQUERIDO)</small></label>
             <el-input placeholder="Teléfono" type="text" autocomplete="phone" clearable show-word-limit maxlength="11" v-model="proveedores.proveedor_telefono">
               <i slot="prefix" class="el-input__icon el-icon-phone-outline"></i>
             </el-input>

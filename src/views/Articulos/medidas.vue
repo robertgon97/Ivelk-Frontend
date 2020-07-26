@@ -16,17 +16,17 @@
         <form @submit.prevent="addStatus">
           <div class="row m-0 p-0 justify-content-center">
             <div class="col-md-6 mb-3">
-              <label>Nombre</label>
+              <label>Nombre <small>(REQUERIDO)</small></label>
               <el-input type="text" placeholder="Nombre" v-model="article.articulo_medidas_nombre" clearable show-word-limit maxlength="100"></el-input>
             </div>
             <div class="col-md-6 mb-3">
-              <label>Diminutivo</label>
+              <label>Diminutivo <small>(REQUERIDO)</small></label>
               <el-input type="text" placeholder="Diminutivo" v-model="article.articulo_medidas_diminutivo" clearable show-word-limit maxlength="2"></el-input>
             </div>
           </div>
           <div class="row m-0 p-0 justify-content-center">
             <div class="col-md-6 mb-3">
-              <label>Descripcion</label>
+              <label>Descripcion <small>(REQUERIDO)</small></label>
               <el-input type="text" placeholder="Descripcion" v-model="article.articulo_medidas_descripcion" clearable show-word-limit maxlength="300"></el-input>
             </div>
             <div class="col-md-6 mb-3">

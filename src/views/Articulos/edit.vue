@@ -47,23 +47,23 @@
             <form @submit.prevent="update(getIDArticulo.articulo)">
               <div class="row m-0 p-0 justify-content-between">
                 <div class="col-md-6 mb-3">
-                  <label>Nombre del Artículo</label>
+                  <label>Nombre del Artículo <small>(REQUERIDO)</small></label>
                   <el-input type="text" placeholder="Nombre del artículo" v-model="getIDArticulo.articulo.articulos_nombres" prefix-icon="el-icon-goods" clearable show-word-limit maxlength="100"></el-input>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label>Descripción del Artículo</label>
+                  <label>Descripción del Artículo <small>(REQUERIDO)</small></label>
                   <el-input type="text" placeholder="Descripción del artículo" v-model="getIDArticulo.articulo.articulos_descripcion" prefix-icon="el-icon-document" clearable show-word-limit maxlength="300"></el-input>
                 </div>
               </div>
               <div class="row m-0 p-0 justify-content-between">
                 <div class="col-md-6 mb-3">
-                  <label>Categoría del Artículo</label>
+                  <label>Categoría del Artículo <small>(REQUERIDO)</small></label>
                   <el-select class="w-100" placeholder="Categoría del Artículo" v-model="getIDArticulo.articulo.articulo_tipo_id">
                     <el-option v-for="categoria of getAllCategoria" :key="categoria.articulo_tipo_id" :label="categoria.articulo_tipo_nombre" :value="categoria.articulo_tipo_id" />
                   </el-select>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label>Marca</label>
+                  <label>Marca <small>(REQUERIDO)</small></label>
                   <el-select class="w-100" placeholder="Marca del Artículo" v-model="getIDArticulo.articulo.articulo_marcas_id">
                     <el-option v-for="marca of getAllMarcas" :key="marca.articulo_marcas_id" :label="marca.articulo_marcas_nombre" :value="marca.articulo_marcas_id" />
                   </el-select>
@@ -71,13 +71,13 @@
               </div>
               <div class="row m-0 p-0 justify-content-between">
                 <div class="col-md-6 mb-3">
-                  <label>Medida</label>
+                  <label>Medida <small>(REQUERIDO)</small></label>
                   <el-select class="w-100" placeholder="Seleccione la medida del articulo" v-model="getIDArticulo.articulo.articulo_medida_id" clearable>
                     <el-option v-for="medida of getAllMedidas" :key="medida.articulo_medida_id" :label="medida.articulo_medidas_nombre" :value="medida.articulo_medida_id" />
                   </el-select>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label>Tamaño</label>
+                  <label>Tamaño <small>(REQUERIDO)</small></label>
                   <el-select class="w-100" placeholder="Seleccione el tamaño del articulo" v-model="getIDArticulo.articulo.articulo_tamano_id" clearable>
                     <el-option v-for="tamano of getAllTamanos" :key="tamano.articulo_tamano_id" :label="tamano.articulo_tamano_nombre" :value="tamano.articulo_tamano_id" />
                   </el-select>
