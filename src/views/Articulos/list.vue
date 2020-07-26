@@ -17,7 +17,7 @@
           <div class="d-flex flex-wrap justify-content-around">
             <div class="col-md-3 p-0 mb-2 mx-1">
               <label>Nombre del Artículo</label>
-              <el-input placeholder="Nombre del Artículo" size="mini" type="text" v-model="search.articulos_nombres" clearable></el-input>
+              <el-input placeholder="Nombre del Artículo" size="mini" type="text" v-model="search.articulos_nombres" clearable show-word-limit maxlength="100"></el-input>
             </div>
             <div class="col-md-3 p-0 mb-2 mx-1">
               <label>Categoría del Artículo</label>

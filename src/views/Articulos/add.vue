@@ -12,11 +12,11 @@
         <div class="row m-0 p-0 justify-content-between">
           <div class="col-md-6 mb-3">
             <label>Nombre del Artículo</label>
-            <el-input type="text" placeholder="Nombre del artículo" v-model="article.articulos_nombres" prefix-icon="el-icon-goods" clearable></el-input>
+            <el-input type="text" placeholder="Nombre del artículo" v-model="article.articulos_nombres" prefix-icon="el-icon-goods" clearable show-word-limit maxlength="100"></el-input>
           </div>
           <div class="col-md-6 mb-3">
             <label>Descripción del Artículo</label>
-            <el-input type="text" placeholder="Descripción del artículo" v-model="article.articulos_descripcion" prefix-icon="el-icon-document" clearable></el-input>
+            <el-input type="text" placeholder="Descripción del artículo" v-model="article.articulos_descripcion" prefix-icon="el-icon-document" clearable show-word-limit maxlength="300"></el-input>
           </div>
         </div>
         <div class="row m-0 p-0 justify-content-between">
@@ -50,7 +50,7 @@
         <div class="row m-0 p-0 justify-content-between">
           <div class="col-md-6 mb-3">
             <label>Cantidad Inicial</label>
-            <el-input type="number" placeholder="Cantidad del artículo" min="0" v-model="article.stock_cantidad" prefix-icon="el-icon-takeaway-box" clearable></el-input>
+            <el-input type="number" placeholder="Cantidad del artículo" min="0" :max="getgetAppConfig.config_inventario_maximo" v-model="article.stock_cantidad" prefix-icon="el-icon-takeaway-box" clearable></el-input>
           </div>
           <div class="col-md-6 mb-3">
             <label>Precio Inicial</label>
@@ -197,6 +197,9 @@
       },
       getAllProveedores () {
         return this.$store.getters.getAllProveedores
+      },
+      getgetAppConfig () {
+        return this.$store.getters.getgetAppConfig
       }
     }
   }
