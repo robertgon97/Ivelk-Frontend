@@ -25,7 +25,7 @@
           </div>
         </el-image>
       </el-carousel-item>
-      <el-carousel-item>
+      <!-- <el-carousel-item>
         <el-image fit="cover" class="h-100" src="https://http2.mlstatic.com/optimize/o:f_webp/resources/exhibitors/MLV-especial-dia-del-nino/ecff6d00-bd74-11ea-a55e-c3cef0325006-home-slider_desktop.jpg">
           <div slot="placeholder" class="image-slot">
             Cargando<span class="dot">...</span>
@@ -36,7 +36,7 @@
             </div>
           </div>
         </el-image>
-      </el-carousel-item>
+      </el-carousel-item> -->
       <el-carousel-item>
         <el-image fit="cover" class="h-100" src="https://http2.mlstatic.com/optimize/o:f_webp/resources/deals/exhibitors_resources/mlv-home-desktop-slider-picture-0bcea931-c615-4797-b8f5-1f54db1c3ace.jpg">
           <div slot="placeholder" class="image-slot">
