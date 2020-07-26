@@ -19,7 +19,7 @@
         </div>
         <div class="col-12 text-center">
           <p class="m-0 p-0">No tienes usuario? <router-link to="/autenticador/registro">Regístrate!</router-link> </p>
-          <p class="m-0 p-0">Olvidastes tus datos? <router-link to="/autenticador/recuperar">Recupera tu usuario!</router-link> </p>
+          <p class="m-0 p-0">Olvidastes tus datos? <router-link to="/autenticador/recuperar">Recupera tu contraseña!</router-link> </p>
         </div>
       </div>
     </form>
