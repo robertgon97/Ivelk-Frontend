@@ -41,7 +41,7 @@
               <el-input type="number" placeholder="Precio de venta" min="0" step="0.01" v-model="item.montoDestino" prefix-icon="el-icon-money"></el-input>
             </div>
             <div class="col-md-3 pt-4 mb-3">
-              <el-button class="btn-primario mt-2" round @click="AddToCart(item)" v-loading.fullscreen.lock="uploading">Agregar Item a la Lista</el-button>
+              <el-button class="btn-primario mt-2" round @click="AddToCart(item, getgetAppConfig)" v-loading.fullscreen.lock="uploading">Agregar Item a la Lista</el-button>
             </div>
           </div>
         </div>
@@ -150,7 +150,7 @@
       }
     },
     methods: {
-      AddToCart (item) {
+      AddToCart (item, config) {
         this.getArticulosProveedores.forEach(element => {
           if (element.stock_id == item.stock_id) {
             var elemento = {
@@ -164,19 +164,27 @@
               montoDestino: item.montoDestino,
               articulos_nombres: element.articulos_nombres
             }
-            this.detalleCompra.push(Object.assign({}, elemento))
+            if (parseInt(item.compras_detalle_cantidad) + parseInt(element.stock_cantidad) <= config.config_inventario_maximo) {
+              this.detalleCompra.push(Object.assign({}, elemento))
+              this.item = {
+                compras_detalles_id: 0,
+                compras_id: null,
+                proveedor_id: null,
+                stock_id: null,
+                compras_detalle_cantidad: 1,
+                compras_detalles_preciobase: 0,
+                compras_detalles_total: 0,
+                montoDestino: 0
+              }
+            } else {
+              this.$notify({
+                title: 'Error',
+                message: 'Esta cantidad sobrepasa la cantidad de stock máximo establecida en el sistema',
+                type: 'error'
+              })
+            }
           }
         })
-        this.item = {
-          compras_detalles_id: 0,
-          compras_id: null,
-          proveedor_id: null,
-          stock_id: null,
-          compras_detalle_cantidad: 1,
-          compras_detalles_preciobase: 0,
-          compras_detalles_total: 0,
-          montoDestino: 0
-        }
       },
       DelToCart (item) {
         this.detalleCompra.splice(item, 1)
