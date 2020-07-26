@@ -14,6 +14,8 @@
           <span> Tu Carrito</span>
           <el-divider direction="vertical"></el-divider>
           <span>Aquí puedes visualizar la lista de artículos a comprar</span>
+          <el-divider direction="vertical"></el-divider>
+          <span><small>Este carrito será válido hasta el <b class="text-dark">{{parseFecha(getCarritoAll.carrito[0].carrito_expiracion)}}</b></small></span>
         </div>
         <el-table :data="getCarritoAll.carrito" class="w-100" v-loading="uploading">
           <el-table-column fixed label="Imagen" width="150">
@@ -99,6 +101,7 @@
   </div>
 </template>
 <script>
+  import moment from 'moment'
   export default {
     metaInfo: {
       titleTemplate: '%s | Tu carrito'
@@ -116,6 +119,10 @@
         var numer = parseFloat(value || 0)
         if (numer) return numer.toLocaleString('es-VE') + ' Bs.'
         else return 'Gratis'
+      },
+      parseFecha(value) {
+        moment.locale('es')
+        return moment(value).format('LLL')
       },
       eliminar(item) {
         this.uploading = true

@@ -207,11 +207,11 @@
           xAxis: {
             categories: [],
             title: {
-              text: 'Artículos'
+              text: 'Clientes'
             }
           },
           series: {
-            name: 'Artículos',
+            name: 'Clientes',
             data: []
           }
         }
