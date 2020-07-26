@@ -31,11 +31,11 @@
               </div>
               <div class="col-12 p-0 mb-3">
                 <label>Responsable</label>
-                <el-input placeholder="Nombre del cliente" type="text" v-model="search.personas_name" clearable></el-input>
+                <el-input placeholder="Nombre del cliente" type="text" v-model="search.personas_name" clearable show-word-limit maxlength="50"></el-input>
               </div>
               <div class="col-12 p-0 mb-3">
                 <label>N° Orden</label>
-                <el-input placeholder="123456789" type="number" min="1" v-model="search.compras_id" clearable></el-input>
+                <el-input placeholder="123456789" type="number" min="1" v-model="search.compras_id" clearable show-word-limit maxlength="20"></el-input>
               </div>
               <div class="col-12 p-0 mb-3 text-center">
                 <button type="submit" class="btn btn-primario">Buscar</button>

@@ -17,11 +17,11 @@
           <div class="row m-0 p-0 justify-content-center">
             <div class="col-md-6 mb-3">
               <label>Nombre</label>
-              <el-input type="text" placeholder="Nombre" v-model="newstatus.status_nombre" clearable></el-input>
+              <el-input type="text" placeholder="Nombre" v-model="newstatus.status_nombre" clearable show-word-limit maxlength="20"></el-input>
             </div>
             <div class="col-md-6 mb-3">
               <label>Descripción</label>
-              <el-input type="text" placeholder="Descripción" v-model="newstatus.status_descripcion" clearable></el-input>
+              <el-input type="text" placeholder="Descripción" v-model="newstatus.status_descripcion" clearable show-word-limit maxlength="100"></el-input>
             </div>
           </div>
           <div class="row m-0 p-0 justify-content-center">
@@ -48,10 +48,9 @@
           <el-table-column fixed width="50" prop="status_id" label="#"></el-table-column>
           <el-table-column prop="status_nombre" label="Nombre"></el-table-column>
           <el-table-column prop="status_descripcion" label="Descripcion"></el-table-column>
-          <el-table-column fixed="right" label="Operaciones" width="150">
+          <el-table-column fixed="right" label="Operaciones" width="100">
             <template slot-scope="">
               <el-button class="text-primary" type="text" size="small" icon="el-icon-edit">Editar</el-button>
-              <el-button class="text-danger" type="text" size="small" icon="el-icon-delete">Eliminar</el-button>
             </template>
           </el-table-column>
         </el-table>

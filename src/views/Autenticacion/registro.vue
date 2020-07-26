@@ -13,7 +13,7 @@
         </div>
         <div class="col-12 col-md-6 mb-3">
           <label>Usuario</label>
-          <el-input placeholder="Usuario" type="text" autocomplete="username" clearable v-model="registro.usuario_username">
+          <el-input placeholder="Usuario" type="text" autocomplete="username" clearable show-word-limit maxlength="30" v-model="registro.usuario_username">
             <i slot="suffix" class="el-input__icon el-icon-s-custom"></i>
           </el-input>
         </div>
@@ -32,13 +32,13 @@
         </div>
         <div class="col-12 col-md-6 mb-3">
           <label>Nombres</label>
-          <el-input placeholder="Nombres" type="text" autocomplete="name" clearable v-model="registro.personas_name">
+          <el-input placeholder="Nombres" type="text" autocomplete="name" clearable show-word-limit maxlength="40" v-model="registro.personas_name">
             <i slot="suffix" class="el-input__icon el-icon-s-custom"></i>
           </el-input>
         </div>
         <div class="col-12 col-md-6 mb-3">
           <label>Apellidos</label>
-          <el-input placeholder="Apellidos" type="text" autocomplete="lastname" clearable v-model="registro.personas_apellido">
+          <el-input placeholder="Apellidos" type="text" autocomplete="lastname" clearable show-word-limit maxlength="40" v-model="registro.personas_apellido">
             <i slot="suffix" class="el-input__icon el-icon-s-custom"></i>
           </el-input>
         </div>
@@ -50,7 +50,7 @@
         </div>
         <div class="col-12 col-md-4 mb-3">
           <label class="w-100">Numero de Identificación</label>
-          <el-input placeholder="123456789" type="text" autocomplete="dni" clearable v-model="registro.personas_documento_identidad">
+          <el-input placeholder="123456789" type="text" autocomplete="dni" clearable show-word-limit maxlength="9" v-model="registro.personas_documento_identidad">
 
           </el-input>
         </div>
@@ -68,7 +68,7 @@
           </div>
         <div class="col-12 col-md-6 mb-3">
           <label>Teléfono</label>
-          <el-input placeholder="Número de Teléfono" type="text" autocomplete="phone" clearable v-model="registro.personas_telefono">
+          <el-input placeholder="Número de Teléfono" type="text" autocomplete="phone" clearable show-word-limit maxlength="11" v-model="registro.personas_telefono">
             <i slot="suffix" class="el-input__icon el-icon-s-custom"></i>
           </el-input>
         </div>
@@ -77,13 +77,13 @@
         </div>
         <div class="col-12 col-md-6 mb-3">
           <label>Dirección</label>
-          <el-input placeholder="Dirección completa" type="text" autocomplete="direction" clearable v-model="registro.personas_direccion">
+          <el-input placeholder="Dirección completa" type="text" autocomplete="direction" clearable show-word-limit maxlength="100" v-model="registro.personas_direccion">
             <i slot="suffix" class="el-input__icon el-icon-position"></i>
           </el-input>
         </div>
         <div class="col-12 col-md-6 mb-3">
           <label>Ciudad</label>
-          <el-input placeholder="Ciudad" type="text" autocomplete="city" clearable v-model="registro.personas_ciudad">
+          <el-input placeholder="Ciudad" type="text" autocomplete="city" clearable show-word-limit maxlength="20" v-model="registro.personas_ciudad">
             <i slot="suffix" class="el-input__icon el-icon-position"></i>
           </el-input>
         </div>

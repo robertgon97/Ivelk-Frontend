@@ -25,19 +25,19 @@
             </div>
             <div class="col-12 p-0 mb-3">
               <label>Correo</label>
-              <el-input placeholder="Correo del Usuario" type="email" v-model="search.usuario_email" clearable></el-input>
+              <el-input placeholder="Correo del Usuario" type="email" v-model="search.usuario_email" clearable show-word-limit maxlength="100"></el-input>
             </div>
             <div class="col-12 p-0 mb-3">
               <label>Nombre del Usuario</label>
-              <el-input placeholder="Nombre del Usuario" type="text" v-model="search.personas_name" clearable></el-input>
+              <el-input placeholder="Nombre del Usuario" type="text" v-model="search.personas_name" clearable show-word-limit maxlength="50"></el-input>
             </div>
             <div class="col-12 p-0 mb-3">
               <label>Acción</label>
-              <el-input placeholder="Acción del Usuario" type="text" v-model="search.auditoria_accion" clearable></el-input>
+              <el-input placeholder="Acción del Usuario" type="text" v-model="search.auditoria_accion" clearable show-word-limit maxlength="100"></el-input>
             </div>
             <div class="col-12 p-0 mb-3">
               <label>Descripción</label>
-              <el-input placeholder="Descripción Usuario" type="text" v-model="search.auditoria_descripcion" clearable></el-input>
+              <el-input placeholder="Descripción Usuario" type="text" v-model="search.auditoria_descripcion" clearable show-word-limit maxlength="100"></el-input>
             </div>
             <div class="col-12 p-0 mb-3">
               <label>ID Auditoria</label>

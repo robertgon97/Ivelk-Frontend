@@ -38,17 +38,17 @@
               <div class="row m-0 p-0 justify-content-center">
                 <div class="col-md-6 mb-3">
                   <label>Stock Mínimo <small>REQUERIDO</small></label>
-                  <el-input type="number" size="small" min="0" placeholder="Stock mínimo" prefix-icon="el-icon-d-arrow-left" v-model="newconfig.config_inventario_minimo" clearable></el-input>
+                  <el-input type="number" size="small" min="0" placeholder="Stock mínimo" prefix-icon="el-icon-d-arrow-left" v-model="newconfig.config_inventario_minimo" clearable show-word-limit maxlength="3"></el-input>
                 </div>
                 <div class="col-md-6 mb-3">
                   <label>Stock Máximo <small>REQUERIDO</small></label>
-                  <el-input type="number" size="small" min="0" placeholder="Stock máximo" prefix-icon="el-icon-d-arrow-right" v-model="newconfig.config_inventario_maximo" clearable></el-input>
+                  <el-input type="number" size="small" min="0" placeholder="Stock máximo" prefix-icon="el-icon-d-arrow-right" v-model="newconfig.config_inventario_maximo" clearable show-word-limit maxlength="5"></el-input>
                 </div>
               </div>
               <div class="row m-0 p-0 justify-content-center">
                 <div class="col-md-5 mb-3">
                   <label>IVA (Porcentaje) <small>REQUERIDO</small></label>
-                  <el-input type="number" size="small" min="0" max="100" placeholder="IVA%" prefix-icon="el-icon-tickets" v-model="newconfig.config_iva" clearable></el-input>
+                  <el-input type="number" size="small" min="1" max="99" placeholder="IVA%" prefix-icon="el-icon-tickets" v-model="newconfig.config_iva" clearable></el-input>
                 </div>
                 <div class="col-md-5 mb-3 pt-4">
                   <el-button class="btn-primario mt-2" size="small" round @click="add" v-loading.fullscreen.lock="uploading">Aplicar esta configuración</el-button>
