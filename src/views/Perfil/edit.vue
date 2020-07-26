@@ -52,7 +52,7 @@
               </div>
               <div class="col-12 col-md-4 mb-3">
                 <label class="w-100">Numero de Identificación <small>(REQUERIDO)</small></label>
-                <el-input placeholder="123456789" type="text" disabled autocomplete="dni" clearable show-word-limit maxlength="9" v-model="getMyUser.personas_documento_identidad">
+                <el-input placeholder="123456789" type="number" disabled autocomplete="dni" onKeyDown="if(this.value.length==9) return false;" max="999999999" min="1000000" show-word-limit maxlength="9" v-model="getMyUser.personas_documento_identidad">
 
                 </el-input>
               </div>

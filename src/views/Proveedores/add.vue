@@ -22,7 +22,7 @@
           </div>
           <div class="col-md-4 mb-3">
             <label class="w-100">Numero de Identificación <small>(REQUERIDO)</small></label>
-            <el-input placeholder="123456789-0" type="text" autocomplete="dni" clearable show-word-limit maxlength="9" v-model="proveedores.proveedor_rif"></el-input>
+            <el-input placeholder="123456789" type="number" autocomplete="dni" clearable onKeyDown="if(this.value.length==9) return false;" max="999999999" min="1000000" maxlength="9" v-model="proveedores.proveedor_rif"></el-input>
           </div>
         </div>
         <div class="row m-0 p-0 justify-content-between">
