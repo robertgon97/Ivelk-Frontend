@@ -125,13 +125,14 @@
       print () {
         this.axios({
           method: `GET`,
-          url: `/orden?pdf=true`,
+          url: `/orden`,
           responseType: 'blob',
           params: {
             venta_date: this.search.venta_date ? this.search.venta_date : null,
             status_id: this.search.status_id ? this.search.status_id : null,
             personas_name: this.search.personas_name ? this.search.personas_name : null,
-            ventas_id: this.search.ventas_id ? this.search.ventas_id : null
+            ventas_id: this.search.ventas_id ? this.search.ventas_id : null,
+            pdf: true
           }
         })
         .then((response) => {

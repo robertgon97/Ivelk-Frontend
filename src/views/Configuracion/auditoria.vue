@@ -127,7 +127,7 @@
       print () {
         this.axios({
           method: `GET`,
-          url: `/auditoria?pdf=true`,
+          url: `/auditoria`,
           responseType: 'blob',
           params: {
             auditoria_date: this.search.auditoria_date ? this.search.auditoria_date : null,
@@ -136,7 +136,8 @@
             usuario_email: this.search.usuario_email ? this.search.usuario_email : null,
             personas_name: this.search.personas_name ? this.search.personas_name : null,
             auditoria_accion: this.search.auditoria_accion ? this.search.auditoria_accion : null,
-            auditoria_descripcion: this.search.auditoria_descripcion ? this.search.auditoria_descripcion : null
+            auditoria_descripcion: this.search.auditoria_descripcion ? this.search.auditoria_descripcion : null,
+            pdf: true
           }
         })
         .then((response) => {

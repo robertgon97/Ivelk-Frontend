@@ -125,13 +125,14 @@
       print () {
         this.axios({
           method: `GET`,
-          url: `/compra?pdf=true`,
+          url: `/compra`,
           responseType: 'blob',
           params: {
             compras_created: this.search.compras_created ? this.search.compras_created : null,
             status_id: this.search.status_id ? this.search.status_id : null,
             personas_name: this.search.personas_name ? this.search.personas_name : null,
-            compras_id: this.search.compras_id ? this.search.compras_id : null
+            compras_id: this.search.compras_id ? this.search.compras_id : null,
+            pdf: true
           }
         })
         .then((response) => {
